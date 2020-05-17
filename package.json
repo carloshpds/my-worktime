@@ -1,0 +1,40 @@
+{
+  "name": "worktime",
+  "version": "1.0.0",
+  "description": "Your worktime on terminal",
+  "main": "index.js",
+  "scripts": {
+    "compile": "tsc",
+    "start-dev": "npm run compile && node dist/index.js -u 16238 -p AiRJNT4HY694bu -s ahgora -c a382748 -d 2020-03-10 -jt 08:48 --debug TRUE",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/carloshpds/worktime.git"
+  },
+  "keywords": [
+    "work",
+    "time",
+    "ahgora"
+  ],
+  "author": "Carlos Henrique <carloshpds@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carloshpds/worktime/issues"
+  },
+  "homepage": "https://github.com/carloshpds/worktime#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "commander": "^5.1.0",
+    "moment": "^2.25.3",
+    "qs": "^6.9.4"
+  },
+  "devDependencies": {
+    "@types/jest": "^25.2.2",
+    "@types/moment": "^2.13.0",
+    "@types/node": "^13.13.5",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2"
+  }
+}
