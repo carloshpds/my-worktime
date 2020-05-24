@@ -27,12 +27,3 @@ export interface WorktimeProviderOptions {
   debug?: boolean
   journeyTime?: string // Clock time HH:mm
 }
-
-export interface WorktimeProvider {
-  name: string
-  options: WorktimeProviderOptions
-  urls: Record<string, string>
-  getWorktimeDayResume(requestOptions?: any): Promise<WorktimeDayResume>
-  getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]>
-  [prop: string]: any
-}

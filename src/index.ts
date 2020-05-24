@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { WorktimeProvider, WorktimeProviderOptions } from "./providers/types"
+import { WorktimeProviderOptions } from "./providers/types"
 
 import * as program from 'commander'
 import Ahgora from './providers/Ahgora'
@@ -8,12 +8,13 @@ import * as moment from "moment"
 import 'moment/locale/pt-br'
 import ClockHelper from "./utils/ClockHelper"
 import * as ora from 'ora'
+import WorktimeProvider from "./providers/WorktimeProvider"
 
 program
     .requiredOption('-u, --user [user]', 'ID do usuário no sistema de ponto')
     .requiredOption('-p, --password [password]', 'Senha do usuário no sistema')
     .requiredOption('-s, --system [system]', 'Nome do sistema de ponto', 'ahgora')
-    .option('-c, --company [company]', 'ID da empresa no sistema de ponto')
+    .requiredOption('-c, --company [company]', 'ID da empresa no sistema de ponto')
     .option('-d, --date [date]', 'Data relacionada a consulta de horas', moment().format('YYYY-MM-DD'))
     .option('-dbg, --debug [debug]', 'Debug - Exibe mais informações na execução', false)
     .option('-jt, --journeytime [journeyTime]', 'Quantidade de horas a serem trabalhadas por dia', '08:00')
