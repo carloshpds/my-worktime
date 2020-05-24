@@ -10,6 +10,7 @@ export interface WorktimeDayResume {
   workedMinutesUntilNow: number
   breakMinutes: number
   shouldLeaveClockTime?: string
+  missingPairMark: boolean
 }
 
 export interface WorktimeDayMark {
@@ -30,7 +31,7 @@ export interface WorktimeProviderOptions {
 export interface WorktimeProvider {
   name: string
   options: WorktimeProviderOptions
-  worktimeDayURL: string
+  urls: Record<string, string>
   getWorktimeDayResume(requestOptions?: any): Promise<WorktimeDayResume>
   getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]>
   [prop: string]: any

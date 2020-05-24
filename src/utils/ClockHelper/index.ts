@@ -1,6 +1,9 @@
 import { WorktimeDayMark, WorktimeDayWorkedTime, WorktimeDayResume } from "../../providers/types";
+import * as moment from "moment"
 
 class ClockHelper {
+  debug = false
+
   convertClockStringToMinutes(hourString: string, options = { considerSeconds: false }){
     const formatedHourString = hourString.replace(/:/g, '')
     const hoursAsMinutes = parseInt(formatedHourString.substring(0, 2)) * 60
@@ -43,10 +46,10 @@ class ClockHelper {
     return minutes
   }
 
-  calculateWorkedTimeMinutes(marks: WorktimeDayMark[]): WorktimeDayWorkedTime {
+  calculateWorkedTimeMinutes(marks: WorktimeDayMark[], date: string): WorktimeDayWorkedTime {
     let registeredWorkedMinutes = 0
     let workedMinutesUntilNow = 0
-    // let now = moment()
+    let now = moment()
 
     marks.forEach((mark, index) => {
       const isClosingPeriod = index % 2 === 1
@@ -58,15 +61,31 @@ class ClockHelper {
       return mark.clock
     })
 
+    const lastPeriodIsOpen = marks.length && marks.length % 2 === 1
+    const todayIsTheCurrentDate = moment(date).isSame(now, 'day')
+    if(lastPeriodIsOpen && todayIsTheCurrentDate){
+      const lastStartingPeriodMarkMinutes = this.convertClockStringToMinutes(marks[marks.length - 1].clock)
+
+      const nowClock = now.format('HH:mm')
+      this.debug && console.log('nowClock', nowClock)
+
+      let partialWorkedMinutesUntilNow = this.convertClockStringToMinutes(nowClock)
+      partialWorkedMinutesUntilNow -= lastStartingPeriodMarkMinutes
+
+      workedMinutesUntilNow = partialWorkedMinutesUntilNow + registeredWorkedMinutes
+    } else if (registeredWorkedMinutes) {
+      workedMinutesUntilNow = registeredWorkedMinutes
+    }
+
     return { registeredWorkedMinutes, workedMinutesUntilNow }
   }
 
-  calculateWorktimeDayResume(marks: WorktimeDayMark[]): WorktimeDayResume {
+  calculateWorktimeDayResume(marks: WorktimeDayMark[], date: string): WorktimeDayResume {
     const worktimeDayResume: WorktimeDayResume = {
-      registeredWorkedMinutes: 0,
-      workedMinutesUntilNow: 0,
-      breakMinutes: 0,
-      shouldLeaveClockTime: 'Invalid'
+      ...this.calculateWorkedTimeMinutes(marks, date),
+      breakMinutes: this.calculateBreakMinutes(marks),
+      shouldLeaveClockTime: 'Invalid',
+      missingPairMark: marks.length && marks.length % 2 === 1
     }
 
     return worktimeDayResume

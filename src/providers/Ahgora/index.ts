@@ -1,16 +1,16 @@
 import { WorktimeProvider, WorktimeDayResume, WorktimeProviderOptions, WorktimeDayMark } from "../types"
 import axios from "axios"
 import * as qs from "qs"
-import moment, { Moment } from "moment"
 import ClockHelper from "../../utils/ClockHelper"
 const old = require('./OldAhgora.js')
 
 export default class Ahgora implements WorktimeProvider {
   name = 'Ahgora'
-  worktimeDayURL = 'https://www.ahgora.com.br/externo/getApuracao'
+  urls = {
+    getDayResume: 'https://www.ahgora.com.br/externo/getApuracao'
+  }
   old = null
   options = null
-  currentDate: Moment
 
   constructor(options: WorktimeProviderOptions){
     this.old = new old(options.userId, options.password)
@@ -31,7 +31,7 @@ export default class Ahgora implements WorktimeProvider {
 
       this.options.debug && console.log('\nRequest body', requestBody)
       const { data } = await axios.post(
-        this.worktimeDayURL,
+        this.urls.getDayResume,
         qs.stringify(requestBody),
         requestOptions
       )
@@ -63,7 +63,7 @@ export default class Ahgora implements WorktimeProvider {
 
     try {
       let marks: WorktimeDayMark[] = await this.getDateMarks()
-      const worktimeDayResume: WorktimeDayResume = ClockHelper.calculateWorktimeDayResume(marks)
+      const worktimeDayResume: WorktimeDayResume = ClockHelper.calculateWorktimeDayResume(marks, this.options.date)
       return worktimeDayResume
     } catch (err) {
       throw err

@@ -53,7 +53,7 @@ export interface AhgoraDayMark {
 
 export interface AhgoraDay {
   resultado: AhgoraDayTotal[],
-  batidas: AhgoraDayMark[], // parei aquiiiiii
+  batidas: AhgoraDayMark[],
   status: Array<string>,
   HORAS_CONTRATUAIS: Array<string>,
   justificativa: string

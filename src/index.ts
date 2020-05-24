@@ -1,30 +1,31 @@
 #!/usr/bin/env node
 
-import { WorktimeProvider, WorktimeProviderOptions } from "./providers/types";
+import { WorktimeProvider, WorktimeProviderOptions } from "./providers/types"
 
 import * as program from 'commander'
 import Ahgora from './providers/Ahgora'
-import moment from "moment";
+import * as moment from "moment"
+import 'moment/locale/pt-br'
+import ClockHelper from "./utils/ClockHelper"
+import * as ora from 'ora'
 
 program
-    .option('-u, --user [user]', 'ID do usuário no sistema de ponto')
-    .option('-p, --password [password]', 'Senha do usuário no sistema')
-    .option('-s, --system [system]')
-    .option('-c, --company [company]')
-    .option('-d, --date [date]')
-    .option('-dbg, --debug [debug]')
-    .option('-jt, --journeytime [journeyTime]')
-    .action((args) => {
-        const date = args.date || process.env.WORKTIME_DATE
-        const options: WorktimeProviderOptions = {
+    .requiredOption('-u, --user [user]', 'ID do usuário no sistema de ponto')
+    .requiredOption('-p, --password [password]', 'Senha do usuário no sistema')
+    .requiredOption('-s, --system [system]', 'Nome do sistema de ponto', 'ahgora')
+    .option('-c, --company [company]', 'ID da empresa no sistema de ponto')
+    .option('-d, --date [date]', 'Data relacionada a consulta de horas', moment().format('YYYY-MM-DD'))
+    .option('-dbg, --debug [debug]', 'Debug - Exibe mais informações na execução', false)
+    .option('-jt, --journeytime [journeyTime]', 'Quantidade de horas a serem trabalhadas por dia', '08:00')
+    .action(async (args) => {
+        const options: Partial<WorktimeProviderOptions> = {
           userId    : args.user     || process.env.WORKTIME_USER,
           password  : args.password || process.env.WORKTIME_PASSWORD,
           systemId  : args.system || process.env.WORKTIME_SYSTEM,
           companyId : args.company || process.env.WORKTIME_COMPANY,
-          date,
-          momentDate: date ? moment(date) : moment(),
+          date : args.date || process.env.WORKTIME_DATE,
           debug     : args.debug || process.env.WORKTIME_DEBUG,
-          journeyTime : args.journeyTime || process.env.WORKTIME_JOURNEYTIME || '08:00',
+          journeyTime : args.journeyTime || process.env.WORKTIME_JOURNEYTIME,
         }
 
         if(!options.userId || !options.password || !options.systemId || !options.companyId) {
@@ -41,17 +42,28 @@ program
           console.groupEnd()
         }
 
+        // Runtime parameters
+        options.momentDate = options.date ? moment(options.date) : moment()
+        ClockHelper.debug = options.debug
+
         const providers = {
           ahgora: Ahgora
         }
 
         const currentProviderClass = providers[options.systemId.toLowerCase()]
+        const loader = ora(`Iniciando...`).start()
 
         if(currentProviderClass){
-          const worktimeProvider: WorktimeProvider = new currentProviderClass(options)
-          worktimeProvider.getWorktimeDayResume()
+          try {
+            const worktimeProvider: WorktimeProvider = new currentProviderClass(options)
+            loader.text = `Buscando dados no ${worktimeProvider.name}`
+            await worktimeProvider.getWorktimeDayResume()
+            loader.succeed('Dados encontrados')
+          } catch (err) {
+            loader.fail('Não foi possível calcular. Verifique os parâmetros e tente novamente')
+          }
         } else {
-          console.log('Parece que ainda não suportamos o seu sistema de ponto :(')
+          loader.fail('Parece que ainda não suportamos o seu sistema de ponto :(')
         }
     })
     .parse(process.argv);
