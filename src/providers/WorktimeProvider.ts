@@ -5,6 +5,7 @@ import ClockHelper from "../utils/ClockHelper"
 export default abstract class WorktimeProvider {
   name: string
   options: WorktimeProviderOptions
+  marks: WorktimeDayMark[] = []
   urls: {
     getDayResume: string
     [prop: string]: any
@@ -19,8 +20,8 @@ export default abstract class WorktimeProvider {
 
   async getWorktimeDayResume(requestOptions?: any): Promise<WorktimeDayResume> {
     try {
-      let marks: WorktimeDayMark[] = await this.getDateMarks()
-      const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(marks)
+      this.marks = await this.getDateMarks()
+      const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(this.marks)
       return worktimeDayResume
     } catch (err) {
       throw err
@@ -28,7 +29,7 @@ export default abstract class WorktimeProvider {
   }
 
 
-  calculateBreakMinutes(marks: WorktimeDayMark[]) {
+  calculateBreakMinutes(marks: WorktimeDayMark[] = this.marks) {
     let minutes = 0
 
     marks.forEach((mark, index) => {
@@ -44,7 +45,7 @@ export default abstract class WorktimeProvider {
     return minutes
   }
 
-  calculateWorkedTimeMinutes(marks: WorktimeDayMark[], date: string = this.options.date): WorktimeDayWorkedTime {
+  calculateWorkedTimeMinutes(marks: WorktimeDayMark[] = this.marks, date: string = this.options.date): WorktimeDayWorkedTime {
     let registeredWorkedMinutes = 0
     let workedMinutesUntilNow = 0
     let now = moment()
@@ -59,7 +60,7 @@ export default abstract class WorktimeProvider {
       return mark.clock
     })
 
-    const lastPeriodIsOpen = marks.length && marks.length % 2 === 1
+    const lastPeriodIsOpen = this.isMissingMark(marks)
     const todayIsTheCurrentDate = moment(date).isSame(now, 'day')
     if(lastPeriodIsOpen && todayIsTheCurrentDate){
       const lastStartingPeriodMarkMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
@@ -75,17 +76,22 @@ export default abstract class WorktimeProvider {
       workedMinutesUntilNow = registeredWorkedMinutes
     }
 
-    return { registeredWorkedMinutes, workedMinutesUntilNow }
+    return { registeredWorkedMinutes, workedMinutesUntilNow, missingPairMark: lastPeriodIsOpen }
   }
 
-  calculateWorktimeDayResume(marks: WorktimeDayMark[], date: string = this.options.date): WorktimeDayResume {
+  calculateWorktimeDayResume(marks: WorktimeDayMark[] = this.marks, date: string = this.options.date): WorktimeDayResume {
+    const workedTimes: WorktimeDayWorkedTime = this.calculateWorkedTimeMinutes(marks, date)
+
     const worktimeDayResume: WorktimeDayResume = {
-      ...this.calculateWorkedTimeMinutes(marks, date),
+      ...workedTimes,
       breakMinutes: this.calculateBreakMinutes(marks),
-      shouldLeaveClockTime: 'Invalid',
-      missingPairMark: marks.length && marks.length % 2 === 1
+      isMissingPairMark: this.isMissingMark(marks)
     }
 
     return worktimeDayResume
+  }
+
+  isMissingMark(marks = this.marks){
+    return marks.length && marks.length % 2 === 1
   }
 }

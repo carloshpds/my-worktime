@@ -3,6 +3,8 @@ import { Moment } from "moment";
 export interface WorktimeDayWorkedTime {
   registeredWorkedMinutes: number
   workedMinutesUntilNow: number
+  shouldLeaveClockTime?: string
+  missingPairMark: boolean
 }
 
 export interface WorktimeDayResume {
@@ -10,7 +12,7 @@ export interface WorktimeDayResume {
   workedMinutesUntilNow: number
   breakMinutes: number
   shouldLeaveClockTime?: string
-  missingPairMark: boolean
+  isMissingPairMark: boolean
 }
 
 export interface WorktimeDayMark {
