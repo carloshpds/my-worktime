@@ -84,9 +84,9 @@ export default abstract class WorktimeProvider {
     // const shouldLeaveTimeInMinutes = (ClockHelper.convertClockStringToMinutes(nowClock) + missingJourneyMinutes ) - breakMinutes
     // shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(shouldLeaveTimeInMinutes)
 
-    if(breakMinutes < 30){
-      missingJourneyMinutes += 30 - breakMinutes
-    }
+    // if(breakMinutes < 30){
+    //   missingJourneyMinutes += 30 - breakMinutes
+    // }
 
 
     const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)

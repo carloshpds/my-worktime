@@ -31,7 +31,7 @@ class AbstractProvider extends WorktimeProvider {
 describe('WorktimeProvier', () => {
 
   describe('Calculations', () => {
-    describe('Calculate interval Of Mark Pairs', () => {
+    describe('Calculate interval Of Mark Pairs (Break)', () => {
       it('Calulates to perfect default pairs', () => {
         const marks: WorktimeDayMark[] = [
           { clock: '09:00'},
