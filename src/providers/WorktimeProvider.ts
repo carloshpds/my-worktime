@@ -61,11 +61,12 @@ export default abstract class WorktimeProvider {
     })
 
     const lastPeriodIsOpen = this.isMissingMark(marks)
+    const breakMinutes = this.calculateBreakMinutes(marks)
     const todayIsTheCurrentDate = moment(date).isSame(now, 'day')
+    const nowClock = now.format('HH:mm')
+
     if(lastPeriodIsOpen && todayIsTheCurrentDate){
       const lastStartingPeriodMarkMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
-
-      const nowClock = now.format('HH:mm')
       this.options.debug && console.log('nowClock', nowClock)
 
       let partialWorkedMinutesUntilNow = ClockHelper.convertClockStringToMinutes(nowClock)
@@ -76,18 +77,42 @@ export default abstract class WorktimeProvider {
       workedMinutesUntilNow = registeredWorkedMinutes
     }
 
-    return { registeredWorkedMinutes, workedMinutesUntilNow, missingPairMark: lastPeriodIsOpen }
+    const journeyTimeInMinutes = ClockHelper.convertClockStringToMinutes(this.options.journeyTime)
+    let missingJourneyMinutes = journeyTimeInMinutes - registeredWorkedMinutes
+    let shouldLeaveClockTime = null
+    // const isInExtraJourney = missingJourneyMinutes < 0
+    // const shouldLeaveTimeInMinutes = (ClockHelper.convertClockStringToMinutes(nowClock) + missingJourneyMinutes ) - breakMinutes
+    // shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(shouldLeaveTimeInMinutes)
+
+    if(breakMinutes < 30){
+      missingJourneyMinutes += 30 - breakMinutes
+    }
+
+
+    const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
+    const sum = lastMarkInMinutes + missingJourneyMinutes
+    shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(sum)
+
+    // if(isInExtraJourney){
+    //   const firstMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[0].clock)
+    //   const sum = firstMarkInMinutes + journeyTimeInMinutes
+    //   shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(sum)
+    // } else {
+    //   const shouldLeaveTimeInMinutes = ClockHelper.convertClockStringToMinutes(nowClock) + missingJourneyMinutes
+    //   shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(shouldLeaveTimeInMinutes)
+    // }
+
+    return {
+      registeredWorkedMinutes,
+      workedMinutesUntilNow,
+      isMissingPairMark: lastPeriodIsOpen,
+      shouldLeaveClockTime,
+      breakMinutes
+    }
   }
 
   calculateWorktimeDayResume(marks: WorktimeDayMark[] = this.marks, date: string = this.options.date): WorktimeDayResume {
-    const workedTimes: WorktimeDayWorkedTime = this.calculateWorkedTimeMinutes(marks, date)
-
-    const worktimeDayResume: WorktimeDayResume = {
-      ...workedTimes,
-      breakMinutes: this.calculateBreakMinutes(marks),
-      isMissingPairMark: this.isMissingMark(marks)
-    }
-
+    const worktimeDayResume: WorktimeDayResume = this.calculateWorkedTimeMinutes(marks, date)
     return worktimeDayResume
   }
 
