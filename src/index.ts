@@ -61,6 +61,7 @@ program
             await worktimeProvider.getWorktimeDayResume()
             loader.succeed('Dados encontrados')
           } catch (err) {
+            options.debug && console.error(err)
             loader.fail('Não foi possível calcular. Verifique os parâmetros e tente novamente')
           }
         } else {
