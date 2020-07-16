@@ -146,6 +146,32 @@ describe('WorktimeProvier', () => {
         expect(worktimeDayResume.isMissingPairMark).toBe(false)
       })
 
+      it('Calulates to many pairs', () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T23:30:00').valueOf()
+          )
+
+        const marks: WorktimeDayMark[] = [
+          { clock: '09:07'},
+          { clock: '12:00'}, // +2:53
+          { clock: '13:00'},
+          { clock: '21:20'}, // +8:20 -> 11h13 total
+          { clock: '22:14'},
+          { clock: '23:10'}, // +0:56 -> 12h09 total
+        ]
+
+        const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+        const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+        const dailyWorkedTimeInMinutes = 729
+
+        expect(worktimeDayResume.registeredWorkedMinutes).toBe(dailyWorkedTimeInMinutes)
+        expect(worktimeDayResume.workedMinutesUntilNow).toBe(dailyWorkedTimeInMinutes)
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:07')
+        expect(worktimeDayResume.isMissingPairMark).toBe(false)
+      })
+
       it('Calulates to many odd marks', () => {
         jest
           .spyOn(global.Date, 'now')

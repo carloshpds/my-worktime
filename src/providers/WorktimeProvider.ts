@@ -79,15 +79,19 @@ export default abstract class WorktimeProvider {
     }
 
     const journeyTimeInMinutes = ClockHelper.convertClockStringToMinutes(this.options.journeyTime)
-    // const shouldLeaveClockTime = calculateShouldLeaveClockTime({
-    //   marks,
-    //   journeyTimeInMinutes,
-    //   registeredWorkedMinutes,
-    //   workedMinutesUntilNow,
-    //   breakMinutes,
-    //   isMissingPairMark: lastPeriodIsOpen,
-    //   now
-    // })
+    let missingJourneyMinutes = journeyTimeInMinutes - registeredWorkedMinutes
+    let shouldLeaveClockTime = null
+
+    if(breakMinutes < 30){
+      missingJourneyMinutes += 30 - breakMinutes
+    }
+
+    const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
+    const firstMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[0].clock)
+    const dailyWorkedTimeInMinutes = lastMarkInMinutes - firstMarkInMinutes
+    const sum = lastMarkInMinutes + missingJourneyMinutes
+    // const sum = missingJourneyMinutes !== 0 ? dailyWorkedTimeInMinutes - missingJourneyMinutes : lastMarkInMinutes
+    shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(sum)
 
     return {
       registeredWorkedMinutes,
