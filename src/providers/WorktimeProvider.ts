@@ -29,7 +29,6 @@ export default abstract class WorktimeProvider {
     }
   }
 
-
   calculateBreakMinutes(marks: WorktimeDayMark[] = this.marks) {
     let minutes = 0
 
@@ -79,15 +78,6 @@ export default abstract class WorktimeProvider {
     }
 
     const journeyTimeInMinutes = ClockHelper.convertClockStringToMinutes(this.options.journeyTime)
-    // const shouldLeaveClockTime = calculateShouldLeaveClockTime({
-    //   marks,
-    //   journeyTimeInMinutes,
-    //   registeredWorkedMinutes,
-    //   workedMinutesUntilNow,
-    //   breakMinutes,
-    //   isMissingPairMark: lastPeriodIsOpen,
-    //   now
-    // })
 
     return {
       registeredWorkedMinutes,

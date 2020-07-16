@@ -164,6 +164,11 @@ describe('Calculate "should leave clock time"', () => {
   })
 
   it('Calulates to values less than an hour', () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-01-01T16:00:00').valueOf()
+      )
     const marks: WorktimeDayMark[] = [
       { clock: '08:00'},
       { clock: '08:45'}
@@ -176,7 +181,7 @@ describe('Calculate "should leave clock time"', () => {
       marks,
     })
 
-    expect(shouldLeaveClockTime).toBe('17:00')
+    expect(shouldLeaveClockTime).toBe('16:00')
   })
 
   it('Calulates to only one mark (disconsidering break time)', () => {
@@ -198,6 +203,183 @@ describe('Calculate "should leave clock time"', () => {
     })
 
     expect(shouldLeaveClockTime).toBe('17:00')
+  })
+
+  it('Calulates too many pairs', () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-01-01T12:00:00').valueOf()
+      )
+
+    const marks: WorktimeDayMark[] = [
+      { clock: '09:07'},
+      { clock: '12:00'}, // +2:53
+      { clock: '13:00'},
+      { clock: '21:20'}, // +8:20 -> 11h13 total
+      { clock: '22:14'},
+      { clock: '23:10'}, // +0:56 -> 12h09 total
+    ]
+
+    const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+    const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+    const shouldLeaveClockTime = calculateShouldLeaveClockTime({
+      ...worktimeDayResume,
+      marks,
+    })
+
+    expect(shouldLeaveClockTime).toBe('18:07')
+  })
+
+  it('Calulates pair marks with less than 8h total', () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-01-01T12:00:00').valueOf()
+      )
+
+    const marks: WorktimeDayMark[] = [
+      { clock: '09:07'},
+      { clock: '12:00'}, // +2:53
+      { clock: '13:00'},
+      { clock: '15:20'}, // +2:20 -> 5:13 total
+    ]
+
+    const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+    const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+    const shouldLeaveClockTime = calculateShouldLeaveClockTime({
+      ...worktimeDayResume,
+      marks,
+    })
+
+    expect(shouldLeaveClockTime).toBe('18:07')
+  })
+
+  it('Calulates odd marks with less than 8h total', () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-01-01T12:00:00').valueOf()
+      )
+
+    const marks: WorktimeDayMark[] = [
+      { clock: '09:07'},
+      { clock: '12:00'}, // +2:53
+      { clock: '13:00'},
+    ]
+
+    const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+    const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+    const shouldLeaveClockTime = calculateShouldLeaveClockTime({
+      ...worktimeDayResume,
+      marks,
+    })
+
+    expect(shouldLeaveClockTime).toBe('18:07')
+  })
+
+  it('Calulates odd marks with less than 8h total', () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-01-01T12:00:00').valueOf()
+      )
+
+    const marks: WorktimeDayMark[] = [
+      { clock: '09:07'},
+      { clock: '12:00'}, // +2:53
+      { clock: '13:00'},
+      { clock: '14:00'}, // +1:00
+      { clock: '14:30'},
+    ]
+
+    const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+    const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+    const shouldLeaveClockTime = calculateShouldLeaveClockTime({
+      ...worktimeDayResume,
+      marks,
+    })
+
+    expect(shouldLeaveClockTime).toBe('18:37')
+  })
+
+  it('Calulates odd marks with less than 8h total', () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-01-01T12:00:00').valueOf()
+      )
+
+    const marks: WorktimeDayMark[] = [
+      { clock: '09:07'},
+      { clock: '12:22'}, // +3:15
+      { clock: '12:56'},
+      { clock: '14:00'}, // +1:04
+      { clock: '14:30'},
+      { clock: '15:27'}, // 0:57
+      { clock: '17:30'},
+    ]
+
+    const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+    const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+    const shouldLeaveClockTime = calculateShouldLeaveClockTime({
+      ...worktimeDayResume,
+      marks,
+    })
+
+    expect(shouldLeaveClockTime).toBe('20:14')
+  })
+
+  it('Calulates odd marks with less than 8h total', () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-01-01T12:00:00').valueOf()
+      )
+
+    const marks: WorktimeDayMark[] = [
+      { clock: '09:07'},
+      { clock: '12:22'}, // +3:15
+      { clock: '12:56'},
+      { clock: '14:00'}, // +1:04
+      { clock: '14:30'},
+      { clock: '15:27'}, // 0:57
+      { clock: '17:30'},
+      { clock: '17:40'}, // 0:10
+      { clock: '18:30'},
+    ]
+
+    const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+    const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+    const shouldLeaveClockTime = calculateShouldLeaveClockTime({
+      ...worktimeDayResume,
+      marks,
+    })
+
+    expect(shouldLeaveClockTime).toBe('21:04')
+  })
+
+  it('Calulates odd marks with less than 8h total', () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementationOnce(() =>
+        new Date('2020-01-01T12:00:00').valueOf()
+      )
+
+    const marks: WorktimeDayMark[] = [
+      { clock: '09:00'},
+      { clock: '09:15'}, // +0:15
+      { clock: '15:40'},
+    ]
+
+    const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+    const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+    const shouldLeaveClockTime = calculateShouldLeaveClockTime({
+      ...worktimeDayResume,
+      marks,
+    })
+
+    expect(shouldLeaveClockTime).toBe('23:25')
   })
 
 });

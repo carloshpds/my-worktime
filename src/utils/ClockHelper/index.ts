@@ -30,6 +30,22 @@ class ClockHelper {
     return [clock.slice(0, 2), ':', clock.slice(2)].join('')
   }
 
+  calculateBreakMinutes(marks: WorktimeDayMark[]) {
+    let minutes = 0
+  
+    marks.forEach((mark, index) => {
+      const isStartingPeriod = index % 2 === 0
+      if(index >= 2 && isStartingPeriod){
+        const currentMarkInMinutes = this.convertClockStringToMinutes(mark.clock)
+        const lastMarkInMinutes = this.convertClockStringToMinutes(marks[index - 1].clock)
+        minutes += currentMarkInMinutes - lastMarkInMinutes
+      }
+      return mark.clock
+    })
+  
+    return minutes
+  }
+
 }
 
 export default new ClockHelper()
