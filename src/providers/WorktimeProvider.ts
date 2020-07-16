@@ -1,6 +1,7 @@
 import { WorktimeProviderOptions, WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime } from "./types"
 import * as moment from "moment"
 import ClockHelper from "../utils/ClockHelper"
+import calculateShouldLeaveClockTime from "../hackaton/calculateShouldLeaveClockTime"
 
 export default abstract class WorktimeProvider {
   name: string
@@ -78,36 +79,24 @@ export default abstract class WorktimeProvider {
     }
 
     const journeyTimeInMinutes = ClockHelper.convertClockStringToMinutes(this.options.journeyTime)
-    let missingJourneyMinutes = journeyTimeInMinutes - registeredWorkedMinutes
-    let shouldLeaveClockTime = null
-    // const isInExtraJourney = missingJourneyMinutes < 0
-    // const shouldLeaveTimeInMinutes = (ClockHelper.convertClockStringToMinutes(nowClock) + missingJourneyMinutes ) - breakMinutes
-    // shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(shouldLeaveTimeInMinutes)
-
-    // if(breakMinutes < 30){
-    //   missingJourneyMinutes += 30 - breakMinutes
-    // }
-
-
-    const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
-    const sum = lastMarkInMinutes + missingJourneyMinutes
-    shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(sum)
-
-    // if(isInExtraJourney){
-    //   const firstMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[0].clock)
-    //   const sum = firstMarkInMinutes + journeyTimeInMinutes
-    //   shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(sum)
-    // } else {
-    //   const shouldLeaveTimeInMinutes = ClockHelper.convertClockStringToMinutes(nowClock) + missingJourneyMinutes
-    //   shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(shouldLeaveTimeInMinutes)
-    // }
+    // const shouldLeaveClockTime = calculateShouldLeaveClockTime({
+    //   marks,
+    //   journeyTimeInMinutes,
+    //   registeredWorkedMinutes,
+    //   workedMinutesUntilNow,
+    //   breakMinutes,
+    //   isMissingPairMark: lastPeriodIsOpen,
+    //   now
+    // })
 
     return {
       registeredWorkedMinutes,
       workedMinutesUntilNow,
       isMissingPairMark: lastPeriodIsOpen,
-      shouldLeaveClockTime,
-      breakMinutes
+      // shouldLeaveClockTime,
+      breakMinutes,
+      journeyTimeInMinutes,
+      now
     }
   }
 
