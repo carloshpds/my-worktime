@@ -3,18 +3,15 @@ import axios from "axios"
 import * as qs from "qs"
 import ClockHelper from "../../utils/ClockHelper"
 import WorktimeProvider from "../WorktimeProvider"
-const old = require('./OldAhgora.js')
 
 export default class Ahgora extends WorktimeProvider {
   name = 'Ahgora'
   urls = {
     getDayResume: 'https://www.ahgora.com.br/externo/getApuracao'
   }
-  old = null
 
   constructor(options: WorktimeProviderOptions){
     super(options)
-    this.old = new old(options.userId, options.password)
   }
 
   async getDateMarks(requestOptions?): Promise<WorktimeDayMark[]> {
