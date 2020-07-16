@@ -29,7 +29,6 @@ export default abstract class WorktimeProvider {
     }
   }
 
-
   calculateBreakMinutes(marks: WorktimeDayMark[] = this.marks) {
     let minutes = 0
 
@@ -44,6 +43,13 @@ export default abstract class WorktimeProvider {
     })
 
     return minutes
+  }
+
+  getHoursBetweenStartAndDesired(hour: any, marks: WorktimeDayMark[]) {
+    const momentMark = moment(hour, 'hh:mm')
+    return marks.filter(item => {
+      return moment(momentMark).isAfter(moment(item.clock, 'hh:mm'))
+    })
   }
 
   calculateWorkedTimeMinutes(marks: WorktimeDayMark[] = this.marks, date: string = this.options.date): WorktimeDayWorkedTime {
@@ -79,19 +85,6 @@ export default abstract class WorktimeProvider {
     }
 
     const journeyTimeInMinutes = ClockHelper.convertClockStringToMinutes(this.options.journeyTime)
-    let missingJourneyMinutes = journeyTimeInMinutes - registeredWorkedMinutes
-    let shouldLeaveClockTime = null
-
-    if(breakMinutes < 30){
-      missingJourneyMinutes += 30 - breakMinutes
-    }
-
-    const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
-    const firstMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[0].clock)
-    const dailyWorkedTimeInMinutes = lastMarkInMinutes - firstMarkInMinutes
-    const sum = lastMarkInMinutes + missingJourneyMinutes
-    // const sum = missingJourneyMinutes !== 0 ? dailyWorkedTimeInMinutes - missingJourneyMinutes : lastMarkInMinutes
-    shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(sum)
 
     return {
       registeredWorkedMinutes,
