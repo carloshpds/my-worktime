@@ -45,13 +45,6 @@ export default abstract class WorktimeProvider {
     return minutes
   }
 
-  getHoursBetweenStartAndDesired(hour: any, marks: WorktimeDayMark[]) {
-    const momentMark = moment(hour, 'hh:mm')
-    return marks.filter(item => {
-      return moment(momentMark).isAfter(moment(item.clock, 'hh:mm'))
-    })
-  }
-
   calculateWorkedTimeMinutes(marks: WorktimeDayMark[] = this.marks, date: string = this.options.date): WorktimeDayWorkedTime {
     let registeredWorkedMinutes = 0
     let workedMinutesUntilNow = 0
