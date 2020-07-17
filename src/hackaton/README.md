@@ -1,3 +1,18 @@
+# Cronograma
+
+* 10 min explicando tudo.
+* 5 min formando times
+* 15 min ajudando com o ambiente.
+  + Instalação
+  + Forks
+* 1h pra resolver e mandar o PR com a solução.
+
+# Avaliação
+O PR será analisado na semana seguinte, os critérios serão:
+
+* Suporte a maior quantidade de casos
+* Legibilidade do código
+
 # Ambiente
 Para a realização do desafio, será necessário instalar algumas coisas.
 
@@ -47,18 +62,3 @@ Para ter certeza que seu algoritmo funciona, na pasta raíz, rode:
 ```
 npm test
 ```
-
-## Dinâmica
-
-* 10 min explicando tudo.
-* 5 min formando times
-* 15 min ajudando com o ambiente.
-  + Instalação
-  + Forks
-* 1h pra resolver e mandar o PR com a solução.
-
-# Avaliação
-O PR será analisado na semana seguinte, os critérios serão:
-
-* Suporte a maior quantidade de casos
-* Legibilidade do código
