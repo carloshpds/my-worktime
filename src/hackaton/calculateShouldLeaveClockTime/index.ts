@@ -2,6 +2,7 @@
  * Imports
  */
 import * as moment from "moment"
+import { Moment } from "moment"
 import { WorktimeDayMark } from "../../providers/types"
 import ClockHelper from "../../utils/ClockHelper"
 
@@ -16,7 +17,7 @@ interface LeaveClockTimeParams {
   breakMinutes: number, // Quantidade de minutos relacionados a intervalos (almoço, café e etc...)
   isMissingPairMark: boolean, // Há batidas ímpares?
   marks: WorktimeDayMark[], // Batidas do ponto do usuário
-  now: any // Abstração do Moment para o relógio neste exato momento
+  now: Moment // Abstração do Moment para o relógio neste exato momento
 }
 
 /**
