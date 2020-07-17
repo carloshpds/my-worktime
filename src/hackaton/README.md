@@ -25,3 +25,40 @@ Para a realização do desafio, será necessário instalar algumas coisas.
 npm install
 ```
 
+# Hackaton: Desafio
+O desafio consiste em o usuário poder saber em qual horário ele deveria parar de trabalhar já que neste mesmo horário estaria cumprindo sua jornada de trabalho. Não se engane, deve contemplar todos os cenários de batidas do ponto. Isto é:
+
+* Apenas 1 batida de início do trabalho
+* 1 batida de início e 1 de saída para o almoço
+* 1 batida de início, 1 de saída para o almoço e 1 de retorno do almoço
+* 4 batidas
+* Mais que 4 batidas
+* Resumindo... `Qualquer combinação de batidas!`
+
+Para otimizar o nosso tempo, há certo trabalho já realizado para determinar os cenários de teste.
+
+## Arquivos
+Na pasta `calculateShouldLeaveClockTime`:
+  * `index.ts` : Arquivo que irá conter a implementação.
+  * `index.spec.ts`: Arquivo de teste da implementação do desafio.
+
+## Validar solução
+Para ter certeza que seu algoritmo funciona, na pasta raíz, rode:
+```
+npm test
+```
+
+## Dinâmica
+
+* 10 min explicando tudo.
+* 5 min formando times
+* 15 min ajudando com o ambiente.
+  + Instalação
+  + Forks
+* 1h pra resolver e mandar o PR com a solução.
+
+# Avaliação
+O PR será analisado na semana seguinte, os critérios serão:
+
+* Suporte a maior quantidade de casos
+* Legibilidade do código
