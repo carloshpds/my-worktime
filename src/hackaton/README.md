@@ -29,7 +29,7 @@ Para a realização do desafio, será necessário instalar algumas coisas.
   + Documentação: https://www.typescriptlang.org/docs/home.html
   + instalação
   ```
-  npm -g typescript
+  npm install -g typescript
   ```
 
 * Vamos utilizar o VS Code como IDE (https://code.visualstudio.com/)
