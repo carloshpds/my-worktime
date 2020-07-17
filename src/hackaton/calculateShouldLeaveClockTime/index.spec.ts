@@ -231,7 +231,7 @@ describe('Calculate "should leave clock time"', () => {
     expect(shouldLeaveClockTime).toBe('18:07')
   })
 
-  it('Calulates pair marks with less than 8h total (case 1)', () => {
+  it('Calulates pair marks with less than 8h total', () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementationOnce(() =>
@@ -255,7 +255,7 @@ describe('Calculate "should leave clock time"', () => {
     expect(shouldLeaveClockTime).toBe('18:07')
   })
 
-  it('Calulates odd marks with less than 8h total (case 2)', () => {
+  it('Calulates odd marks with less than 8h total (case 1)', () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementationOnce(() =>
@@ -278,7 +278,7 @@ describe('Calculate "should leave clock time"', () => {
     expect(shouldLeaveClockTime).toBe('18:07')
   })
 
-  it('Calulates odd marks with less than 8h total (case 3)', () => {
+  it('Calulates odd marks with less than 8h total (case 2)', () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementationOnce(() =>
@@ -303,7 +303,7 @@ describe('Calculate "should leave clock time"', () => {
     expect(shouldLeaveClockTime).toBe('18:37')
   })
 
-  it('Calulates odd marks with less than 8h total (case 4)', () => {
+  it('Calulates odd marks with less than 8h total (case 3)', () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementationOnce(() =>
@@ -330,7 +330,7 @@ describe('Calculate "should leave clock time"', () => {
     expect(shouldLeaveClockTime).toBe('20:14')
   })
 
-  it('Calulates odd marks with less than 8h total (case 5)', () => {
+  it('Calulates odd marks with less than 8h total (case 4)', () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementationOnce(() =>
@@ -359,7 +359,7 @@ describe('Calculate "should leave clock time"', () => {
     expect(shouldLeaveClockTime).toBe('21:04')
   })
 
-  it('Calulates odd marks with less than 8h total (case 6)', () => {
+  it('Calulates odd marks with less than 8h total (case 5)', () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementationOnce(() =>
