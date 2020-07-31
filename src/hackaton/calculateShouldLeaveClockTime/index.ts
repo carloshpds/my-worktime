@@ -2,9 +2,9 @@
  * Imports
  */
 import * as moment from "moment"
-import { Moment } from "moment"
 import { WorktimeDayMark } from "../../providers/types"
 import ClockHelper from "../../utils/ClockHelper"
+import { exception } from "console"
 
 
 /**
@@ -17,12 +17,32 @@ interface LeaveClockTimeParams {
   breakMinutes: number, // Quantidade de minutos relacionados a intervalos (almoço, café e etc...)
   isMissingPairMark: boolean, // Há batidas ímpares?
   marks: WorktimeDayMark[], // Batidas do ponto do usuário
-  now: Moment // Abstração do Moment para o relógio neste exato momento
+  now: any // Abstração do Moment para o relógio neste exato momento
 }
 
 /**
  * Implementation
  */
 export default (data: LeaveClockTimeParams): string => {
-  return null
+  let lastIndex: number;
+  let minutesQuantityNecessaryToOut: number;
+  let minutesFromTheLastMark: number;
+  let breakMinutes: number;
+  let hourToStopWork: string;
+
+  if(data.isMissingPairMark && data.registeredWorkedMinutes > data.journeyTimeInMinutes) {
+    data.marks.pop();
+  }
+
+  minutesQuantityNecessaryToOut = data.journeyTimeInMinutes - data.registeredWorkedMinutes;
+  lastIndex = data.marks.length;
+  minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(data.marks[lastIndex-1].clock);
+
+  breakMinutes = 0;
+  if(data.breakMinutes>60 && data.registeredWorkedMinutes > data.journeyTimeInMinutes && data.isMissingPairMark === false) {
+    breakMinutes = data.breakMinutes - 60;  
+  }
+
+  hourToStopWork = ClockHelper.humanizeMinutesToClock((minutesFromTheLastMark + minutesQuantityNecessaryToOut) - breakMinutes);
+  return hourToStopWork;
 }
