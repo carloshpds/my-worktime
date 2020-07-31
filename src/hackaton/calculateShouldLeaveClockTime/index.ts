@@ -24,7 +24,6 @@ interface LeaveClockTimeParams {
  * Implementation
  */
 export default (data: LeaveClockTimeParams): string => {
-  let lastIndex: number;
   let minutesQuantityNecessaryToOut: number;
   let minutesFromTheLastMark: number;
   let breakMinutes: number;
@@ -35,8 +34,7 @@ export default (data: LeaveClockTimeParams): string => {
   }
 
   minutesQuantityNecessaryToOut = data.journeyTimeInMinutes - data.registeredWorkedMinutes;
-  lastIndex = data.marks.length;
-  minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(data.marks[lastIndex-1].clock);
+  minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(data.marks[Utils.getLastIndex(data.marks)].clock);
 
   breakMinutes = 0;
   if(data.breakMinutes>60 && data.registeredWorkedMinutes > data.journeyTimeInMinutes && data.isMissingPairMark === false) {
@@ -44,5 +42,11 @@ export default (data: LeaveClockTimeParams): string => {
   }
 
   hourToStopWork = ClockHelper.humanizeMinutesToClock((minutesFromTheLastMark + minutesQuantityNecessaryToOut) - breakMinutes);
-  return hourToStopWork;
+  return hourToStopWork; 
+}
+
+export class Utils {
+  public static getLastIndex(marks: WorktimeDayMark[]): number {
+    return marks.length - 1;
+  }
 }
