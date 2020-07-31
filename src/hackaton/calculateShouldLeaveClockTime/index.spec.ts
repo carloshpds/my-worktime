@@ -164,11 +164,11 @@ describe('Calculate "should leave clock time"', () => {
   })
 
   it('Calulates to values less than an hour', () => {
+    // Este cenário não existe
     jest
       .spyOn(global.Date, 'now')
-      .mockImplementationOnce(() =>
-        new Date('2020-01-01T16:00:00').valueOf()
-      )
+      .mockImplementationOnce(() => new Date('2020-01-01T16:00:00').valueOf())
+    
     const marks: WorktimeDayMark[] = [
       { clock: '08:00'},
       { clock: '08:45'}
