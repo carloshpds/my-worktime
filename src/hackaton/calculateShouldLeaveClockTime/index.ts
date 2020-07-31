@@ -19,27 +19,37 @@ interface LeaveClockTimeParams {
   now: any // Abstração do Moment para o relógio neste exato momento
 }
 
+interface WorkPeriod {
+  start: string,
+  end: string,
+  worked: number,
+  auto: boolean,
+  hit: boolean,
+  overTimingMinutes: number,
+  endJourneyAt: string
+}
+
 /**
  * Implementation
  */
 export default ({ marks, journeyTimeInMinutes }: LeaveClockTimeParams): string => {
-  const markPairs = toPairs(marks, [])
+  const periods: Array<WorkPeriod> = joinMarksToPeriod(marks, [])
 
-  if (markPairs.length == 1) {
-    return moment(markPairs[0].start, 'HH:mm')
+  if (periods.length == 1) {
+    return moment(periods[0].start, 'HH:mm')
       .add(journeyTimeInMinutes, 'minutes')
       .format('HH:mm')
   }
 
-  const worked = findJourneyCompletedPair(markPairs, journeyTimeInMinutes)
+  const workPeriods = setUpEndJourneyAt(periods, journeyTimeInMinutes)
+  const time = calculateWorkedTime(workPeriods)
 
-  const a = markPairs.find(it => it.endJourneyAt)
-
-  if (a) {
-    return a.endJourneyAt
+  let lastHit
+  if (lastHit = workPeriods.find(it => it.endJourneyAt)) {
+    return lastHit.endJourneyAt
   } else {
-    const res = journeyTimeInMinutes - worked
-    const tail = markPairs[markPairs.length - 1]
+    const res = journeyTimeInMinutes - time
+    const tail = workPeriods[workPeriods.length - 1]
     
     return moment(tail.start, 'HH:mm')
       .add(tail.worked + res, 'minutes')
@@ -47,27 +57,24 @@ export default ({ marks, journeyTimeInMinutes }: LeaveClockTimeParams): string =
   }
 }
 
-function toPairs(marks: any[], tuples: Array<any>) {
+function joinMarksToPeriod(marks: any[], tuples: Array<WorkPeriod>) {
   const [
     a, 
     b = { clock: '23:59', auto: true }, 
     ...rest
   ] = marks
 
-  const aTime = moment(a.clock, "HH:mm")
-  const bTime = moment(b.clock, "HH:mm")
-
-  const _tuples = [...tuples, { start: a.clock, end: b.clock, worked: bTime.diff(aTime, 'minutes'), auto: b.auto }]
+  const newTuples = [...tuples, toWorkPeriod(a, b)]
 
   if (rest.length <= 0) {
-    return _tuples
+    return newTuples
   } else {
-    return toPairs(rest, _tuples)
+    return joinMarksToPeriod(rest, newTuples)
   }
 }
 
-function findJourneyCompletedPair(marks: Array<any>, journey: number): number {
-  return marks.reduce((current, data) => {
+function setUpEndJourneyAt(marks: Array<WorkPeriod>, journey: number): Array<WorkPeriod> {
+  marks.reduce((current, data) => {
     let newCurrent = current
 
     if (data.auto) {
@@ -93,4 +100,22 @@ function findJourneyCompletedPair(marks: Array<any>, journey: number): number {
 
     return newCurrent
   }, 0)
+
+  return marks
+}
+
+function toWorkPeriod(a: WorktimeDayMark, b: any) {
+  return { 
+    start: a.clock, 
+    end: b.clock, 
+    worked: moment(b.clock, "HH:mm").diff(moment(a.clock, "HH:mm"), 'minutes'), 
+    auto: b.auto,
+    hit: false,
+    endJourneyAt: '',
+    overTimingMinutes: 0
+  }
+}
+
+function calculateWorkedTime(marks: Array<WorkPeriod>): number {
+  return marks.reduce((current, data) => data.worked + current, 0)
 }
