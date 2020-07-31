@@ -22,9 +22,9 @@ interface LeaveClockTimeParams {
 interface WorkPeriod {
   start: string,
   end: string,
-  worked: number,
-  auto: boolean,
-  hit: boolean,
+  workedMinutes: number,
+  autofill: boolean,
+  shouldLeave: boolean,
   overTimingMinutes: number,
   endJourneyAt: string
 }
@@ -42,17 +42,17 @@ export default ({ marks, journeyTimeInMinutes }: LeaveClockTimeParams): string =
   }
 
   const workPeriods = setUpEndJourneyAt(periods, journeyTimeInMinutes)
-  const time = calculateWorkedTime(workPeriods)
+  const workedTime = calculateWorkedTime(workPeriods)
 
-  let lastHit
-  if (lastHit = workPeriods.find(it => it.endJourneyAt)) {
-    return lastHit.endJourneyAt
+  let leavePeriod
+  if (leavePeriod = workPeriods.find(it => it.endJourneyAt)) {
+    return leavePeriod.endJourneyAt
   } else {
-    const res = journeyTimeInMinutes - time
-    const tail = workPeriods[workPeriods.length - 1]
+    const missingMinutes = journeyTimeInMinutes - workedTime
+    const { start, workedMinutes } = workPeriods[workPeriods.length - 1]
     
-    return moment(tail.start, 'HH:mm')
-      .add(tail.worked + res, 'minutes')
+    return moment(start, 'HH:mm')
+      .add(workedMinutes + missingMinutes, 'minutes')
       .format('HH:mm')
   }
 }
@@ -60,7 +60,7 @@ export default ({ marks, journeyTimeInMinutes }: LeaveClockTimeParams): string =
 function joinMarksToPeriod(marks: any[], tuples: Array<WorkPeriod>) {
   const [
     a, 
-    b = { clock: '23:59', auto: true }, 
+    b = { clock: '23:59', autofill: true }, 
     ...rest
   ] = marks
 
@@ -77,20 +77,20 @@ function setUpEndJourneyAt(marks: Array<WorkPeriod>, journey: number): Array<Wor
   marks.reduce((current, data) => {
     let newCurrent = current
 
-    if (data.auto) {
+    if (data.autofill) {
       const missing = journey - newCurrent
       
-      data.hit = true
+      data.shouldLeave = true
       data.overTimingMinutes = 0
       data.endJourneyAt = moment(data.start, "HH:mm")
         .add(missing, 'minutes')
         .format('HH:mm')
     } else {
-      newCurrent = data.worked + newCurrent
+      newCurrent = data.workedMinutes + newCurrent
       const overTime = newCurrent - journey
 
       if (newCurrent >= journey) {
-        data.hit = true
+        data.shouldLeave = true
         data.overTimingMinutes = overTime
         data.endJourneyAt = moment(data.end, "HH:mm")
           .subtract(overTime, 'minutes')
@@ -108,14 +108,14 @@ function toWorkPeriod(a: WorktimeDayMark, b: any) {
   return { 
     start: a.clock, 
     end: b.clock, 
-    worked: moment(b.clock, "HH:mm").diff(moment(a.clock, "HH:mm"), 'minutes'), 
-    auto: b.auto,
-    hit: false,
+    workedMinutes: moment(b.clock, "HH:mm").diff(moment(a.clock, "HH:mm"), 'minutes'), 
+    autofill: b.autofill,
+    shouldLeave: false,
     endJourneyAt: '',
     overTimingMinutes: 0
   }
 }
 
 function calculateWorkedTime(marks: Array<WorkPeriod>): number {
-  return marks.reduce((current, data) => data.worked + current, 0)
+  return marks.reduce((current, data) => data.workedMinutes + current, 0)
 }
