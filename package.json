@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "tsc",
-    "start-dev": "npm run compile && node dist/index.js -u 16238 -p AiRJNT4HY694bu -s ahgora -c a382748 -d 2020-03-10 -jt 08:48 -dbg true",
+    "start-dev": "npm run compile && node dist/index.js -u 16238 -p wGj4A79tUBvW -s ahgora -c a382748 -jt 08:48 -dbg false",
     "test": "jest"
   },
   "repository": {
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/carloshpds/worktime#readme",
   "dependencies": {
     "axios": "^0.19.2",
+    "boxen": "^4.2.0",
     "commander": "^5.1.0",
     "moment": "^2.25.3",
     "ora": "^4.0.4",

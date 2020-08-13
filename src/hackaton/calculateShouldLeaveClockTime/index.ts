@@ -23,6 +23,41 @@ interface LeaveClockTimeParams {
 /**
  * Implementation
  */
+const getHoursBetweenStartAndDesired = (hour: any, marks: WorktimeDayMark[]) => {
+  const momentMark = moment(hour, 'hh:mm')
+  return marks.filter(item => {
+    return moment(momentMark).isAfter(moment(item.clock, 'hh:mm'))
+  })
+}
+​
 export default (data: LeaveClockTimeParams): string => {
-  return null
+  const { journeyTimeInMinutes, marks, now } = data
+  let registeredWorkedMinutes = 0
+​
+    marks.forEach((mark, index) => {
+      const isClosingPeriod = index % 2 === 1
+      if (isClosingPeriod) {
+        const currentMarkInMinutes = ClockHelper.convertClockStringToMinutes(mark.clock)
+        const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[index - 1].clock)
+        registeredWorkedMinutes += currentMarkInMinutes - lastMarkInMinutes
+      }
+      return mark.clock
+    })
+​
+    let missingJourneyMinutes = journeyTimeInMinutes - registeredWorkedMinutes
+    let shouldLeaveClockTime = null
+​
+    const firstMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[0].clock)
+    const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
+​
+    const shouldStopWithoutBreaks = firstMarkInMinutes + journeyTimeInMinutes
+    const hour = ClockHelper.humanizeMinutesToClock(shouldStopWithoutBreaks)
+​
+    const newMarks = getHoursBetweenStartAndDesired(hour, marks)
+    const breaks = ClockHelper.calculateBreakMinutes(newMarks.length % 2 === 1 ? newMarks : marks)
+
+    const sum = missingJourneyMinutes !== 0 ? shouldStopWithoutBreaks + breaks : lastMarkInMinutes
+    shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(sum)
+​
+    return shouldLeaveClockTime
 }
