@@ -9,7 +9,6 @@ import 'moment/locale/pt-br'
 import ClockHelper from "./utils/ClockHelper"
 import * as ora from 'ora'
 import WorktimeProvider from "./providers/WorktimeProvider"
-import calculateShouldLeaveClockTime from "./hackaton/calculateShouldLeaveClockTime"
 
 program
     .requiredOption('-u, --user [user]', 'ID do usuário no sistema de ponto')
@@ -59,16 +58,11 @@ program
           try {
             const worktimeProvider: WorktimeProvider = new currentProviderClass(options)
             loader.text = `Buscando dados no ${worktimeProvider.name}`
-            const marks = await worktimeProvider.getDateMarks()
-            // const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()
-            const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, options.momentDate.format())
-            const shouldLeaveClockTime = calculateShouldLeaveClockTime({
-              ...worktimeDayResume,
-              marks,
-            })
-            loader.succeed(`Dados encontrados, seu horário de saída ideal é ${shouldLeaveClockTime}`)
+
+            const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()
+            loader.succeed(`Dados encontrados, seu horário de saída ideal é ${worktimeDayResume.shouldLeaveClockTime}`)
             // console.log(marks.map(mark => mark.clock).join(' '))
-            marks.length && console.table(marks)
+            worktimeDayResume.marks.length && console.table(worktimeDayResume.marks)
           } catch (err) {
             options.debug && console.error(err)
             loader.fail('Não foi possível calcular. Verifique os parâmetros e tente novamente')
