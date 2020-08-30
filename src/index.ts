@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { WorktimeProviderOptions } from "./providers/types"
+import { WorktimeProviderOptions, WorktimeDayResume, WorktimeDayWorkedTime } from "./providers/types"
 
 import * as program from 'commander'
 import Ahgora from './providers/Ahgora'
@@ -25,8 +25,8 @@ program
           systemId  : args.system || process.env.WORKTIME_SYSTEM,
           companyId : args.company || process.env.WORKTIME_COMPANY,
           date : args.date || process.env.WORKTIME_DATE,
-          debug     : args.debug || process.env.WORKTIME_DEBUG,
-          journeyTime : args.journeyTime || process.env.WORKTIME_JOURNEYTIME,
+          debug     : /true/i.test(args.debug),
+          journeyTime : args.journeytime || process.env.WORKTIME_JOURNEYTIME,
         }
 
         if(!options.userId || !options.password || !options.systemId || !options.companyId) {
@@ -58,8 +58,11 @@ program
           try {
             const worktimeProvider: WorktimeProvider = new currentProviderClass(options)
             loader.text = `Buscando dados no ${worktimeProvider.name}`
-            await worktimeProvider.getWorktimeDayResume()
-            loader.succeed('Dados encontrados')
+
+            const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()
+            loader.succeed(`Dados encontrados, seu horário de saída ideal é ${worktimeDayResume.shouldLeaveClockTime}`)
+            // console.log(marks.map(mark => mark.clock).join(' '))
+            worktimeDayResume.marks.length && console.table(worktimeDayResume.marks)
           } catch (err) {
             options.debug && console.error(err)
             loader.fail('Não foi possível calcular. Verifique os parâmetros e tente novamente')

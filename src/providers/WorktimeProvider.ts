@@ -1,7 +1,6 @@
 import { WorktimeProviderOptions, WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime } from "./types"
 import * as moment from "moment"
 import ClockHelper from "../utils/ClockHelper"
-import calculateShouldLeaveClockTime from "../hackaton/calculateShouldLeaveClockTime"
 
 export default abstract class WorktimeProvider {
   name: string
@@ -79,13 +78,24 @@ export default abstract class WorktimeProvider {
 
     const journeyTimeInMinutes = ClockHelper.convertClockStringToMinutes(this.options.journeyTime)
 
+    let shouldLeaveMarks = [].concat(marks);
+    if(lastPeriodIsOpen && registeredWorkedMinutes > journeyTimeInMinutes) {
+      shouldLeaveMarks.pop()
+    }
+
+    const missingMinutesToCompleteJourney = journeyTimeInMinutes - registeredWorkedMinutes;
+    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveMarks[shouldLeaveMarks.length - 1].clock);
+    const breakMinutesToCalculateShouldLeaveClockTime = breakMinutes > 60 && registeredWorkedMinutes > journeyTimeInMinutes && !lastPeriodIsOpen ? breakMinutes - 60 : 0;
+    const shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock((minutesFromTheLastMark + missingMinutesToCompleteJourney) - breakMinutesToCalculateShouldLeaveClockTime);
+
     return {
       registeredWorkedMinutes,
       workedMinutesUntilNow,
       isMissingPairMark: lastPeriodIsOpen,
-      // shouldLeaveClockTime,
+      shouldLeaveClockTime,
       breakMinutes,
       journeyTimeInMinutes,
+      marks,
       now
     }
   }

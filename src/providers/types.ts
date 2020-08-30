@@ -4,10 +4,11 @@ export interface WorktimeDayWorkedTime {
   journeyTimeInMinutes: number
   registeredWorkedMinutes: number
   workedMinutesUntilNow: number
-  shouldLeaveClockTime?: string
+  shouldLeaveClockTime: string
   isMissingPairMark: boolean
   breakMinutes: number
   now: Moment
+  marks: WorktimeDayMark[]
 }
 
 export interface WorktimeDayResume {
@@ -16,6 +17,7 @@ export interface WorktimeDayResume {
   breakMinutes: number
   shouldLeaveClockTime?: string
   isMissingPairMark: boolean
+  marks: WorktimeDayMark[]
 }
 
 export interface WorktimeDayMark {

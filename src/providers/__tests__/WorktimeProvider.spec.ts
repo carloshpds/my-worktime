@@ -116,7 +116,7 @@ describe('WorktimeProvier', () => {
         const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(60 * 8)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(60 * 8)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:00')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:00')
         expect(worktimeDayResume.isMissingPairMark).toBe(false)
       })
 
@@ -142,7 +142,7 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(twelveHours)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(twelveHours)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:00')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:00')
         expect(worktimeDayResume.isMissingPairMark).toBe(false)
       })
 
@@ -168,7 +168,7 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(dailyWorkedTimeInMinutes)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(dailyWorkedTimeInMinutes)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:07')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:07')
         expect(worktimeDayResume.isMissingPairMark).toBe(false)
       })
 
@@ -192,11 +192,11 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(dailyWorkedTimeInMinutes)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(dailyWorkedTimeInMinutes)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:07')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:07')
         expect(worktimeDayResume.isMissingPairMark).toBe(false)
       })
 
-      it('Calulates odd marks with less than 8h total', () => {
+      it('Calulates odd marks with less than 8h total (case 1)', () => {
         jest
           .spyOn(global.Date, 'now')
           .mockImplementationOnce(() =>
@@ -215,11 +215,11 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(dailyWorkedTimeInMinutes)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(dailyWorkedTimeInMinutes)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:07')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:07')
         expect(worktimeDayResume.isMissingPairMark).toBe(true)
       })
 
-      it('Calulates odd marks with less than 8h total', () => {
+      it('Calulates odd marks with less than 8h total (case 2)', () => {
         jest
           .spyOn(global.Date, 'now')
           .mockImplementationOnce(() =>
@@ -240,11 +240,11 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(dailyWorkedTimeInMinutes)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(dailyWorkedTimeInMinutes)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:37')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:37')
         expect(worktimeDayResume.isMissingPairMark).toBe(true)
       })
 
-      it('Calulates odd marks with less than 8h total', () => {
+      it('Calulates odd marks with less than 8h total (case 3)', () => {
         jest
           .spyOn(global.Date, 'now')
           .mockImplementationOnce(() =>
@@ -268,11 +268,11 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(dailyWorkedTimeInMinutes)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(workedMinutesUntilNow)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('20:14')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('20:14')
         expect(worktimeDayResume.isMissingPairMark).toBe(true)
       })
 
-      it('Calulates odd marks with less than 8h total', () => {
+      it('Calulates odd marks with less than 8h total (case 4)', () => {
         jest
           .spyOn(global.Date, 'now')
           .mockImplementationOnce(() =>
@@ -297,11 +297,11 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(dailyWorkedTimeInMinutes)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(dailyWorkedTimeInMinutes)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('21:04')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('21:04')
         expect(worktimeDayResume.isMissingPairMark).toBe(true)
       })
 
-      it('Calulates odd marks with more than 8h total', () => {
+      it('Calulates odd marks with more than 8h total (case 5)', () => {
         jest
           .spyOn(global.Date, 'now')
           .mockImplementationOnce(() =>
@@ -322,7 +322,7 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(dailyWorkedTimeInMinutes)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(dailyWorkedTimeInMinutes)
-        // expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:27')
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:27')
         expect(worktimeDayResume.isMissingPairMark).toBe(true)
       })
 
