@@ -1,36 +1,36 @@
-import { Moment } from "moment";
+import {Moment} from 'moment'
 
 export interface WorktimeDayWorkedTime {
-  journeyTimeInMinutes: number
-  registeredWorkedMinutes: number
-  workedMinutesUntilNow: number
-  shouldLeaveClockTime: string
-  isMissingPairMark: boolean
-  breakMinutes: number
-  now: Moment
-  marks: WorktimeDayMark[]
+  journeyTimeInMinutes: number;
+  registeredWorkedMinutes: number;
+  workedMinutesUntilNow: number;
+  shouldLeaveClockTime: string;
+  isMissingPairMark: boolean;
+  breakMinutes: number;
+  now: Moment;
+  marks: WorktimeDayMark[];
 }
 
 export interface WorktimeDayResume {
-  registeredWorkedMinutes: number
-  workedMinutesUntilNow: number
-  breakMinutes: number
-  shouldLeaveClockTime?: string
-  isMissingPairMark: boolean
-  marks: WorktimeDayMark[]
+  registeredWorkedMinutes: number;
+  workedMinutesUntilNow: number;
+  breakMinutes: number;
+  shouldLeaveClockTime?: string;
+  isMissingPairMark: boolean;
+  marks: WorktimeDayMark[];
 }
 
 export interface WorktimeDayMark {
-  clock: string
+  clock: string;
 }
 
 export interface WorktimeProviderOptions {
-  userId: string
-  password: string
-  companyId: string
-  systemId: string
-  date: string
-  momentDate: Moment
-  debug?: boolean
-  journeyTime?: string // Clock time HH:mm
+  userId: string;
+  password: string;
+  companyId: string;
+  systemId: string;
+  date: string;
+  momentDate: Moment;
+  debug?: boolean;
+  journeyTime?: string; // Clock time HH:mm
 }
