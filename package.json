@@ -1,42 +1,78 @@
 {
-  "name": "worktime",
+  "name": "my-worktime",
   "version": "1.0.0",
-  "description": "Your worktime on terminal",
-  "main": "index.js",
-  "scripts": {
-    "compile": "tsc",
-    "start-dev": "npm run compile && node dist/index.js -u 16238 -p wGj4A79tUBvW -s ahgora -c a382748 -d 2020-03-10 -jt 08:48 -dbg false",
-    "test": "jest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/carloshpds/worktime.git"
-  },
-  "keywords": [
-    "work",
-    "time",
-    "ahgora"
+  "author": "Carlos Henrique <carloshpds@gmail.com> https://github.com/carloshpds",
+  "contributors": [
+    "Matheus Soares <matheusb95@gmail.com> https://github.com/Matheusss",
+    "Beatriz Gidzinski Cardoso <beatriz.gidzinski@mercadolivre.com> https://github.com/bgidzinski",
+    "Marco Antonio De Souza <marco.souza@mercadolivre.com>"
   ],
-  "author": "Carlos Henrique <carloshpds@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/carloshpds/worktime/issues"
+  "bin": {
+    "my-worktime": "./bin/run"
   },
-  "homepage": "https://github.com/carloshpds/worktime#readme",
+  "bugs": "https://github.com/carloshpds/worktime/issues",
   "dependencies": {
-    "axios": "^0.19.2",
-    "boxen": "^4.2.0",
-    "commander": "^5.1.0",
-    "moment": "^2.25.3",
-    "ora": "^4.0.4",
-    "qs": "^6.9.4"
+    "@oclif/command": "^1.8.0",
+    "@oclif/config": "^1.17.0",
+    "@oclif/plugin-help": "^3.2.0",
+    "axios": "0.20.0",
+    "moment": "^2.28.0",
+    "ora": "^5.1.0",
+    "tslib": "^1.13.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.2.2",
+    "@oclif/dev-cli": "^1.22.2",
+    "@types/jest": "^25.2.3",
     "@types/moment": "^2.13.0",
-    "@types/node": "^13.13.5",
+    "@types/node": "^10.17.28",
+    "eslint": "^5.16.0",
+    "eslint-config-oclif": "^3.1.0",
+    "eslint-config-oclif-typescript": "^0.1.0",
+    "globby": "^10.0.2",
     "jest": "^26.0.1",
     "ts-jest": "^26.0.0",
-    "typescript": "^3.9.2"
-  }
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "files": [
+    "/bin",
+    "/lib",
+    "/npm-shrinkwrap.json",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/carloshpds/worktime#readme",
+  "keywords": [
+    "worktime",
+    "my-worktime",
+    "mw",
+    "time",
+    "hour",
+    "minute",
+    "ahgora",
+    "work",
+    "utility",
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "oclif": {
+    "commands": "./lib/commands",
+    "bin": "my-worktime",
+    "plugins": [
+      "@oclif/plugin-help"
+    ]
+  },
+  "repository": "carloshpds/my-worktime",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "eslint . --ext .ts --config .eslintrc",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "jest",
+    "version": "oclif-dev readme && git add README.md",
+    "check": "./bin/run check -u 16238 -p $PASS -s ahgora -c a382748 -j 08:48 -d 2020-09-25"
+  },
+  "types": "lib/index.d.ts"
 }

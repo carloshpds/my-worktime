@@ -1,12 +1,16 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "importHelpers": true,
+    "outDir": "lib",
+    "rootDir": "src",
+    "strict": true,
     "module": "CommonJS",
     "noImplicitAny": false,
     "removeComments": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "moduleResolution": "node",
-    "outDir": "dist",
     "target": "es6",
     "allowSyntheticDefaultImports": true
   },

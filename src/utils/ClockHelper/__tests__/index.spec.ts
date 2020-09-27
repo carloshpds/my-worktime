@@ -1,13 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import * as moment from 'moment'
+import 'moment/locale/pt-br'
 import ClockHelper from '..'
-import { WorktimeDayMark, WorktimeDayWorkedTime } from '../../../providers/types';
-import * as moment from "moment"
-import "moment/locale/pt-br"
-
 
 describe('Clock Helper', () => {
-
   describe('Convert hour string (clock format) in minutes', () => {
-
     describe('Clocks using the default HH:mm format', () => {
       it('Converts one hour without minutes', () => {
         const minutes = ClockHelper.convertClockStringToMinutes('01:00')
@@ -30,9 +27,7 @@ describe('Clock Helper', () => {
   })
 
   describe('Humanize minutes to Clock format', () => {
-
     describe('Clocks using the default HH:mm format', () => {
-
       it('Humanizes one perfect hour', () => {
         const clock = ClockHelper.humanizeMinutesToClock(60)
         expect(clock).toBe('01:00')
@@ -60,6 +55,5 @@ describe('Clock Helper', () => {
       const errorTest = () => ClockHelper.formatClockString('010')
       expect(errorTest).toThrow(Error)
     })
-  });
-
-});
+  })
+})
