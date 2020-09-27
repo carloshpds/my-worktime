@@ -1,6 +1,6 @@
 {
   "name": "my-worktime",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Carlos Henrique <carloshpds@gmail.com> https://github.com/carloshpds",
   "contributors": [
     "Matheus Soares <matheusb95@gmail.com> https://github.com/Matheusss",
@@ -10,12 +10,13 @@
   "bin": {
     "my-worktime": "./bin/run"
   },
-  "bugs": "https://github.com/carloshpds/worktime/issues",
+  "bugs": "https://github.com/carloshpds/my-worktime/issues",
   "dependencies": {
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.0",
     "axios": "0.20.0",
+    "chalk": "^4.1.0",
     "moment": "^2.28.0",
     "ora": "^5.1.0",
     "tslib": "^1.13.0"
@@ -43,7 +44,7 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/carloshpds/worktime#readme",
+  "homepage": "https://github.com/carloshpds/my-worktime#readme",
   "keywords": [
     "worktime",
     "my-worktime",
@@ -72,7 +73,7 @@
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "jest",
     "version": "oclif-dev readme && git add README.md",
-    "check": "./bin/run check -u 16238 -p $PASS -s ahgora -c a382748 -j 08:48 -d 2020-09-25"
+    "check": "./bin/run check -u $USER -p $PASS -s ahgora -c $COMPANY -j 08:48 -d 2020-09-23"
   },
   "types": "lib/index.d.ts"
 }
