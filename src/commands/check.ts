@@ -71,8 +71,13 @@ export default class CheckCommand extends Command {
         loader.text = `Buscando dados no ${worktimeProvider.name}`
 
         const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()
-        loader.succeed(`Dados encontrados, seu horário de saída ideal é ${chalk.black.bgGreen(' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
-        if(worktimeDayResume.marks.length){ this.printResult(worktimeDayResume) }
+
+        if(worktimeDayResume.marks.length){
+          loader.succeed(`Dados encontrados, seu horário de saída ideal é ${chalk.black.bgGreen(' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
+          this.printResult(worktimeDayResume)
+        } else {
+          loader.fail('Não há nenhuma batida para esta data ainda.')
+        }
 
       } catch (error) {
         console.error(error)
