@@ -11,15 +11,15 @@ export default class CheckCommand extends Command {
   static description = 'Checks your worktime'
 
   static examples = [
-    '$ worktime check -u 321 -p 123 -c a22',
-    '$ worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48',
-    '$ worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48 -d 2020-09-23',
+    '$ my-worktime check -u 321 -p 123 -c a22',
+    '$ my-worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48',
+    '$ my-worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48 -d 2020-09-23',
   ]
 
   static flags = {
     help: flags.help({char: 'h'}),
-    user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', required: true}),
-    password: flags.string({char: 'p', description: 'Senha do usuário no sistema', required: true}),
+    user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', required: true, env: 'MW_USER'}),
+    password: flags.string({char: 'p', description: 'Senha do usuário no sistema', required: true, env: 'MW_PASS'}),
     system: flags.string({char: 's', description: 'Nome do sistema de ponto', default: 'ahgora'}),
     company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', required: true, default: 'ahgora'}),
     date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),

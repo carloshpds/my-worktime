@@ -71,12 +71,12 @@ OPTIONS
   -u, --user=user                (required) ID do usuário no sistema de ponto
 
 EXAMPLES
-  $ worktime check -u 321 -p 123 -c a22
-  $ worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48
-  $ worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48 -d 2020-09-23
+  $ my-worktime check -u 321 -p 123 -c a22
+  $ my-worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48
+  $ my-worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48 -d 2020-09-23
 ```
 
-_See code: [src/commands/check.ts](https://github.com/carloshpds/my-worktime/blob/v1.0.1/src/commands/check.ts)_
+_See code: [src/commands/check.ts](https://github.com/carloshpds/my-worktime/blob/v1.0.2/src/commands/check.ts)_
 
 ## `my-worktime help [COMMAND]`
 
