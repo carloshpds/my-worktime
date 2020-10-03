@@ -6,6 +6,8 @@ import Ahgora from '../providers/Ahgora'
 import WorktimeProvider from '../providers/WorktimeProvider'
 import * as ora from 'ora'
 import * as chalk from 'chalk'
+import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
+import {CLIError} from '@oclif/errors'
 
 export default class CheckCommand extends Command {
   static description = 'Checks your worktime'
@@ -20,8 +22,8 @@ export default class CheckCommand extends Command {
     help: flags.help({char: 'h'}),
     user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', required: true, env: 'MW_USER'}),
     password: flags.string({char: 'p', description: 'Senha do usuário no sistema', required: true, env: 'MW_PASS'}),
-    system: flags.string({char: 's', description: 'Nome do sistema de ponto', default: 'ahgora'}),
-    company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', required: true, default: 'ahgora'}),
+    system: flags.string({char: 's', description: 'Nome do sistema de ponto', default: 'ahgora', env: 'MW_SYSTEM'}),
+    company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', required: true, env: 'MW_COMPANY'}),
     date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),
     debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: false}),
     journeytime: flags.string({char: 'j', description: 'Quantidade de horas a serem trabalhadas por dia', default: '08:00'}),
@@ -31,19 +33,24 @@ export default class CheckCommand extends Command {
     const {flags} = this.parse(CheckCommand)
 
     const options: Partial<WorktimeProviderOptions> = {
-      userId: flags.user     || process.env.WORKTIME_USER,
-      password: flags.password || process.env.WORKTIME_PASSWORD,
-      systemId: flags.system || process.env.WORKTIME_SYSTEM,
-      companyId: flags.company || process.env.WORKTIME_COMPANY,
-      date: flags.date || process.env.WORKTIME_DATE,
+      userId: flags.user,
+      password: flags.password,
+      systemId: flags.system,
+      companyId: flags.company,
+      date: flags.date,
       debug: flags.debug,
-      journeyTime: flags.journeytime || process.env.WORKTIME_JOURNEYTIME,
+      journeyTime: flags.journeytime,
     }
 
     if (!options.userId || !options.password || !options.systemId || !options.companyId) {
       this.log('Não foi possível recuperar as credenciais do sistema de ponto')
-      this.log('Você pode definir as variáveis de ambiente "WORKTIME_USER" e "WORKTIME_PASSWORD"')
-      this.log('Use worktime -h para informar as credencias via linha de comando.')
+      this.log('Você pode definir as variáveis de ambiente "MW_USER" e "MW_PASS"')
+      this.log('Use my-worktime -h para informar as credencias via linha de comando.')
+      return
+    }
+
+    if(!DATE_REGEXP.test(options.date as string) || !moment().isValid()){
+      this.error(chalk.red(`Este formato de data é inválido, utilize o padrão ${DATE_FORMAT}`))
       return
     }
 
@@ -100,10 +107,17 @@ export default class CheckCommand extends Command {
       return `${markOnConsole}`
     })
 
+    let workedMinutesUntilNowOnConsole = ClockHelper.humanizeMinutesToClock(worktimeDayResume.workedMinutesUntilNow)
+
+    if(worktimeDayResume.isMissingPairMark){
+      workedMinutesUntilNowOnConsole = chalk.yellow(workedMinutesUntilNowOnConsole)
+    }
+
     console.log('')
     console.log(`🔢 Batidas: ${marksToConsole.join('   ')}`)
+    console.log(`⏸  Horas de pausas: ${ClockHelper.humanizeMinutesToClock(worktimeDayResume.breakMinutes)}`)
     console.log(`🆗 Horas registradas: ${ClockHelper.humanizeMinutesToClock(worktimeDayResume.registeredWorkedMinutes)}`)
-    console.log(`⏺  Horas trabalhadas até este momento: ${ClockHelper.humanizeMinutesToClock(worktimeDayResume.workedMinutesUntilNow)}`)
+    console.log(`⏺  Horas trabalhadas até este momento: ${workedMinutesUntilNowOnConsole}`)
     console.log('')
   }
 }
