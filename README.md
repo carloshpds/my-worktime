@@ -63,7 +63,7 @@ USAGE
 OPTIONS
   -b, --debug                    Debug - Exibe mais informações na execução
   -c, --company=company          (required) [default: ahgora] ID da empresa no sistema de ponto
-  -d, --date=date                [default: 2020-09-27] Data relacionada a consulta de horas no padrão YYYY-MM-DD
+  -d, --date=date                [default: 2020-10-03] Data relacionada a consulta de horas no padrão YYYY-MM-DD
   -h, --help                     show CLI help
   -j, --journeytime=journeytime  [default: 08:00] Quantidade de horas a serem trabalhadas por dia
   -p, --password=password        (required) Senha do usuário no sistema
