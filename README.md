@@ -62,7 +62,7 @@ USAGE
 
 OPTIONS
   -b, --debug                    Debug - Exibe mais informações na execução
-  -c, --company=company          (required) [default: ahgora] ID da empresa no sistema de ponto
+  -c, --company=company          (required) ID da empresa no sistema de ponto
   -d, --date=date                [default: 2020-10-03] Data relacionada a consulta de horas no padrão YYYY-MM-DD
   -h, --help                     show CLI help
   -j, --journeytime=journeytime  [default: 08:00] Quantidade de horas a serem trabalhadas por dia
@@ -76,7 +76,7 @@ EXAMPLES
   $ my-worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48 -d 2020-09-23
 ```
 
-_See code: [src/commands/check.ts](https://github.com/carloshpds/my-worktime/blob/v1.0.2/src/commands/check.ts)_
+_See code: [src/commands/check.ts](https://github.com/carloshpds/my-worktime/blob/v1.1.0/src/commands/check.ts)_
 
 ## `my-worktime help [COMMAND]`
 
