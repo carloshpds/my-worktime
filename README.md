@@ -51,6 +51,7 @@ USAGE
 <!-- commands -->
 * [`my-worktime check`](#my-worktime-check)
 * [`my-worktime help [COMMAND]`](#my-worktime-help-command)
+* [`my-worktime setup [FILE]`](#my-worktime-setup-file)
 
 ## `my-worktime check`
 
@@ -63,7 +64,7 @@ USAGE
 OPTIONS
   -b, --debug                    Debug - Exibe mais informações na execução
   -c, --company=company          (required) ID da empresa no sistema de ponto
-  -d, --date=date                [default: 2020-10-03] Data relacionada a consulta de horas no padrão YYYY-MM-DD
+  -d, --date=date                [default: 2020-10-07] Data relacionada a consulta de horas no padrão YYYY-MM-DD
   -h, --help                     show CLI help
   -j, --journeytime=journeytime  [default: 08:00] Quantidade de horas a serem trabalhadas por dia
   -p, --password=password        (required) Senha do usuário no sistema
@@ -94,4 +95,20 @@ OPTIONS
 ```
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
+
+## `my-worktime setup [FILE]`
+
+describe the command here
+
+```
+USAGE
+  $ my-worktime setup [FILE]
+
+OPTIONS
+  -f, --force
+  -h, --help       show CLI help
+  -n, --name=name  name to print
+```
+
+_See code: [src/commands/setup.ts](https://github.com/carloshpds/my-worktime/blob/v1.1.0/src/commands/setup.ts)_
 <!-- commandsstop -->
