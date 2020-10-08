@@ -4,10 +4,11 @@ See your worktime using terminal
 
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/oclid-test.svg)](https://npmjs.org/package/my-worktime)
+![npm](https://img.shields.io/npm/v/my-worktime)
+![node-current](https://img.shields.io/node/v/my-worktime)
 
 [![Downloads/week](https://img.shields.io/npm/dw/my-worktime.svg)](https://npmjs.org/package/my-worktime)
-[![License](https://img.shields.io/npm/l/oclid-test.svg)](https://github.com/carloshpds/oclid-test/blob/master/package.json)
+![NPM](https://img.shields.io/npm/l/my-worktime)
 
 <!-- toc -->
 * [Install](#install)
