@@ -28,7 +28,7 @@ export default class Setup extends Command {
       this.exit(0)
     }
 
-    this.log('🧞 Este setup irá te guiar a confgirar esse CLI para a sua empresa.')
+    this.log('🧞 Este setup irá te guiar no processo de configuração desta CLI para a sua empresa.')
     this.log('📛 Qualquer configuração previamente gravada será substituída caso termine este setup.')
     this.log('💢 ATENÇÃO: A sua senha será gravada em texto puro no arquivo de configuração!')
 
