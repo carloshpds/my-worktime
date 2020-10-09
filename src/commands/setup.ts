@@ -4,15 +4,30 @@ import Ahgora from '../providers/Ahgora'
 import { executeQuery } from '../providers/executeQuery'
 import { meliFluxSecondStep, meliFluxThirdStep, meliFluxGenerateOptions, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions } from '../utils/setupFlux'
 import Conf from 'conf'
+import CheckCommand from './check'
 
 export default class Setup extends Command {
-  static description = 'Setup the correct properties for your company'
+  static description = 'Configura a CLI para a sua empresa'
 
   static flags = {
-    help: flags.help({char: 'h'})
+    help: flags.help({char: 'h'}),
+    delete: flags.boolean({char: 'd', description: 'Deleta a configuração salva', default: false})
   }
 
   async run() {
+    const {flags} = this.parse(Setup)
+    const config = new Conf();
+
+    if (flags.delete) {
+      if (config.has('options')) {
+        config.delete('options')
+        this.log('🚮 Configurações excluídas com sucesso!')
+      } else {
+        this.log('😐 Não há configuração salva para ser deletada.')
+      }
+      this.exit(0)
+    }
+
     this.log('🧞 Este setup irá te guiar a confgirar esse CLI para a sua empresa.')
     this.log('📛 Qualquer configuração previamente gravada será substituída caso termine este setup.')
     this.log('💢 ATENÇÃO: A sua senha será gravada em texto puro no arquivo de configuração!')
@@ -40,7 +55,7 @@ export default class Setup extends Command {
     let secondStepInquirer: any = await inquirer.prompt(fluxs[firstStepInquirer.isMeli].secondStep())
     let thirdStepInquirer: any = await inquirer.prompt(fluxs[firstStepInquirer.isMeli].thirdStep(secondStepInquirer))
 
-    const config = new Conf();
+    
     const options = fluxs[firstStepInquirer.isMeli].generateOptions(secondStepInquirer, thirdStepInquirer)
 
     config.set('options', options)
