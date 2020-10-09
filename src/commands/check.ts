@@ -21,7 +21,7 @@ export default class CheckCommand extends Command {
     help: flags.help({char: 'h'}),
     user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER'}),
     password: flags.string({char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS'}),
-    system: flags.string({char: 's', description: 'Nome do sistema de ponto', default: 'ahgora', env: 'MW_SYSTEM'}),
+    system: flags.string({char: 's', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM'}),
     company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY'}),
     date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),
     debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: false}),
@@ -32,18 +32,24 @@ export default class CheckCommand extends Command {
     const {flags} = this.parse(CheckCommand)
 
     const config = new Conf();
+    let configOptions = config.get('options') as Partial<WorktimeProviderOptions>
 
-    let options = config.get('options') as Partial<WorktimeProviderOptions>
-
-    if (options) {
-      options.date = moment().format("YYYY-MM-DD")
-      options.momentDate = moment()
-
-      await executeQuery(Ahgora, options)
-      this.exit(0)
+    if (!flags.user && !flags.password && !flags.system && !flags.company) {
+      if (configOptions) {
+        configOptions.date = moment().format("YYYY-MM-DD")
+        configOptions.momentDate = moment()
+  
+        await executeQuery(Ahgora, configOptions)
+        this.exit(0)
+      }
+      this.describeUsage()
+      this.exit(1)
+    } else if (!flags.user || !flags.password || !flags.system || !flags.company) {
+      this.describeUsage()
+      this.exit(1)
     }
 
-    options = {
+    const options: Partial<WorktimeProviderOptions> = {
       userId: flags.user,
       password: flags.password,
       systemId: flags.system,
@@ -53,17 +59,8 @@ export default class CheckCommand extends Command {
       journeyTime: flags.journeytime,
     }
 
-    if (!options.userId || !options.password || !options.systemId || !options.companyId) {
-      this.log('Não foi possível recuperar as credenciais do sistema de ponto!')
-      this.log('Use `my-worktime setup` para configurar a CLI')
-      this.log('Use `my-worktime check -h` para obter informações de como passar as credencias via linha de comando.')
-      this.log('Alternativamente, você também pode definir as variáveis de ambiente "MW_USER" e "MW_PASS"')
-      return
-    }
-
     if(!DATE_REGEXP.test(options.date as string) || !moment().isValid()){
       this.error(chalk.red(`Este formato de data é inválido, utilize o padrão ${DATE_FORMAT}`))
-      return
     }
 
     if (options.debug) {
@@ -81,6 +78,13 @@ export default class CheckCommand extends Command {
       ahgora: Ahgora,
     }
 
-    await executeQuery(providers[options.systemId.toLowerCase()], options)
+    await executeQuery(providers[flags.system.toLowerCase()], options)
+  }
+
+  describeUsage() {
+      this.log('Não foi possível recuperar as credenciais do sistema de ponto!')
+      this.log('Use `my-worktime setup` para configurar a CLI')
+      this.log('Use `my-worktime check -h` para obter informações de como passar as credencias via linha de comando.')
+      this.log('Alternativamente, você também pode definir as variáveis de ambiente "MW_USER" e "MW_PASS"')
   }
 }
