@@ -6,6 +6,7 @@ import Ahgora from '../providers/Ahgora'
 import * as chalk from 'chalk'
 import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
 import { executeQuery } from '../providers/executeQuery'
+import Conf from 'conf'
 
 export default class CheckCommand extends Command {
   static description = 'Checks your worktime'
@@ -18,10 +19,10 @@ export default class CheckCommand extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', required: true, env: 'MW_USER'}),
-    password: flags.string({char: 'p', description: 'Senha do usuário no sistema', required: true, env: 'MW_PASS'}),
+    user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER'}),
+    password: flags.string({char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS'}),
     system: flags.string({char: 's', description: 'Nome do sistema de ponto', default: 'ahgora', env: 'MW_SYSTEM'}),
-    company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', required: true, env: 'MW_COMPANY'}),
+    company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY'}),
     date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),
     debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: false}),
     journeytime: flags.string({char: 'j', description: 'Quantidade de horas a serem trabalhadas por dia', default: '08:00'}),
@@ -30,7 +31,19 @@ export default class CheckCommand extends Command {
   async run() {
     const {flags} = this.parse(CheckCommand)
 
-    const options: Partial<WorktimeProviderOptions> = {
+    const config = new Conf();
+
+    let options = config.get('options') as Partial<WorktimeProviderOptions>
+
+    if (options) {
+      options.date = moment().format("YYYY-MM-DD")
+      options.momentDate = moment()
+
+      await executeQuery(Ahgora, options)
+      this.exit(0)
+    }
+
+    options = {
       userId: flags.user,
       password: flags.password,
       systemId: flags.system,
