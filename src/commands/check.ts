@@ -54,9 +54,10 @@ export default class CheckCommand extends Command {
     }
 
     if (!options.userId || !options.password || !options.systemId || !options.companyId) {
-      this.log('Não foi possível recuperar as credenciais do sistema de ponto')
-      this.log('Você pode definir as variáveis de ambiente "MW_USER" e "MW_PASS"')
-      this.log('Use my-worktime -h para informar as credencias via linha de comando.')
+      this.log('Não foi possível recuperar as credenciais do sistema de ponto!')
+      this.log('Use `my-worktime setup` para configurar a CLI')
+      this.log('Use `my-worktime check -h` para obter informações de como passar as credencias via linha de comando.')
+      this.log('Alternativamente, você também pode definir as variáveis de ambiente "MW_USER" e "MW_PASS"')
       return
     }
 
