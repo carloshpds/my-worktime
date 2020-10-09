@@ -1,8 +1,6 @@
 import {Command, flags} from '@oclif/command'
 import * as inquirer from 'inquirer'
 import Ahgora from '../providers/Ahgora'
-import { WorktimeProviderOptions } from '../providers/types'
-import * as moment from 'moment'
 import { executeQuery } from '../providers/executeQuery'
 import { meliFluxSecondStep, meliFluxThirdStep, meliFluxGenerateOptions, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions } from '../utils/setupFlux'
 

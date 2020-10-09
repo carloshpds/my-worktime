@@ -1,13 +1,10 @@
 import {Command, flags} from '@oclif/command'
 import * as moment from 'moment'
-import {WorktimeProviderOptions, WorktimeDayResume} from '../providers/types'
+import {WorktimeProviderOptions} from '../providers/types'
 import ClockHelper from '../utils/ClockHelper'
 import Ahgora from '../providers/Ahgora'
-import WorktimeProvider from '../providers/WorktimeProvider'
-import * as ora from 'ora'
 import * as chalk from 'chalk'
 import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
-import {CLIError} from '@oclif/errors'
 import { executeQuery } from '../providers/executeQuery'
 
 export default class CheckCommand extends Command {
