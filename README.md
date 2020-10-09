@@ -97,18 +97,17 @@ OPTIONS
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v3.2.0/src/commands/help.ts)_
 
-## `my-worktime setup [FILE]`
+## `my-worktime setup`
 
-describe the command here
+Set's up the CLI for checking the worktime without entering the credentials every time.
 
 ```
 USAGE
-  $ my-worktime setup [FILE]
+  $ my-worktime setup
 
 OPTIONS
-  -f, --force
+  -d, --delete     deletes the saved configuration (if any)
   -h, --help       show CLI help
-  -n, --name=name  name to print
 ```
 
 _See code: [src/commands/setup.ts](https://github.com/carloshpds/my-worktime/blob/v1.1.0/src/commands/setup.ts)_

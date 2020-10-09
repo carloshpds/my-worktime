@@ -1,11 +1,12 @@
 {
   "name": "my-worktime",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Carlos Henrique <carloshpds@gmail.com> https://github.com/carloshpds",
   "contributors": [
     "Matheus Soares <matheusb95@gmail.com> https://github.com/Matheusss",
     "Beatriz Gidzinski Cardoso <beatriz.gidzinski@mercadolivre.com> https://github.com/bgidzinski",
-    "Marco Antonio De Souza <marco.souza@mercadolivre.com>"
+    "Marco Antonio De Souza <marco.souza@mercadolivre.com>",
+    "Otávio Martins Pinheiro <otavio.marpin@gmail.com> https://github.com/Tavisco"
   ],
   "bin": {
     "my-worktime": "./bin/run"

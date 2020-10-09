@@ -7,7 +7,7 @@ import Conf from 'conf'
 import CheckCommand from './check'
 
 export default class Setup extends Command {
-  static description = 'Configura a CLI para a sua empresa'
+  static description = 'Sets up the CLI for checking the worktime without entering the credentials every time.'
 
   static flags = {
     help: flags.help({char: 'h'}),
