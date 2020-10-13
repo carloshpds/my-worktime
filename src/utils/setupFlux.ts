@@ -110,7 +110,7 @@ export function otherCompaniesFluxThirdStep(secondStepInquirer: any): inquirer.Q
 export function meliFluxGenerateOptions(secondStepInquirer: any, thirdStepInquirer: any): WorktimeProviderOptions {
   return {
     userId: secondStepInquirer.ahgoraUsername,
-    password: secondStepInquirer.ahgoraPassword,
+    //password: secondStepInquirer.ahgoraPassword,
     systemId: "ahgora",
     companyId: secondStepInquirer.whichMeli,
     date: moment().format("YYYY-MM-DD"),
@@ -124,7 +124,7 @@ export function otherCompaniesGenerateOptions(secondStepInquirer: any, thirdStep
   if (secondStepInquirer.provider === AHGORA) {
     return {
       userId: thirdStepInquirer.ahgoraUsername,
-      password: thirdStepInquirer.ahgoraPassword,
+      //password: thirdStepInquirer.ahgoraPassword,
       systemId: "ahgora",
       companyId: secondStepInquirer.ahgoraCompanyId,
       date: moment().format("YYYY-MM-DD"),
@@ -135,4 +135,12 @@ export function otherCompaniesGenerateOptions(secondStepInquirer: any, thirdStep
   } else {
     throw new CLIError("Somente o Ahgora é suportado no momento!");
   }
+}
+
+export function meliFluxGetPassword(secondStepInquirer: any, thirdStepInquirer: any): String {
+  return secondStepInquirer.ahgoraPassword
+}
+
+export function otherCompaniesGetPassword(secondStepInquirer: any, thirdStepInquirer: any): String {
+  return thirdStepInquirer.ahgoraPassword
 }

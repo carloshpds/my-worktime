@@ -2,9 +2,10 @@ import {Command, flags} from '@oclif/command'
 import * as inquirer from 'inquirer'
 import Ahgora from '../providers/Ahgora'
 import { executeQuery } from '../providers/executeQuery'
-import { meliFluxSecondStep, meliFluxThirdStep, meliFluxGenerateOptions, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions } from '../utils/setupFlux'
+import { meliFluxSecondStep, meliFluxThirdStep, meliFluxGenerateOptions, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions, meliFluxGetPassword, otherCompaniesGetPassword } from '../utils/setupFlux'
 import Conf from 'conf'
-import CheckCommand from './check'
+import { WorktimeProviderOptions } from '../providers/types'
+import * as keytar from 'keytar'
 
 export default class Setup extends Command {
   static description = 'Sets up the CLI for checking the worktime without entering the credentials every time.'
@@ -43,12 +44,14 @@ export default class Setup extends Command {
       true: {
         secondStep: meliFluxSecondStep,
         thirdStep: meliFluxThirdStep,
-        generateOptions: meliFluxGenerateOptions
+        generateOptions: meliFluxGenerateOptions,
+        getPassword: meliFluxGetPassword
       },
       false: {
         secondStep: otherCompaniesFluxSecondStep,
         thirdStep: otherCompaniesFluxThirdStep,
-        generateOptions: otherCompaniesGenerateOptions
+        generateOptions: otherCompaniesGenerateOptions,
+        getPassword: otherCompaniesGetPassword
       }
     }
 
@@ -56,7 +59,10 @@ export default class Setup extends Command {
     let thirdStepInquirer: any = await inquirer.prompt(fluxs[firstStepInquirer.isMeli].thirdStep(secondStepInquirer))
 
     
-    const options = fluxs[firstStepInquirer.isMeli].generateOptions(secondStepInquirer, thirdStepInquirer)
+    const options: WorktimeProviderOptions = fluxs[firstStepInquirer.isMeli].generateOptions(secondStepInquirer, thirdStepInquirer)
+    const password = fluxs[firstStepInquirer.isMeli].getPassword(secondStepInquirer, thirdStepInquirer)
+
+    keytar.setPassword('My-Worktime', options.systemId, password)
 
     config.set('options', options)
     this.log('💾 Dados armazenados com sucesso!')

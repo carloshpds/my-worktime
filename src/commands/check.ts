@@ -51,7 +51,7 @@ export default class CheckCommand extends Command {
 
     const options: Partial<WorktimeProviderOptions> = {
       userId: flags.user,
-      password: flags.password,
+      //TODO: password: flags.password,
       systemId: flags.system,
       companyId: flags.company,
       date: flags.date,
