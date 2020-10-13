@@ -7,6 +7,7 @@ import * as chalk from 'chalk'
 import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
 import { executeQuery } from '../providers/executeQuery'
 import Conf from 'conf'
+import * as keytar from 'keytar'
 
 export default class CheckCommand extends Command {
   static description = 'Checks your worktime'
@@ -30,17 +31,32 @@ export default class CheckCommand extends Command {
 
   async run() {
     const {flags} = this.parse(CheckCommand)
-
     const config = new Conf();
     let configOptions = config.get('options') as Partial<WorktimeProviderOptions>
+    const providers: Record<string, any> = {
+      ahgora: Ahgora,
+    }
 
     if (!flags.user && !flags.password && !flags.system && !flags.company) {
       if (configOptions) {
         configOptions.date = moment().format("YYYY-MM-DD")
         configOptions.momentDate = moment()
   
-        await executeQuery(Ahgora, configOptions)
-        this.exit(0)
+        const passwords = await keytar.findCredentials('My-Worktime')
+
+        if (passwords.length != 0 && configOptions.systemId) {
+            const password = passwords.filter(pwd => pwd.account === configOptions.systemId?.toLowerCase()).map(pwd => pwd.password)
+
+            if (!password || password.length != 1) {
+              this.error("Ocorreu um erro ao obter senha do Keychain. O setup foi efetuado?")
+            }
+
+            await executeQuery(providers[configOptions.systemId?.toLowerCase()], configOptions, password[0])
+            this.exit(0)
+        } else {
+          this.error("As configurações estão incompletas. Favor execute o setup novamente.")
+        }
+        
       }
       this.describeUsage()
       this.exit(1)
@@ -51,7 +67,6 @@ export default class CheckCommand extends Command {
 
     const options: Partial<WorktimeProviderOptions> = {
       userId: flags.user,
-      //TODO: password: flags.password,
       systemId: flags.system,
       companyId: flags.company,
       date: flags.date,
@@ -74,11 +89,7 @@ export default class CheckCommand extends Command {
     options.momentDate = options.date ? moment(options.date) : moment()
     ClockHelper.debug = options.debug
 
-    const providers: Record<string, any> = {
-      ahgora: Ahgora,
-    }
-
-    await executeQuery(providers[flags.system.toLowerCase()], options)
+    await executeQuery(providers[flags.system.toLowerCase()], options, flags.password)
   }
 
   describeUsage() {

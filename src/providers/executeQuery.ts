@@ -5,11 +5,11 @@ import WorktimeProvider from './WorktimeProvider'
 import ClockHelper from '../utils/ClockHelper'
 
 
-export async function executeQuery(CurrentProviderClass: any, options: any) {
+export async function executeQuery(CurrentProviderClass: any, options: any, password: any) {
     const loader = ora('Iniciando...').start()
     if (CurrentProviderClass) {
         try {
-            const worktimeProvider: WorktimeProvider = new CurrentProviderClass(options)
+            const worktimeProvider: WorktimeProvider = new CurrentProviderClass(options, password)
             loader.text = `Buscando dados no ${worktimeProvider.name}`
 
             const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()

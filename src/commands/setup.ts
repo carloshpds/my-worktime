@@ -67,6 +67,6 @@ export default class Setup extends Command {
     config.set('options', options)
     this.log('💾 Dados armazenados com sucesso!')
     this.log('✅ A próxima vez, execute apenas `my-worktime check` Que os seus dados serão recuperados automaticamente!')
-    await executeQuery(Ahgora, options)
+    await executeQuery(Ahgora, options, password)
   }
 }
