@@ -42,6 +42,11 @@ describe('Clock Helper', () => {
         const clock = ClockHelper.humanizeMinutesToClock(1290)
         expect(clock).toBe('21:30')
       })
+
+      it('Humanizes negative numbers', () => {
+        const clock = ClockHelper.humanizeMinutesToClock(-1290)
+        expect(clock).toBe('21:30')
+      })
     })
   })
 

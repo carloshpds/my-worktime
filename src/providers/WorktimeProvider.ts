@@ -84,10 +84,14 @@ export default abstract class WorktimeProvider {
       shouldLeaveMarks.pop()
     }
 
-    const missingMinutesToCompleteJourney = journeyTimeInMinutes - registeredWorkedMinutes
+    let missingMinutesToCompleteJourney = journeyTimeInMinutes - registeredWorkedMinutes
     const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveMarks[shouldLeaveMarks.length - 1].clock)
     const breakMinutesToCalculateShouldLeaveClockTime = breakMinutes > 60 && registeredWorkedMinutes > journeyTimeInMinutes && !lastPeriodIsOpen ? breakMinutes - 60 : 0
     const shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock((minutesFromTheLastMark + missingMinutesToCompleteJourney) - breakMinutesToCalculateShouldLeaveClockTime)
+
+    if(lastPeriodIsOpen){
+      missingMinutesToCompleteJourney = journeyTimeInMinutes - workedMinutesUntilNow
+    }
 
     return {
       registeredWorkedMinutes,
@@ -96,6 +100,7 @@ export default abstract class WorktimeProvider {
       shouldLeaveClockTime,
       breakMinutes,
       journeyTimeInMinutes,
+      missingMinutesToCompleteJourney,
       marks,
       now,
     }
@@ -106,6 +111,7 @@ export default abstract class WorktimeProvider {
       isMissingPairMark: false,
       registeredWorkedMinutes: 0,
       workedMinutesUntilNow: 0,
+      missingMinutesToCompleteJourney: 0,
       breakMinutes: 0,
       marks
     }
