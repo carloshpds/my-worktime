@@ -80,8 +80,8 @@ export default class CheckCommand extends Command {
         const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()
 
         if(worktimeDayResume.marks.length){
-          loader.succeed(`Dados encontrados, seu horário de saída ideal é ${chalk.black.bgGreen(' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
-          this.printResult(worktimeDayResume)
+          loader.succeed(`Dados encontrados, seu horário ideal de saída é ${chalk.black.bgBlueBright(' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
+          this.printResult(worktimeDayResume, options)
         } else {
           loader.fail('Não há nenhuma batida para esta data ainda.')
         }
@@ -95,10 +95,10 @@ export default class CheckCommand extends Command {
     }
   }
 
-  printResult(worktimeDayResume: WorktimeDayResume){
+  printResult(worktimeDayResume: WorktimeDayResume, options: Partial<WorktimeProviderOptions>){
     const marksToConsole = worktimeDayResume.marks.map((mark, index) => {
       const isLastMark = index === worktimeDayResume.marks.length - 1
-      let markOnConsole = chalk.green(mark.clock)
+      let markOnConsole = chalk.blueBright(mark.clock)
 
       if(isLastMark && worktimeDayResume.isMissingPairMark){
         markOnConsole = chalk.yellow(mark.clock) + chalk.gray(' Batida ímpar')
@@ -110,7 +110,18 @@ export default class CheckCommand extends Command {
     let workedMinutesUntilNowOnConsole = ClockHelper.humanizeMinutesToClock(worktimeDayResume.workedMinutesUntilNow)
 
     if(worktimeDayResume.isMissingPairMark){
-      workedMinutesUntilNowOnConsole = chalk.yellow(workedMinutesUntilNowOnConsole)
+      workedMinutesUntilNowOnConsole = chalk.yellow(workedMinutesUntilNowOnConsole) + ' '
+    }
+
+    if(worktimeDayResume.missingMinutesToCompleteJourney){
+      const humanizedMissingMinutes = ClockHelper.humanizeMinutesToClock(worktimeDayResume.missingMinutesToCompleteJourney)
+
+      workedMinutesUntilNowOnConsole += chalk.gray(` - ${options.journeyTime} = `)
+      if(worktimeDayResume.missingMinutesToCompleteJourney > 0) {
+        workedMinutesUntilNowOnConsole += chalk.red(`-${humanizedMissingMinutes} `)
+      } else {
+        workedMinutesUntilNowOnConsole += chalk.green(`+${humanizedMissingMinutes} `)
+      }
     }
 
     console.log('')

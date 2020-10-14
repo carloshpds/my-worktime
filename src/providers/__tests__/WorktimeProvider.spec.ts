@@ -116,6 +116,7 @@ describe('WorktimeProvier', () => {
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(60 * 8)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(60 * 8)
         expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:00')
+        expect(worktimeDayResume.missingMinutesToCompleteJourney).toBe(0)
         expect(worktimeDayResume.isMissingPairMark).toBe(false)
       })
 
@@ -138,10 +139,12 @@ describe('WorktimeProvier', () => {
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
         const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
         const twelveHours = 60 * 12
+        const fourExtraHours = -(60 * 4)
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(twelveHours)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(twelveHours)
         expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:00')
+        expect(worktimeDayResume.missingMinutesToCompleteJourney).toBe(fourExtraHours)
         expect(worktimeDayResume.isMissingPairMark).toBe(false)
       })
 
@@ -345,9 +348,12 @@ describe('WorktimeProvier', () => {
         const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
         const elevenHours = 60 * 11
         const twelveHoursAndFifthNineMinutes = elevenHours + 119 // 119 = 1h + 59m
+        const threeExtraHoursAndFifthNineMinutes = -(60 * 3 + 119) // 119 = 1h + 59m
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(elevenHours)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(twelveHoursAndFifthNineMinutes)
+        expect(worktimeDayResume.missingMinutesToCompleteJourney).toBe(threeExtraHoursAndFifthNineMinutes)
+
       })
 
       it('Calulates to odd marks', () => {
@@ -370,6 +376,7 @@ describe('WorktimeProvier', () => {
 
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(threeHours)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(eightHours)
+        expect(worktimeDayResume.missingMinutesToCompleteJourney).toBe(0)
       })
 
       it('Calulates to values less than an hour', () => {
