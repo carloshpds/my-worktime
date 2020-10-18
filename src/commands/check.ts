@@ -1,13 +1,13 @@
 import {Command, flags} from '@oclif/command'
 import * as moment from 'moment'
-import {WorktimeProviderOptions, WorktimeDayResume} from '../providers/types'
+import {WorktimeProviderOptions} from '../providers/types'
 import ClockHelper from '../utils/ClockHelper'
 import Ahgora from '../providers/Ahgora'
-import WorktimeProvider from '../providers/WorktimeProvider'
-import * as ora from 'ora'
 import * as chalk from 'chalk'
 import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
-import {CLIError} from '@oclif/errors'
+import { executeQuery } from '../providers/executeQuery'
+import Conf from 'conf'
+import * as keytar from 'keytar'
 
 export default class CheckCommand extends Command {
   static description = 'Checks your worktime'
@@ -20,10 +20,10 @@ export default class CheckCommand extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', required: true, env: 'MW_USER'}),
-    password: flags.string({char: 'p', description: 'Senha do usuário no sistema', required: true, env: 'MW_PASS'}),
-    system: flags.string({char: 's', description: 'Nome do sistema de ponto', default: 'ahgora', env: 'MW_SYSTEM'}),
-    company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', required: true, env: 'MW_COMPANY'}),
+    user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER'}),
+    password: flags.string({char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS'}),
+    system: flags.string({char: 's', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM'}),
+    company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY'}),
     date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),
     debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: false}),
     journeytime: flags.string({char: 'j', description: 'Quantidade de horas a serem trabalhadas por dia', default: '08:00'}),
@@ -31,10 +31,42 @@ export default class CheckCommand extends Command {
 
   async run() {
     const {flags} = this.parse(CheckCommand)
+    const config = new Conf();
+    let configOptions = config.get('options') as Partial<WorktimeProviderOptions>
+    const providers: Record<string, any> = {
+      ahgora: Ahgora,
+    }
+
+    if (!flags.user && !flags.password && !flags.system && !flags.company) {
+      if (configOptions) {
+        configOptions.date = moment().format("YYYY-MM-DD")
+        configOptions.momentDate = moment()
+  
+        const passwords = await keytar.findCredentials('My-Worktime')
+
+        if (passwords.length != 0 && configOptions.systemId) {
+            const password = passwords.filter(pwd => pwd.account === configOptions.systemId?.toLowerCase()).map(pwd => pwd.password)
+
+            if (!password || password.length != 1) {
+              this.error("Ocorreu um erro ao obter senha do Keychain. O setup foi efetuado?")
+            }
+
+            await executeQuery(providers[configOptions.systemId?.toLowerCase()], configOptions, password[0])
+            this.exit(0)
+        } else {
+          this.error("As configurações estão incompletas. Favor execute o setup novamente.")
+        }
+        
+      }
+      this.describeUsage()
+      this.exit(1)
+    } else if (!flags.user || !flags.password || !flags.system || !flags.company) {
+      this.describeUsage()
+      this.exit(1)
+    }
 
     const options: Partial<WorktimeProviderOptions> = {
       userId: flags.user,
-      password: flags.password,
       systemId: flags.system,
       companyId: flags.company,
       date: flags.date,
@@ -42,16 +74,8 @@ export default class CheckCommand extends Command {
       journeyTime: flags.journeytime,
     }
 
-    if (!options.userId || !options.password || !options.systemId || !options.companyId) {
-      this.log('Não foi possível recuperar as credenciais do sistema de ponto')
-      this.log('Você pode definir as variáveis de ambiente "MW_USER" e "MW_PASS"')
-      this.log('Use my-worktime -h para informar as credencias via linha de comando.')
-      return
-    }
-
     if(!DATE_REGEXP.test(options.date as string) || !moment().isValid()){
       this.error(chalk.red(`Este formato de data é inválido, utilize o padrão ${DATE_FORMAT}`))
-      return
     }
 
     if (options.debug) {
@@ -68,7 +92,16 @@ export default class CheckCommand extends Command {
     const providers: Record<string, any> = {
       ahgora: Ahgora,
     }
+    /*
+     await executeQuery(providers[flags.system.toLowerCase()], options, flags.password)
+  }
 
+  describeUsage() {
+      this.log('Não foi possível recuperar as credenciais do sistema de ponto!')
+      this.log('Use `my-worktime setup` para configurar a CLI')
+      this.log('Use `my-worktime check -h` para obter informações de como passar as credencias via linha de comando.')
+      this.log('Alternativamente, você também pode definir as variáveis de ambiente "MW_USER" e "MW_PASS"')
+*/
     const CurrentProviderClass = providers[options.systemId.toLowerCase()]
     const loader = ora('Iniciando...').start()
 

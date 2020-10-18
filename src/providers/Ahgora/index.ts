@@ -17,7 +17,7 @@ export default class Ahgora extends WorktimeProvider {
       const requestBody = {
         ano: this.options.momentDate.year(),
         company: this.options.companyId,
-        senha: this.options.password,
+        senha: this.password,
         matricula: this.options.userId,
         mes: this.options.momentDate.month() + 1, // Not a zero based service
       }
