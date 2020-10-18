@@ -89,7 +89,11 @@ export default class CheckCommand extends Command {
     options.momentDate = options.date ? moment(options.date) : moment()
     ClockHelper.debug = options.debug
 
-    await executeQuery(providers[flags.system.toLowerCase()], options, flags.password)
+    const providers: Record<string, any> = {
+      ahgora: Ahgora,
+    }
+    /*
+     await executeQuery(providers[flags.system.toLowerCase()], options, flags.password)
   }
 
   describeUsage() {
@@ -97,5 +101,67 @@ export default class CheckCommand extends Command {
       this.log('Use `my-worktime setup` para configurar a CLI')
       this.log('Use `my-worktime check -h` para obter informações de como passar as credencias via linha de comando.')
       this.log('Alternativamente, você também pode definir as variáveis de ambiente "MW_USER" e "MW_PASS"')
+*/
+    const CurrentProviderClass = providers[options.systemId.toLowerCase()]
+    const loader = ora('Iniciando...').start()
+
+    if (CurrentProviderClass) {
+      try {
+        const worktimeProvider: WorktimeProvider = new CurrentProviderClass(options)
+        loader.text = `Buscando dados no ${worktimeProvider.name}`
+
+        const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()
+
+        if(worktimeDayResume.marks.length){
+          loader.succeed(`Dados encontrados, seu horário ideal de saída é ${chalk.black.bgBlueBright(' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
+          this.printResult(worktimeDayResume, options)
+        } else {
+          loader.fail('Não há nenhuma batida para esta data ainda.')
+        }
+
+      } catch (error) {
+        console.error(error)
+        loader.fail('Não foi possível calcular. Verifique os parâmetros e tente novamente')
+      }
+    } else {
+      loader.fail('Parece que ainda não suportamos o seu sistema de ponto :(')
+    }
+  }
+
+  printResult(worktimeDayResume: WorktimeDayResume, options: Partial<WorktimeProviderOptions>){
+    const marksToConsole = worktimeDayResume.marks.map((mark, index) => {
+      const isLastMark = index === worktimeDayResume.marks.length - 1
+      let markOnConsole = chalk.blueBright(mark.clock)
+
+      if(isLastMark && worktimeDayResume.isMissingPairMark){
+        markOnConsole = chalk.yellow(mark.clock) + chalk.gray(' Batida ímpar')
+      }
+
+      return `${markOnConsole}`
+    })
+
+    let workedMinutesUntilNowOnConsole = ClockHelper.humanizeMinutesToClock(worktimeDayResume.workedMinutesUntilNow)
+
+    if(worktimeDayResume.isMissingPairMark){
+      workedMinutesUntilNowOnConsole = chalk.yellow(workedMinutesUntilNowOnConsole) + ' '
+    }
+
+    if(worktimeDayResume.missingMinutesToCompleteJourney){
+      const humanizedMissingMinutes = ClockHelper.humanizeMinutesToClock(worktimeDayResume.missingMinutesToCompleteJourney)
+
+      workedMinutesUntilNowOnConsole += chalk.gray(` - ${options.journeyTime} = `)
+      if(worktimeDayResume.missingMinutesToCompleteJourney > 0) {
+        workedMinutesUntilNowOnConsole += chalk.red(`-${humanizedMissingMinutes} `)
+      } else {
+        workedMinutesUntilNowOnConsole += chalk.green(`+${humanizedMissingMinutes} `)
+      }
+    }
+
+    console.log('')
+    console.log(`🔢 Batidas: ${marksToConsole.join('   ')}`)
+    console.log(`⏸  Horas de pausas: ${ClockHelper.humanizeMinutesToClock(worktimeDayResume.breakMinutes)}`)
+    console.log(`🆗 Horas registradas: ${ClockHelper.humanizeMinutesToClock(worktimeDayResume.registeredWorkedMinutes)}`)
+    console.log(`⏺  Horas trabalhadas até este momento: ${workedMinutesUntilNowOnConsole}`)
+    console.log('')
   }
 }

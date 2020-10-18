@@ -9,11 +9,13 @@ export interface WorktimeDayWorkedTime {
   breakMinutes: number;
   now: Moment;
   marks: WorktimeDayMark[];
+  missingMinutesToCompleteJourney: number;
 }
 
 export interface WorktimeDayResume {
   registeredWorkedMinutes: number;
   workedMinutesUntilNow: number;
+  missingMinutesToCompleteJourney: number;
   breakMinutes: number;
   shouldLeaveClockTime?: string;
   isMissingPairMark: boolean;

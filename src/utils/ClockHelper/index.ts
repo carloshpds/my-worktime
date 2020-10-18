@@ -12,7 +12,7 @@ class ClockHelper {
   }
 
   humanizeMinutesToClock(minutes: number | string, options = {separator: ':'}): string {
-    const minutesNumber = typeof minutes === 'number' ? minutes : parseInt(minutes, 10)
+    const minutesNumber = typeof minutes === 'number' ? Math.abs(minutes) : Math.abs(parseInt(minutes, 10))
     const realHoursNumbers = Math.floor(minutesNumber / 60)
     const realMinutes = minutesNumber % 60
 
