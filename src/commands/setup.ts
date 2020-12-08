@@ -1,7 +1,7 @@
 import {Command, flags} from '@oclif/command'
 import * as inquirer from 'inquirer'
 import Ahgora from '../providers/Ahgora'
-import { executeQuery } from '../providers/executeQuery'
+import { executeQuery } from './check/executeQuery'
 import { meliFluxSecondStep, meliFluxThirdStep, meliFluxGenerateOptions, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions, meliFluxGetPassword, otherCompaniesGetPassword } from '../utils/setupFlux'
 import Conf from 'conf'
 import { WorktimeProviderOptions } from '../providers/types'
@@ -39,7 +39,7 @@ export default class Setup extends Command {
       type: 'confirm',
       default: false
     }])
-    
+
     const fluxs = {
       true: {
         secondStep: meliFluxSecondStep,
@@ -58,7 +58,7 @@ export default class Setup extends Command {
     let secondStepInquirer: any = await inquirer.prompt(fluxs[firstStepInquirer.isMeli].secondStep())
     let thirdStepInquirer: any = await inquirer.prompt(fluxs[firstStepInquirer.isMeli].thirdStep(secondStepInquirer))
 
-    
+
     const options: WorktimeProviderOptions = fluxs[firstStepInquirer.isMeli].generateOptions(secondStepInquirer, thirdStepInquirer)
     const password = fluxs[firstStepInquirer.isMeli].getPassword(secondStepInquirer, thirdStepInquirer)
 

@@ -14,9 +14,8 @@ export default abstract class WorktimeProvider {
 
   abstract getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]>
 
-  constructor(options: WorktimeProviderOptions, password: String) {
+  constructor(options: WorktimeProviderOptions) {
     this.options = options
-    this.password = password
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

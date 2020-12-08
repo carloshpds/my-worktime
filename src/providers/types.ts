@@ -28,6 +28,7 @@ export interface WorktimeDayMark {
 
 export interface WorktimeProviderOptions {
   userId: string;
+  password: string;
   companyId: string;
   systemId: string;
   date: string;
