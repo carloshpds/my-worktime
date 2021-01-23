@@ -1,7 +1,7 @@
 import inquirer from "inquirer";
 import * as moment from 'moment'
-import { MeliBUs } from "../enums/MeliBusinessUnits";
-import { WorktimeProviderOptions } from "../providers/types";
+import { MeliBUs } from "../../enums/MeliBusinessUnits";
+import { WorktimeProviderOptions } from "../../providers/types";
 import { CLIError } from "@oclif/errors";
 
 export const OTHER = "Outro";
@@ -14,9 +14,9 @@ export function meliFluxSecondStep(): inquirer.QuestionCollection[] {
       message: "Para qual BU você trabalha?",
       type: "list",
       choices: [
-        { 
+        {
           name: MeliBUs.MARKETPLACE.name,
-          value: MeliBUs.MARKETPLACE.code 
+          value: MeliBUs.MARKETPLACE.code
         },
         {
           name: MeliBUs.MERCADO_ENVIOS.name,
@@ -110,7 +110,7 @@ export function otherCompaniesFluxThirdStep(secondStepInquirer: any): inquirer.Q
 export function meliFluxGenerateOptions(secondStepInquirer: any, thirdStepInquirer: any): WorktimeProviderOptions {
   return {
     userId: secondStepInquirer.ahgoraUsername,
-    //password: secondStepInquirer.ahgoraPassword,
+    password: secondStepInquirer.ahgoraPassword,
     systemId: "ahgora",
     companyId: secondStepInquirer.whichMeli,
     date: moment().format("YYYY-MM-DD"),
@@ -124,7 +124,7 @@ export function otherCompaniesGenerateOptions(secondStepInquirer: any, thirdStep
   if (secondStepInquirer.provider === AHGORA) {
     return {
       userId: thirdStepInquirer.ahgoraUsername,
-      //password: thirdStepInquirer.ahgoraPassword,
+      password: thirdStepInquirer.ahgoraPassword,
       systemId: "ahgora",
       companyId: secondStepInquirer.ahgoraCompanyId,
       date: moment().format("YYYY-MM-DD"),

@@ -2,7 +2,6 @@ import {Command, flags} from '@oclif/command'
 import * as moment from 'moment'
 import {WorktimeDayResume, WorktimeProviderOptions} from '../providers/types'
 import ClockHelper from '../utils/ClockHelper'
-import Ahgora from '../providers/Ahgora'
 import * as chalk from 'chalk'
 import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
 import { executeQuery } from './check/executeQuery'
@@ -11,6 +10,19 @@ import * as keytar from 'keytar'
 import WorktimeProvider from '../providers/WorktimeProvider'
 import * as ora from 'ora'
 
+/*
+ * Providers
+ */
+import Ahgora from '../providers/Ahgora'
+import Faker from '../providers/Faker'
+
+/*
+ * Constants
+ */
+const providers: Record<string, any> = {
+  ahgora: Ahgora,
+  faker: Faker,
+}
 export default class CheckCommand extends Command {
   static description = 'Checks your worktime'
 
@@ -24,7 +36,7 @@ export default class CheckCommand extends Command {
     help: flags.help({char: 'h'}),
     user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER'}),
     password: flags.string({char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS'}),
-    system: flags.string({char: 's', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM'}),
+    system: flags.string({char: 's', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM', default: 'ahgora'}),
     company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY'}),
     date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),
     debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: false}),
@@ -33,14 +45,23 @@ export default class CheckCommand extends Command {
 
   async run() {
     const {flags} = this.parse(CheckCommand)
-    const config = new Conf();
-    let printer = null
-    const requiredFlagsAreNotPresent = !flags.user && !flags.password && !flags.system && !flags.company
-    let setupOptions = config.get('options') as Partial<WorktimeProviderOptions>
-    const providers: Record<string, any> = {
-      ahgora: Ahgora,
+    const requiredFlagsArePresent = flags.user && flags.password && flags.company
+
+    if(requiredFlagsArePresent){
+      this.runWithoutSetup()
+    } else {
+      this.runUsingSetup()
     }
-    if (requiredFlagsAreNotPresent) {
+
+  }
+
+  async runUsingSetup() {
+    const { flags } = this.parse(CheckCommand)
+    const config = new Conf();
+    const requiredFlagsArePresent = flags.user && flags.password && flags.company
+    let setupOptions = config.get('options') as Partial<WorktimeProviderOptions>
+
+    if (!requiredFlagsArePresent) {
       if (setupOptions) {
         setupOptions.date = flags.date || moment().format("YYYY-MM-DD")
         setupOptions.momentDate = flags.date ? moment(flags.date) : moment()
@@ -69,6 +90,10 @@ export default class CheckCommand extends Command {
       this.describeUsage()
       this.exit(1)
     }
+  }
+
+  async runWithoutSetup() {
+    const { flags } = this.parse(CheckCommand)
 
     const options: Partial<WorktimeProviderOptions> = {
       userId: flags.user,
@@ -94,15 +119,7 @@ export default class CheckCommand extends Command {
     options.momentDate = options.date ? moment(options.date) : moment()
     ClockHelper.debug = options.debug
 
-    await executeQuery(providers[flags.system.toLowerCase()], options, flags.password)
-
-  }
-
-  runUsingSetup() {
-
-  }
-
-  runWithoutSetup() {
+    await executeQuery(providers[flags.system.toLowerCase()], options)
 
   }
 
