@@ -2,7 +2,6 @@ import * as ora from 'ora'
 import * as chalk from 'chalk'
 import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types'
 import WorktimeProvider from '../../providers/WorktimeProvider'
-import ClockHelper from '../../utils/ClockHelper'
 import CheckDisplayer from './displayer'
 
 
