@@ -3,6 +3,7 @@ import * as moment from 'moment'
 import { MeliBUs } from "../../enums/MeliBusinessUnits";
 import { WorktimeProviderOptions } from "../../providers/types";
 import { CLIError } from "@oclif/errors";
+import { WorktimeProviderName } from "../../enums/WorktimeProviderName";
 
 export const OTHER = "Outro";
 export const AHGORA = "Ahgora";
@@ -34,12 +35,17 @@ export function meliFluxSecondStep(): inquirer.QuestionCollection[] {
 }
 
 export function otherCompaniesFluxSecondStep(): inquirer.QuestionCollection[] {
+  const providersAsChoices = [{ name: WorktimeProviderName.AHGORA }];
+  if(process.env.NODE_ENV === 'development'){
+    providersAsChoices.push({ name: WorktimeProviderName.FAKER })
+  }
+
   return [
     {
       name: "provider",
       message: "Selecione um sistema de pontos",
       type: "list",
-      choices: [{ name: AHGORA }],
+      choices: providersAsChoices,
     },
     {
       name: "journeytime",
@@ -49,12 +55,12 @@ export function otherCompaniesFluxSecondStep(): inquirer.QuestionCollection[] {
         { name: "08:00" },
         { name: "08:48" },
         { name: "06:00" },
-        { name: OTHER },
+        // { name: OTHER }, // TODO: review this option to add another step to inform the journey time
       ],
     },
     {
       name: "ahgoraCompanyId",
-      message: "Digite a companyId do Ahgora da sua empresa",
+      message: 'Digite o código da sua empresa no sistema de ponto',
       type: "input",
     },
   ] as inquirer.QuestionCollection[];
@@ -64,7 +70,7 @@ export function inquireAhgoraCredentials(): any {
   return [
     {
       name: "ahgoraUsername",
-      message: "Digite seu nome de usuário do Ahgora:",
+      message: "Digite o código do seu usuário no Ahgora (RE):",
       type: "input",
     },
     {
@@ -111,7 +117,7 @@ export function meliFluxGenerateOptions(secondStepInquirer: any, thirdStepInquir
   return {
     userId: secondStepInquirer.ahgoraUsername,
     password: secondStepInquirer.ahgoraPassword,
-    systemId: "ahgora",
+    systemId: WorktimeProviderName.AHGORA.toLowerCase(),
     companyId: secondStepInquirer.whichMeli,
     date: moment().format("YYYY-MM-DD"),
     debug: false,

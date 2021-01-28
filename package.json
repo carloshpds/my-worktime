@@ -77,9 +77,9 @@
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "jest",
     "version": "oclif-dev readme && git add README.md",
-    "check": "./bin/run check -u $USER -p $PASS -s ahgora -c $COMPANY -j 08:48 -d 2020-09-23",
-    "checkSetup": "./bin/run check -j 08:48 -d 2020-09-23",
-    "setup": "./bin/run setup"
+    "check": "NODE_ENV=development ./bin/run check -u $USER -p $PASS -s ahgora -c $COMPANY -j 08:48 -d 2020-09-23",
+    "checkSetup": "NODE_ENV=development ./bin/run check -j 08:48 -d 2020-09-23",
+    "setup": "NODE_ENV=development ./bin/run setup"
   },
   "types": "lib/index.d.ts"
 }

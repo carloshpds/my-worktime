@@ -1,8 +1,8 @@
 import {Command, flags} from '@oclif/command'
 import * as inquirer from 'inquirer'
 import Ahgora from '../providers/Ahgora'
-import { executeQuery } from './check/executeQuery'
-import { meliFluxSecondStep, meliFluxThirdStep, meliFluxGenerateOptions, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions, meliFluxGetPassword, otherCompaniesGetPassword } from './setup/flux'
+import { executeQuery } from '../logic/check/executeQuery'
+import { meliFluxSecondStep, meliFluxThirdStep, meliFluxGenerateOptions, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions, meliFluxGetPassword, otherCompaniesGetPassword } from '../logic/setup/inputs'
 import Conf from 'conf'
 import { WorktimeProviderOptions } from '../providers/types'
 import * as keytar from 'keytar'
@@ -12,7 +12,8 @@ export default class Setup extends Command {
 
   static flags = {
     help: flags.help({char: 'h'}),
-    delete: flags.boolean({char: 'd', description: 'Deleta a configuração salva', default: false})
+    delete: flags.boolean({char: 'd', description: 'Deleta os dados armazenados', default: false}),
+    check: flags.boolean({char: 'c', description: 'Exibe os dados armazenados até o momento', default: false}),
   }
 
   async run() {
@@ -29,9 +30,21 @@ export default class Setup extends Command {
       this.exit(0)
     }
 
+    if(flags.check){
+      if (config.has('options')) {
+        const options = config.get('options')
+        this.log('Dados armazenados até o momento')
+        console.table(options)
+      } else {
+        this.log('😐 Não há dados armazenados')
+      }
+      this.exit(0)
+    }
+
     this.log('🧞 Este setup irá te guiar no processo de configuração desta CLI para a sua empresa.')
     this.log('📛 Qualquer configuração previamente gravada será substituída caso termine este setup.')
     this.log('🔐 A sua senha será gravada com segurança usando ferramentas do seu Sistema Operacional.')
+    this.log('')
 
     let firstStepInquirer: any = await inquirer.prompt([{
       name: 'isMeli',
@@ -64,9 +77,18 @@ export default class Setup extends Command {
 
     keytar.setPassword('My-Worktime', options.systemId, password)
 
-    config.set('options', options)
-    this.log('💾 Dados armazenados com sucesso!')
-    this.log('✅ A próxima vez, execute apenas `my-worktime check` Que os seus dados serão recuperados automaticamente!')
-    await executeQuery(Ahgora, options, password)
+    config.set('options', {
+      ...options,
+      password: undefined,
+      date: undefined,
+      momentDate: undefined,
+    })
+
+    this.log('')
+    this.log('💾 Dados armazenados!')
+    this.log('✅ A próxima vez, execute apenas `my-worktime check`\n   Os seus dados serão recuperados automaticamente!')
+    this.log('')
+
+    await executeQuery(Ahgora, options)
   }
 }

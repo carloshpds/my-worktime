@@ -4,7 +4,7 @@ import {WorktimeDayResume, WorktimeProviderOptions} from '../providers/types'
 import ClockHelper from '../utils/ClockHelper'
 import * as chalk from 'chalk'
 import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
-import { executeQuery } from './check/executeQuery'
+import { executeQuery } from '../logic/check/executeQuery'
 import Conf from 'conf'
 import * as keytar from 'keytar'
 import WorktimeProvider from '../providers/WorktimeProvider'
@@ -15,6 +15,7 @@ import * as ora from 'ora'
  */
 import Ahgora from '../providers/Ahgora'
 import Faker from '../providers/Faker'
+import Setup from './setup'
 
 /*
  * Constants
@@ -24,7 +25,7 @@ const providers: Record<string, any> = {
   faker: Faker,
 }
 export default class CheckCommand extends Command {
-  static description = 'Checks your worktime'
+  static description = 'Busca as batidas e calcula as horas trabalhadas para uma data específica'
 
   static examples = [
     '$ my-worktime check -u 321 -p 123 -c a22',
@@ -39,7 +40,7 @@ export default class CheckCommand extends Command {
     system: flags.string({char: 's', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM', default: 'ahgora'}),
     company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY'}),
     date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),
-    debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: false}),
+    debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: true}),
     journeytime: flags.string({char: 'j', description: 'Quantidade de horas a serem trabalhadas por dia', default: '08:00'}),
   }
 
@@ -58,6 +59,8 @@ export default class CheckCommand extends Command {
   async runUsingSetup() {
     const { flags } = this.parse(CheckCommand)
     const config = new Conf();
+    const setupCommand = new Setup(this.argv, this.config)
+
     const requiredFlagsArePresent = flags.user && flags.password && flags.company
     let setupOptions = config.get('options') as Partial<WorktimeProviderOptions>
 
@@ -80,15 +83,13 @@ export default class CheckCommand extends Command {
             }
 
         } else {
-          this.error("As configurações estão incompletas. Favor execute o setup novamente.")
+          this.warn("As configurações estão incompletas. Favor execute o setup novamente.")
         }
       }
 
-      this.describeUsage()
-      this.exit(1)
+      await setupCommand.run()
     } else if (!flags.user || !flags.password || !flags.system || !flags.company) {
-      this.describeUsage()
-      this.exit(1)
+      await setupCommand.run()
     }
   }
 
