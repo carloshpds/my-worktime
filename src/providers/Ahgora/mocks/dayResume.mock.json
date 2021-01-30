@@ -1,1669 +1,1669 @@
 {
   "empresa": {
-      "empresa": "a382748",
-      "nome": "MERCADOLIVRE.COM ATIVIDADES DE INTERNET LTDA",
-      "inicia_dia": "01",
-      "inicia_mes_anterior": false,
-      "justifications_enabled": true,
-      "justification": {
-          "read_write_attach": true,
-          "add_absence": true,
-          "add_punch": true
-      },
-      "notificacoes_enabled": true
+    "empresa": "a382748",
+    "nome": "MERCADOLIVRE.COM ATIVIDADES DE INTERNET LTDA",
+    "inicia_dia": "01",
+    "inicia_mes_anterior": false,
+    "justifications_enabled": true,
+    "justification": {
+      "read_write_attach": true,
+      "add_absence": true,
+      "add_punch": true
+    },
+    "notificacoes_enabled": true
   },
   "funcionario": {
-      "nome": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-      "departamento": "IT",
-      "cargo": "Software Development SSr Analyst",
-      "matricula": "16238",
-      "dt_admissao": "2019-08-19",
-      "faceid_filename": "5d56d44a93a914775d262246.png"
+    "nome": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+    "departamento": "IT",
+    "cargo": "Software Development SSr Analyst",
+    "matricula": "16238",
+    "dt_admissao": "2019-08-19",
+    "faceid_filename": "5d56d44a93a914775d262246.png"
   },
   "resultado": [
-      {
-          "tipo": "Horas Previstas",
-          "valor": "18448",
-          "em_dia": false
-      },
-      {
-          "tipo": "Confraternização universal",
-          "valor": "0848",
-          "em_dia": false
-      },
-      {
-          "tipo": "Horas Trabalhadas",
-          "valor": "12724",
-          "em_dia": false
-      },
-      {
-          "tipo": "Adicional Noturno",
-          "valor": "0010",
-          "em_dia": false
-      },
-      {
-          "tipo": "Aniversário de São Paulo",
-          "valor": "0848",
-          "em_dia": false
-      },
-      {
-          "tipo": "Horas mensais positivas",
-          "valor": "0601",
-          "em_dia": false
-      },
-      {
-          "tipo": "Horas mensais negativas",
-          "valor": "-1044",
-          "em_dia": false
-      },
-      {
-          "tipo": "Banco de horas acumulado até  Dezembro/2020",
-          "valor": "0307",
-          "em_dia": false
-      },
-      {
-          "tipo": "SALDO",
-          "valor": "-0136",
-          "em_dia": false
-      },
-      {
-          "tipo": "Banco de horas no mês",
-          "valor": "-0443",
-          "em_dia": false
-      }
+    {
+      "tipo": "Horas Previstas",
+      "valor": "18448",
+      "em_dia": false
+    },
+    {
+      "tipo": "Confraternização universal",
+      "valor": "0848",
+      "em_dia": false
+    },
+    {
+      "tipo": "Horas Trabalhadas",
+      "valor": "12724",
+      "em_dia": false
+    },
+    {
+      "tipo": "Adicional Noturno",
+      "valor": "0010",
+      "em_dia": false
+    },
+    {
+      "tipo": "Aniversário de São Paulo",
+      "valor": "0848",
+      "em_dia": false
+    },
+    {
+      "tipo": "Horas mensais positivas",
+      "valor": "0601",
+      "em_dia": false
+    },
+    {
+      "tipo": "Horas mensais negativas",
+      "valor": "-1044",
+      "em_dia": false
+    },
+    {
+      "tipo": "Banco de horas acumulado até  Dezembro/2020",
+      "valor": "0307",
+      "em_dia": false
+    },
+    {
+      "tipo": "SALDO",
+      "valor": "-0136",
+      "em_dia": false
+    },
+    {
+      "tipo": "Banco de horas no mês",
+      "valor": "-0443",
+      "em_dia": false
+    }
   ],
   "dias": {
-      "2021-01-01": {
-          "resultado": [
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Confraternização universal",
-                  "valor": "0848"
-              }
-          ],
-          "batidas": [],
-          "status": [
-              "afast"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-02": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-03": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-04": {
-          "batidas": [
-              {
-                  "hora": "0942",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609764177,
-                      "longitude": -46.856103279909,
-                      "latitude": -23.770821070451,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1306",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": null,
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1337",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609778243,
-                      "longitude": -46.856109854464,
-                      "latitude": -23.770811475691,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1947",
-                  "tipo": "L",
-                  "offline": true,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609800444,
-                      "longitude": -46.856112753553,
-                      "latitude": -23.770805783329,
-                      "accuracy": 65,
-                      "provider": "GPS",
-                      "offline": true
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0934"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0735"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0046"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-05": {
-          "batidas": [
-              {
-                  "hora": "0944",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609850658,
-                      "longitude": -46.856107376873,
-                      "latitude": -23.770812472605,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1328",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609864116,
-                      "longitude": -46.856123604179,
-                      "latitude": -23.770789383824,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1359",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609866001,
-                      "longitude": -46.856103758958,
-                      "latitude": -23.770807665172,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1903",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609884242,
-                      "longitude": -46.856103533133,
-                      "latitude": -23.770817288016,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "2038",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609889934,
-                      "longitude": -46.856106796793,
-                      "latitude": -23.770813331561,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "2121",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609892514,
-                      "longitude": -46.85618377295,
-                      "latitude": -23.770825644046,
-                      "accuracy": 30,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0931"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0733"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0043"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-06": {
-          "batidas": [
-              {
-                  "hora": "0908",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609934937,
-                      "longitude": -46.856105598378,
-                      "latitude": -23.770815549375,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1312",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609949549,
-                      "longitude": -46.856108328105,
-                      "latitude": -23.770809580538,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1355",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609952110,
-                      "longitude": -46.856111022347,
-                      "latitude": -23.770792531067,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1857",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1609970229,
-                      "longitude": -46.856052093251,
-                      "latitude": -23.770703561626,
-                      "accuracy": 30,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0906"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0757"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0018"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-07": {
-          "batidas": [
-              {
-                  "hora": "0725",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610015114,
-                      "longitude": -46.856104926228,
-                      "latitude": -23.770817192945,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1318",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610036324,
-                      "longitude": -46.856099393397,
-                      "latitude": -23.770816505474,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1351",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610038274,
-                      "longitude": -46.856133099985,
-                      "latitude": -23.770789218091,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1744",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610052256,
-                      "longitude": -46.856105345535,
-                      "latitude": -23.770815925702,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0946"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0711"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0058"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-08": {
-          "batidas": [
-              {
-                  "hora": "1005",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610111152,
-                      "longitude": -46.856100476516,
-                      "latitude": -23.770815536757,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1223",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610119393,
-                      "longitude": -46.856090847326,
-                      "latitude": -23.770820101819,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1258",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610121506,
-                      "longitude": -46.856098360071,
-                      "latitude": -23.770817024452,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1950",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610146214,
-                      "longitude": -46.856121441613,
-                      "latitude": -23.770790748336,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0910"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0743"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0022"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-09": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-10": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-11": {
-          "batidas": [
-              {
-                  "hora": "1036",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610372208,
-                      "longitude": -46.856099193527,
-                      "latitude": -23.770813910821,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1321",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610382079,
-                      "longitude": -46.856103036217,
-                      "latitude": -23.770809683577,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1400",
-                  "tipo": "I",
-                  "offline": false,
-                  "equipamento": "-",
-                  "location": null,
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1920",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610403617,
-                      "longitude": -46.856112575542,
-                      "latitude": -23.770796122635,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0805"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0633"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "-0043"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": [
-              {
-                  "_id": "5ffccf6eb8622853c100f0e2",
-                  "empresa": "a382748",
-                  "matricula": "16238",
-                  "data_batida": "2021-01-11",
-                  "informacao": "entrei na replenishment e esqueci ",
-                  "type": "addPunch",
-                  "horario_da_justificativa": {
-                      "sec": 1610403694,
-                      "usec": 0
-                  },
-                  "funcionario_id": {
-                      "$id": "5d56d44a93a914775d262246"
-                  },
-                  "addPunch": {
-                      "punch": "14:00",
-                      "TRATAMENTO_DIA_BATIDA": null
-                  },
-                  "approved": true,
-                  "confirmado": {
-                      "texto": "Aceito pelo PontoWEB",
-                      "usuario": "mauro.correa@mercadolivre.com",
-                      "data": {
-                          "sec": 1611092045,
-                          "usec": 0
-                      }
-                  },
-                  "attachments": []
-              }
-          ]
-      },
-      "2021-01-12": {
-          "batidas": [
-              {
-                  "hora": "0651",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610445080,
-                      "longitude": -46.856098883068,
-                      "latitude": -23.770814026335,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1234",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610465690,
-                      "longitude": -46.856107822347,
-                      "latitude": -23.770809318809,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1346",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610469967,
-                      "longitude": -46.856106655796,
-                      "latitude": -23.770810649871,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1732",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610483557,
-                      "longitude": -46.856104924827,
-                      "latitude": -23.770813558039,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0929"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0646"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0041"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-13": {
-          "batidas": [
-              {
-                  "hora": "1139",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610548786,
-                      "longitude": -46.856111871803,
-                      "latitude": -23.770798172321,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1302",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610553770,
-                      "longitude": -46.856095229681,
-                      "latitude": -23.770810881059,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1332",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610555547,
-                      "longitude": -46.856100469406,
-                      "latitude": -23.770805920107,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0123"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0023"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "-0725"
-              }
-          ],
-          "status": [
-              "impar"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-14": {
-          "batidas": [
-              {
-                  "hora": "0813",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610622788,
-                      "longitude": -46.856129059277,
-                      "latitude": -23.770776926153,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1209",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610636957,
-                      "longitude": -46.856097105335,
-                      "latitude": -23.770809542516,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1327",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610641655,
-                      "longitude": -46.856091470359,
-                      "latitude": -23.77082218477,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1838",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610660323,
-                      "longitude": -46.856093511807,
-                      "latitude": -23.770813057013,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0907"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0811"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0019"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-15": {
-          "batidas": [
-              {
-                  "hora": "0800",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610708456,
-                      "longitude": -46.856080087989,
-                      "latitude": -23.770816413481,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1225",
-                  "tipo": "L",
-                  "offline": true,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610724349,
-                      "longitude": -46.856103103395,
-                      "latitude": -23.770802843591,
-                      "accuracy": 65,
-                      "provider": "GPS",
-                      "offline": true
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1338",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610728691,
-                      "longitude": -46.85611787746,
-                      "latitude": -23.77078877315,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1816",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610745394,
-                      "longitude": -46.856104787181,
-                      "latitude": -23.770801110202,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0903"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0738"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0015"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-16": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-17": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-18": {
-          "batidas": [
-              {
-                  "hora": "1052",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610977971,
-                      "longitude": -46.856078951422,
-                      "latitude": -23.770819803645,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1215",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610982935,
-                      "longitude": -46.856071132557,
-                      "latitude": -23.770776285183,
-                      "accuracy": 73.21,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1407",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1610989681,
-                      "longitude": -46.856093838644,
-                      "latitude": -23.770813805331,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "2031",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611012714,
-                      "longitude": -46.855977242856,
-                      "latitude": -23.770997640699,
-                      "accuracy": 50,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0747"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0549"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "-0101"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-19": {
-          "batidas": [
-              {
-                  "hora": "0916",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611058574,
-                      "longitude": -46.85584187512,
-                      "latitude": -23.770866128638,
-                      "accuracy": 30,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1239",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611070803,
-                      "longitude": -46.856050752147,
-                      "latitude": -23.770813616015,
-                      "accuracy": 30,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1331",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611073878,
-                      "longitude": -46.856054943099,
-                      "latitude": -23.770945463352,
-                      "accuracy": 30,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1903",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611093822,
-                      "longitude": -46.8561087999,
-                      "latitude": -23.770801262205,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0855"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0801"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-20": {
-          "batidas": [
-              {
-                  "hora": "0933",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611146023,
-                      "longitude": -46.855813544287,
-                      "latitude": -23.770965118915,
-                      "accuracy": 50,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1252",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611157945,
-                      "longitude": -46.85610367063,
-                      "latitude": -23.770808246695,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1412",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611162734,
-                      "longitude": -46.855873307257,
-                      "latitude": -23.770835073687,
-                      "accuracy": 30,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "2021",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611184900,
-                      "longitude": -46.856120321943,
-                      "latitude": -23.770910259358,
-                      "accuracy": 30,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0928"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0703"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0040"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-21": {
-          "batidas": [
-              {
-                  "hora": "1048",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611236938,
-                      "longitude": -46.856122412779,
-                      "latitude": -23.770788663286,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1306",
-                  "tipo": "L",
-                  "offline": true,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611245195,
-                      "longitude": -46.856113364964,
-                      "latitude": -23.770722546637,
-                      "accuracy": 50,
-                      "provider": "GPS",
-                      "offline": true
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1525",
-                  "tipo": "L",
-                  "offline": true,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611253537,
-                      "longitude": -46.855993839024,
-                      "latitude": -23.770729545526,
-                      "accuracy": 50,
-                      "provider": "GPS",
-                      "offline": true
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "2020",
-                  "tipo": "L",
-                  "offline": true,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611271210,
-                      "longitude": -46.856099443819,
-                      "latitude": -23.770814922959,
-                      "accuracy": 65,
-                      "provider": "GPS",
-                      "offline": true
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0713"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0441"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "-0135"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-22": {
-          "batidas": [
-              {
-                  "hora": "0929",
-                  "tipo": "L",
-                  "offline": true,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611318592,
-                      "longitude": -46.856103190628,
-                      "latitude": -23.770811124143,
-                      "accuracy": 65,
-                      "provider": "GPS",
-                      "offline": true
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1008",
-                  "tipo": "L",
-                  "offline": true,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611320918,
-                      "longitude": -46.856091942152,
-                      "latitude": -23.770822200599,
-                      "accuracy": 65,
-                      "provider": "GPS",
-                      "offline": true
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1022",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611321738,
-                      "longitude": -46.857291890708,
-                      "latitude": -23.770781798448,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1251",
-                  "tipo": "L",
-                  "offline": true,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611330700,
-                      "longitude": -46.856092415941,
-                      "latitude": -23.770812681232,
-                      "accuracy": 65,
-                      "provider": "GPS",
-                      "offline": true
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1514",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611339267,
-                      "longitude": -46.857320285673,
-                      "latitude": -23.770920406369,
-                      "accuracy": 65,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1606",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": null,
-                  "id_photo": ""
-              },
-              {
-                  "hora": "1622",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611343351,
-                      "longitude": -46.86270141,
-                      "latitude": -23.77395629,
-                      "accuracy": 165,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              },
-              {
-                  "hora": "2209",
-                  "tipo": "L",
-                  "offline": false,
-                  "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-                  "location": {
-                      "timestamp_loc": 1611364188,
-                      "longitude": -46.86270141,
-                      "latitude": -23.77395629,
-                      "accuracy": 165,
-                      "provider": "GPS"
-                  },
-                  "id_photo": ""
-              }
-          ],
-          "resultado": [
-              {
-                  "tipo": "Horas Trabalhadas",
-                  "valor": "0947"
-              },
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Expediente",
-                  "valor": "0535"
-              },
-              {
-                  "tipo": "Adicional Noturno",
-                  "valor": "0010"
-              },
-              {
-                  "tipo": "Banco de Horas",
-                  "valor": "0059"
-              }
-          ],
-          "status": [
-              "batidas"
-          ],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-23": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-24": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-25": {
-          "resultado": [
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              },
-              {
-                  "tipo": "Aniversário de São Paulo",
-                  "valor": "0848"
-              }
-          ],
-          "batidas": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-26": {
-          "resultado": [
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              }
-          ],
-          "batidas": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-27": {
-          "resultado": [
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              }
-          ],
-          "batidas": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-28": {
-          "resultado": [
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              }
-          ],
-          "batidas": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-29": {
-          "resultado": [
-              {
-                  "tipo": "Horas Previstas",
-                  "valor": "0848"
-              }
-          ],
-          "batidas": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [
-              "09:00",
-              "12:00",
-              "13:00",
-              "18:48"
-          ],
-          "justificativa": null
-      },
-      "2021-01-30": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      },
-      "2021-01-31": {
-          "batidas": [],
-          "resultado": [],
-          "status": [],
-          "HORAS_CONTRATUAIS": [],
-          "justificativa": null
-      }
+    "2021-01-01": {
+      "resultado": [
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Confraternização universal",
+          "valor": "0848"
+        }
+      ],
+      "batidas": [],
+      "status": [
+        "afast"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-02": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-03": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-04": {
+      "batidas": [
+        {
+          "hora": "0942",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609764177,
+            "longitude": -46.856103279909,
+            "latitude": -23.770821070451,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1306",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": null,
+          "id_photo": ""
+        },
+        {
+          "hora": "1337",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609778243,
+            "longitude": -46.856109854464,
+            "latitude": -23.770811475691,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1947",
+          "tipo": "L",
+          "offline": true,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609800444,
+            "longitude": -46.856112753553,
+            "latitude": -23.770805783329,
+            "accuracy": 65,
+            "provider": "GPS",
+            "offline": true
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0934"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0735"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0046"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-05": {
+      "batidas": [
+        {
+          "hora": "0944",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609850658,
+            "longitude": -46.856107376873,
+            "latitude": -23.770812472605,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1328",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609864116,
+            "longitude": -46.856123604179,
+            "latitude": -23.770789383824,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1359",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609866001,
+            "longitude": -46.856103758958,
+            "latitude": -23.770807665172,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1903",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609884242,
+            "longitude": -46.856103533133,
+            "latitude": -23.770817288016,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "2038",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609889934,
+            "longitude": -46.856106796793,
+            "latitude": -23.770813331561,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "2121",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609892514,
+            "longitude": -46.85618377295,
+            "latitude": -23.770825644046,
+            "accuracy": 30,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0931"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0733"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0043"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-06": {
+      "batidas": [
+        {
+          "hora": "0908",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609934937,
+            "longitude": -46.856105598378,
+            "latitude": -23.770815549375,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1312",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609949549,
+            "longitude": -46.856108328105,
+            "latitude": -23.770809580538,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1355",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609952110,
+            "longitude": -46.856111022347,
+            "latitude": -23.770792531067,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1857",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1609970229,
+            "longitude": -46.856052093251,
+            "latitude": -23.770703561626,
+            "accuracy": 30,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0906"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0757"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0018"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-07": {
+      "batidas": [
+        {
+          "hora": "0725",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610015114,
+            "longitude": -46.856104926228,
+            "latitude": -23.770817192945,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1318",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610036324,
+            "longitude": -46.856099393397,
+            "latitude": -23.770816505474,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1351",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610038274,
+            "longitude": -46.856133099985,
+            "latitude": -23.770789218091,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1744",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610052256,
+            "longitude": -46.856105345535,
+            "latitude": -23.770815925702,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0946"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0711"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0058"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-08": {
+      "batidas": [
+        {
+          "hora": "1005",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610111152,
+            "longitude": -46.856100476516,
+            "latitude": -23.770815536757,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1223",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610119393,
+            "longitude": -46.856090847326,
+            "latitude": -23.770820101819,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1258",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610121506,
+            "longitude": -46.856098360071,
+            "latitude": -23.770817024452,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1950",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610146214,
+            "longitude": -46.856121441613,
+            "latitude": -23.770790748336,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0910"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0743"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0022"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-09": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-10": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-11": {
+      "batidas": [
+        {
+          "hora": "1036",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610372208,
+            "longitude": -46.856099193527,
+            "latitude": -23.770813910821,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1321",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610382079,
+            "longitude": -46.856103036217,
+            "latitude": -23.770809683577,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1400",
+          "tipo": "I",
+          "offline": false,
+          "equipamento": "-",
+          "location": null,
+          "id_photo": ""
+        },
+        {
+          "hora": "1920",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610403617,
+            "longitude": -46.856112575542,
+            "latitude": -23.770796122635,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0805"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0633"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "-0043"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": [
+        {
+          "_id": "5ffccf6eb8622853c100f0e2",
+          "empresa": "a382748",
+          "matricula": "16238",
+          "data_batida": "2021-01-11",
+          "informacao": "entrei na replenishment e esqueci ",
+          "type": "addPunch",
+          "horario_da_justificativa": {
+            "sec": 1610403694,
+            "usec": 0
+          },
+          "funcionario_id": {
+            "$id": "5d56d44a93a914775d262246"
+          },
+          "addPunch": {
+            "punch": "14:00",
+            "TRATAMENTO_DIA_BATIDA": null
+          },
+          "approved": true,
+          "confirmado": {
+            "texto": "Aceito pelo PontoWEB",
+            "usuario": "mauro.correa@mercadolivre.com",
+            "data": {
+              "sec": 1611092045,
+              "usec": 0
+            }
+          },
+          "attachments": []
+        }
+      ]
+    },
+    "2021-01-12": {
+      "batidas": [
+        {
+          "hora": "0651",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610445080,
+            "longitude": -46.856098883068,
+            "latitude": -23.770814026335,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1234",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610465690,
+            "longitude": -46.856107822347,
+            "latitude": -23.770809318809,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1346",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610469967,
+            "longitude": -46.856106655796,
+            "latitude": -23.770810649871,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1732",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610483557,
+            "longitude": -46.856104924827,
+            "latitude": -23.770813558039,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0929"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0646"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0041"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-13": {
+      "batidas": [
+        {
+          "hora": "1139",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610548786,
+            "longitude": -46.856111871803,
+            "latitude": -23.770798172321,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1302",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610553770,
+            "longitude": -46.856095229681,
+            "latitude": -23.770810881059,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1332",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610555547,
+            "longitude": -46.856100469406,
+            "latitude": -23.770805920107,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0123"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0023"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "-0725"
+        }
+      ],
+      "status": [
+        "impar"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-14": {
+      "batidas": [
+        {
+          "hora": "0813",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610622788,
+            "longitude": -46.856129059277,
+            "latitude": -23.770776926153,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1209",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610636957,
+            "longitude": -46.856097105335,
+            "latitude": -23.770809542516,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1327",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610641655,
+            "longitude": -46.856091470359,
+            "latitude": -23.77082218477,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1838",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610660323,
+            "longitude": -46.856093511807,
+            "latitude": -23.770813057013,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0907"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0811"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0019"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-15": {
+      "batidas": [
+        {
+          "hora": "0800",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610708456,
+            "longitude": -46.856080087989,
+            "latitude": -23.770816413481,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1225",
+          "tipo": "L",
+          "offline": true,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610724349,
+            "longitude": -46.856103103395,
+            "latitude": -23.770802843591,
+            "accuracy": 65,
+            "provider": "GPS",
+            "offline": true
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1338",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610728691,
+            "longitude": -46.85611787746,
+            "latitude": -23.77078877315,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1816",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610745394,
+            "longitude": -46.856104787181,
+            "latitude": -23.770801110202,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0903"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0738"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0015"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-16": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-17": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-18": {
+      "batidas": [
+        {
+          "hora": "1052",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610977971,
+            "longitude": -46.856078951422,
+            "latitude": -23.770819803645,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1215",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610982935,
+            "longitude": -46.856071132557,
+            "latitude": -23.770776285183,
+            "accuracy": 73.21,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1407",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1610989681,
+            "longitude": -46.856093838644,
+            "latitude": -23.770813805331,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "2031",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611012714,
+            "longitude": -46.855977242856,
+            "latitude": -23.770997640699,
+            "accuracy": 50,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0747"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0549"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "-0101"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-19": {
+      "batidas": [
+        {
+          "hora": "0916",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611058574,
+            "longitude": -46.85584187512,
+            "latitude": -23.770866128638,
+            "accuracy": 30,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1239",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611070803,
+            "longitude": -46.856050752147,
+            "latitude": -23.770813616015,
+            "accuracy": 30,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1331",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611073878,
+            "longitude": -46.856054943099,
+            "latitude": -23.770945463352,
+            "accuracy": 30,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1903",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611093822,
+            "longitude": -46.8561087999,
+            "latitude": -23.770801262205,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0855"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0801"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-20": {
+      "batidas": [
+        {
+          "hora": "0933",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611146023,
+            "longitude": -46.855813544287,
+            "latitude": -23.770965118915,
+            "accuracy": 50,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1252",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611157945,
+            "longitude": -46.85610367063,
+            "latitude": -23.770808246695,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1412",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611162734,
+            "longitude": -46.855873307257,
+            "latitude": -23.770835073687,
+            "accuracy": 30,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "2021",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611184900,
+            "longitude": -46.856120321943,
+            "latitude": -23.770910259358,
+            "accuracy": 30,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0928"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0703"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0040"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-21": {
+      "batidas": [
+        {
+          "hora": "1048",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611236938,
+            "longitude": -46.856122412779,
+            "latitude": -23.770788663286,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1306",
+          "tipo": "L",
+          "offline": true,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611245195,
+            "longitude": -46.856113364964,
+            "latitude": -23.770722546637,
+            "accuracy": 50,
+            "provider": "GPS",
+            "offline": true
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1525",
+          "tipo": "L",
+          "offline": true,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611253537,
+            "longitude": -46.855993839024,
+            "latitude": -23.770729545526,
+            "accuracy": 50,
+            "provider": "GPS",
+            "offline": true
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "2020",
+          "tipo": "L",
+          "offline": true,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611271210,
+            "longitude": -46.856099443819,
+            "latitude": -23.770814922959,
+            "accuracy": 65,
+            "provider": "GPS",
+            "offline": true
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0713"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0441"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "-0135"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-22": {
+      "batidas": [
+        {
+          "hora": "0929",
+          "tipo": "L",
+          "offline": true,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611318592,
+            "longitude": -46.856103190628,
+            "latitude": -23.770811124143,
+            "accuracy": 65,
+            "provider": "GPS",
+            "offline": true
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1008",
+          "tipo": "L",
+          "offline": true,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611320918,
+            "longitude": -46.856091942152,
+            "latitude": -23.770822200599,
+            "accuracy": 65,
+            "provider": "GPS",
+            "offline": true
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1022",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611321738,
+            "longitude": -46.857291890708,
+            "latitude": -23.770781798448,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1251",
+          "tipo": "L",
+          "offline": true,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611330700,
+            "longitude": -46.856092415941,
+            "latitude": -23.770812681232,
+            "accuracy": 65,
+            "provider": "GPS",
+            "offline": true
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1514",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611339267,
+            "longitude": -46.857320285673,
+            "latitude": -23.770920406369,
+            "accuracy": 65,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "1606",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": null,
+          "id_photo": ""
+        },
+        {
+          "hora": "1622",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611343351,
+            "longitude": -46.86270141,
+            "latitude": -23.77395629,
+            "accuracy": 165,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        },
+        {
+          "hora": "2209",
+          "tipo": "L",
+          "offline": false,
+          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
+          "location": {
+            "timestamp_loc": 1611364188,
+            "longitude": -46.86270141,
+            "latitude": -23.77395629,
+            "accuracy": 165,
+            "provider": "GPS"
+          },
+          "id_photo": ""
+        }
+      ],
+      "resultado": [
+        {
+          "tipo": "Horas Trabalhadas",
+          "valor": "0947"
+        },
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Expediente",
+          "valor": "0535"
+        },
+        {
+          "tipo": "Adicional Noturno",
+          "valor": "0010"
+        },
+        {
+          "tipo": "Banco de Horas",
+          "valor": "0059"
+        }
+      ],
+      "status": [
+        "batidas"
+      ],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-23": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-24": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-25": {
+      "resultado": [
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        },
+        {
+          "tipo": "Aniversário de São Paulo",
+          "valor": "0848"
+        }
+      ],
+      "batidas": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-26": {
+      "resultado": [
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        }
+      ],
+      "batidas": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-27": {
+      "resultado": [
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        }
+      ],
+      "batidas": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-28": {
+      "resultado": [
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        }
+      ],
+      "batidas": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-29": {
+      "resultado": [
+        {
+          "tipo": "Horas Previstas",
+          "valor": "0848"
+        }
+      ],
+      "batidas": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [
+        "09:00",
+        "12:00",
+        "13:00",
+        "18:48"
+      ],
+      "justificativa": null
+    },
+    "2021-01-30": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    },
+    "2021-01-31": {
+      "batidas": [],
+      "resultado": [],
+      "status": [],
+      "HORAS_CONTRATUAIS": [],
+      "justificativa": null
+    }
   }
 }
