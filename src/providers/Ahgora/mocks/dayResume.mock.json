@@ -624,20 +624,6 @@
           "equipamento": "-",
           "location": null,
           "id_photo": ""
-        },
-        {
-          "hora": "1920",
-          "tipo": "L",
-          "offline": false,
-          "equipamento": "CARLOS HENRIQUE PRAEIROS DA SILVA",
-          "location": {
-            "timestamp_loc": 1610403617,
-            "longitude": -46.856112575542,
-            "latitude": -23.770796122635,
-            "accuracy": 65,
-            "provider": "GPS"
-          },
-          "id_photo": ""
         }
       ],
       "resultado": [
@@ -669,7 +655,7 @@
       ],
       "justificativa": [
         {
-          "_id": "5ffccf6eb8622853c100f0e2",
+          "_id": "5ffccf6e123c853c100f0e2",
           "empresa": "a382748",
           "matricula": "16238",
           "data_batida": "2021-01-11",
@@ -689,7 +675,36 @@
           "approved": true,
           "confirmado": {
             "texto": "Aceito pelo PontoWEB",
-            "usuario": "mauro.correa@mercadolivre.com",
+            "usuario": "xpto@mercadolivre.com",
+            "data": {
+              "sec": 1611092045,
+              "usec": 0
+            }
+          },
+          "attachments": []
+        },
+        {
+          "_id": "5ffccf6e123c853c1003333",
+          "empresa": "a382748",
+          "matricula": "16238",
+          "data_batida": "2021-01-11",
+          "informacao": "Esqueci totalmente ",
+          "type": "addPunch",
+          "horario_da_justificativa": {
+            "sec": 1610403694,
+            "usec": 0
+          },
+          "funcionario_id": {
+            "$id": "5d56d44a93a914775d262246"
+          },
+          "addPunch": {
+            "punch": "19:20",
+            "TRATAMENTO_DIA_BATIDA": null
+          },
+          "approved": false,
+          "confirmado": {
+            "texto": "Aceito pelo PontoWEB",
+            "usuario": "xpto@mercadolivre.com",
             "data": {
               "sec": 1611092045,
               "usec": 0
