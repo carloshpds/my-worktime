@@ -24,6 +24,12 @@ export interface WorktimeDayResume {
 
 export interface WorktimeDayMark {
   clock: string;
+  correction?: {
+    date: string,
+    reason?: string,
+    approved: boolean,
+    approvedBy?: string
+  },
 }
 
 export interface WorktimeProviderOptions {
@@ -35,4 +41,5 @@ export interface WorktimeProviderOptions {
   momentDate: Moment;
   debug?: boolean;
   journeyTime?: string; // Clock time HH:mm
+  useMocks: boolean;
 }

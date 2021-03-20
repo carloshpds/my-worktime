@@ -51,12 +51,34 @@ export interface AhgoraDayMark {
   id_photo: string;
 }
 
+export interface AhgoraPunchJustification {
+  _id: string,
+  empresa: string;
+  matricula: string;
+  data_batida: string;
+  informacao: string;
+  type: string;
+  horario_da_justificativa: any;
+  funcionario_id: any;
+  addPunch: {
+    punch: string; // HH:mm
+    TRATAMENTO_DIA_BATIDA: any | null;
+  },
+  approved: boolean,
+  confirmado: {
+    texto: string;
+    usuario: string // email
+    data: any
+  },
+  attachments: any[]
+}
+
 export interface AhgoraDay {
   resultado: AhgoraDayTotal[];
   batidas: AhgoraDayMark[];
   status: Array<string>;
   HORAS_CONTRATUAIS: Array<string>;
-  justificativa: string;
+  justificativa: AhgoraPunchJustification[];
 }
 
 export interface AhgoraMonthResume {

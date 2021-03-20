@@ -23,6 +23,8 @@ class ClockHelper {
   }
 
   formatClockString(clock: string): string {
+    clock = clock.replace(/:/g, '')
+
     if (clock.length !== 4) {
       throw new Error('[formatClockString]: Invalid clock format, use: HHmm')
     }

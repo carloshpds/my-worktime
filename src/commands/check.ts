@@ -42,6 +42,7 @@ export default class CheckCommand extends Command {
     date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),
     debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: true}),
     journeytime: flags.string({char: 'j', description: 'Quantidade de horas a serem trabalhadas por dia', default: '08:00'}),
+    useMocks: flags.boolean({ char: 'm', description: 'Simula os requests para o sistema de ponto', default: false }),
   }
 
   async run() {
@@ -99,10 +100,12 @@ export default class CheckCommand extends Command {
     const options: Partial<WorktimeProviderOptions> = {
       userId: flags.user,
       systemId: flags.system,
+      password: flags.password,
       companyId: flags.company,
       date: flags.date,
       debug: flags.debug,
       journeyTime: flags.journeytime,
+      useMocks: flags.useMocks
     }
 
     if(!DATE_REGEXP.test(options.date as string) || !moment().isValid()){

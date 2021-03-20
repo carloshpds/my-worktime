@@ -1,5 +1,5 @@
 import * as chalk from 'chalk'
-import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types'
+import { WorktimeDayMark, WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types'
 import WorktimeProvider from '../../providers/WorktimeProvider'
 import ClockHelper from '../../utils/ClockHelper'
 
@@ -10,10 +10,24 @@ export default class CheckDisplayer {
     this.provider = provider
   }
 
+  private formatMarkToConsole(mark: WorktimeDayMark): string {
+    let markOnConsole = chalk.blueBright(mark.clock)
+
+    if(mark.correction){
+      if(mark.correction.approved){
+        markOnConsole = `${chalk.green('✔')} ${markOnConsole}`
+      } else {
+        markOnConsole = `${chalk.yellow('o')} ${markOnConsole}`
+      }
+    }
+
+    return markOnConsole
+  }
+
   displayResult(worktimeDayResume: WorktimeDayResume, options: Partial<WorktimeProviderOptions>){
     const marksToConsole = worktimeDayResume.marks.map((mark, index) => {
       const isLastMark = index === worktimeDayResume.marks.length - 1
-      let markOnConsole = chalk.blueBright(mark.clock)
+      let markOnConsole = this.formatMarkToConsole(mark)
 
       if(isLastMark && worktimeDayResume.isMissingPairMark){
         markOnConsole = chalk.yellow(mark.clock) + chalk.gray(' Batida ímpar')
@@ -45,5 +59,18 @@ export default class CheckDisplayer {
     console.log(`🆗 Horas registradas: ${ClockHelper.humanizeMinutesToClock(worktimeDayResume.registeredWorkedMinutes)}`)
     console.log(`⏺  Horas trabalhadas até este momento: ${workedMinutesUntilNowOnConsole}`)
     console.log('')
+
+    const marksWithCorrection = worktimeDayResume.marks.filter((mark) => mark.correction)
+
+    if(marksWithCorrection.length){
+      console.log(`${chalk.bgYellow.black('Justificativas')}`)
+      console.log('')
+
+      marksWithCorrection.forEach((mark) => {
+        console.log(`  ${this.formatMarkToConsole(mark)}`)
+        mark.correction && mark.correction.reason && console.log(`  ${chalk.bgYellow.black(mark.correction.reason)}`)
+        console.log(chalk.white('---------'))
+      })
+    }
   }
 }

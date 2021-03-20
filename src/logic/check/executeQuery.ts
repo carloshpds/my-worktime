@@ -16,6 +16,7 @@ export async function executeQuery(CurrentProviderClass: any, options: Partial<W
       const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()
 
       if (worktimeDayResume.marks.length) {
+        console.log('')
         loader.succeed(`Dados encontrados, seu horário de saída ideal é ${chalk.black.bgGreen(' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
         displayer.displayResult(worktimeDayResume, options)
       } else {

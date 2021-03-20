@@ -4,6 +4,7 @@ import ClockHelper from '../utils/ClockHelper'
 
 export default abstract class WorktimeProvider {
   marks: WorktimeDayMark[] = []
+  options: WorktimeProviderOptions
 
   urls: {
     getDayResume: string | null;
