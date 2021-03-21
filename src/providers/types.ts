@@ -41,5 +41,5 @@ export interface WorktimeProviderOptions {
   momentDate: Moment;
   debug?: boolean;
   journeyTime?: string; // Clock time HH:mm
-  useMocks: boolean;
+  useMocks?: boolean;
 }

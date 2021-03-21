@@ -78,7 +78,7 @@ export default abstract class WorktimeProvider {
       workedMinutesUntilNow = registeredWorkedMinutes
     }
 
-    const journeyTimeInMinutes = ClockHelper.convertClockStringToMinutes(this.options.journeyTime)
+    const journeyTimeInMinutes = ClockHelper.convertClockStringToMinutes(this.options.journeyTime as string)
 
     const shouldLeaveMarks: WorktimeDayMark[] = ([] as WorktimeDayMark[]).concat(marks)
     if (lastPeriodIsOpen && registeredWorkedMinutes > journeyTimeInMinutes) {
