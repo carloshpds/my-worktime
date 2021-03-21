@@ -16,7 +16,19 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "disableOptimisticBPs": true
+    },
+    {
+      "type": "node",
+      "name": "check",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/run",
+      "args": [
+        "check"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true
     }
-
   ]
 }

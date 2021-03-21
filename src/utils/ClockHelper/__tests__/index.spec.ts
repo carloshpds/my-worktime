@@ -56,6 +56,11 @@ describe('Clock Helper', () => {
       expect(formattedClock).toBe('10:10')
     })
 
+    it('Formats even when clock string is already done', () => {
+      const formattedClock = ClockHelper.formatClockString('10:10')
+      expect(formattedClock).toBe('10:10')
+    })
+
     it('Displays an error for invalid clock pattern', () => {
       const errorTest = () => ClockHelper.formatClockString('010')
       expect(errorTest).toThrow(Error)

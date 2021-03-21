@@ -5,7 +5,8 @@
   "contributors": [
     "Matheus Soares <matheusb95@gmail.com> https://github.com/Matheusss",
     "Beatriz Gidzinski Cardoso <beatriz.gidzinski@mercadolivre.com> https://github.com/bgidzinski",
-    "Marco Antonio De Souza <marco.souza@mercadolivre.com>"
+    "Marco Antonio De Souza <marco.souza@mercadolivre.com>",
+    "Otávio Martins Pinheiro <otavio.marpin@gmail.com> https://github.com/Tavisco"
   ],
   "bin": {
     "my-worktime": "./bin/run"
@@ -15,14 +16,17 @@
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.0",
-    "axios": "0.20.0",
+    "axios": "^0.21.1",
     "chalk": "^4.1.0",
+    "conf": "^7.1.2",
+    "keytar": "^7.0.0",
     "moment": "^2.28.0",
     "ora": "^5.1.0",
     "tslib": "^1.13.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.22.2",
+    "@types/inquirer": "^7.3.1",
     "@types/jest": "^25.2.3",
     "@types/moment": "^2.13.0",
     "@types/node": "^10.17.28",
@@ -73,7 +77,9 @@
     "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
     "test": "jest",
     "version": "oclif-dev readme && git add README.md",
-    "check": "./bin/run check -u $USER -p $PASS -s ahgora -c $COMPANY -j 08:48 -d 2020-09-23"
+    "check": "NODE_ENV=development ./bin/run check -u $USER -p $PASS -s ahgora -c $COMPANY -j 08:48 -d 2020-09-23 -m",
+    "checkSetup": "NODE_ENV=development ./bin/run check -j 08:48 -d 2020-09-23",
+    "setup": "NODE_ENV=development ./bin/run setup"
   },
   "types": "lib/index.d.ts"
 }
