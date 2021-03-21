@@ -121,7 +121,7 @@ export function meliFluxGenerateOptions(secondStepInquirer: any, thirdStepInquir
     companyId: secondStepInquirer.whichMeli,
     date: moment().format("YYYY-MM-DD"),
     debug: false,
-    journeyTime: secondStepInquirer.isDefaultMeliWorktime? "08:48" : thirdStepInquirer.customJourneytime,
+    journeyTime: secondStepInquirer.isDefaultMeliWorktime ? "08:48" : thirdStepInquirer.customJourneytime,
     momentDate: moment(),
   };
 }

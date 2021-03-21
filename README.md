@@ -56,7 +56,7 @@ USAGE
 
 ## `my-worktime check`
 
-Checks your worktime
+Busca as batidas e calcula as horas trabalhadas para uma data específica
 
 ```
 USAGE
@@ -64,13 +64,14 @@ USAGE
 
 OPTIONS
   -b, --debug                    Debug - Exibe mais informações na execução
-  -c, --company=company          (required) ID da empresa no sistema de ponto
-  -d, --date=date                [default: 2020-10-13] Data relacionada a consulta de horas no padrão YYYY-MM-DD
+  -c, --company=company          ID da empresa no sistema de ponto
+  -d, --date=date                [default: 2021-03-21] Data relacionada a consulta de horas no padrão YYYY-MM-DD
   -h, --help                     show CLI help
   -j, --journeytime=journeytime  [default: 08:00] Quantidade de horas a serem trabalhadas por dia
-  -p, --password=password        (required) Senha do usuário no sistema
+  -m, --useMocks                 Simula os requests para o sistema de ponto
+  -p, --password=password        Senha do usuário no sistema
   -s, --system=system            [default: ahgora] Nome do sistema de ponto
-  -u, --user=user                (required) ID do usuário no sistema de ponto
+  -u, --user=user                ID do usuário no sistema de ponto
 
 EXAMPLES
   $ my-worktime check
