@@ -413,6 +413,55 @@ describe('WorktimeProvier', () => {
         expect(worktimeDayResume.registeredWorkedMinutes).toBe(threeHours)
         expect(worktimeDayResume.workedMinutesUntilNow).toBe(threeHours)
       })
+
+      it('Odd marks using less than 1 hour on breakMinutes', () => {
+        jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() =>
+          new Date('2020-01-01T18:00:00').valueOf()
+        )
+
+        const marks: WorktimeDayMark[] = [
+          { clock: '09:10'},
+          { clock: '12:27'},
+          { clock: '13:19'},
+        ]
+
+        const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
+        const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+        const threeHoursAndSeventeenMinutes = 60 * 3 + 17
+        const sevenHoursAndFifithMinutes = 60 * 7 + 58
+
+        expect(worktimeDayResume.registeredWorkedMinutes).toBe(threeHoursAndSeventeenMinutes)
+        expect(worktimeDayResume.workedMinutesUntilNow).toBe(sevenHoursAndFifithMinutes)
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:02')
+      })
+
+      it('Odd marks using less than 1 hour on breakMinutes and custom journeyTime', () => {
+        jest
+        .spyOn(global.Date, 'now')
+        .mockImplementationOnce(() =>
+          new Date('2020-01-01T18:00:00').valueOf()
+        )
+
+        const marks: WorktimeDayMark[] = [
+          { clock: '09:10'},
+          { clock: '12:27'},
+          { clock: '13:19'},
+        ]
+
+        const worktimeProvider: WorktimeProvider = new AbstractProvider({
+          ...defaultOptions,
+          journeyTime: '08:48'
+        })
+        const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
+        const threeHoursAndSeventeenMinutes = 60 * 3 + 17
+        const sevenHoursAndFifithMinutes = 60 * 7 + 58
+
+        expect(worktimeDayResume.registeredWorkedMinutes).toBe(threeHoursAndSeventeenMinutes)
+        expect(worktimeDayResume.workedMinutesUntilNow).toBe(sevenHoursAndFifithMinutes)
+        expect(worktimeDayResume.shouldLeaveClockTime).toBe('18:50')
+      })
     })
   })
 })
