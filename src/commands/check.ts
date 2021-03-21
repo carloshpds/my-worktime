@@ -15,7 +15,7 @@ import * as ora from 'ora'
  */
 import Ahgora from '../providers/Ahgora'
 import Faker from '../providers/Faker'
-import Setup from './setup'
+import Setup from '../standBy/setup'
 
 /*
  * Constants
@@ -46,15 +46,7 @@ export default class CheckCommand extends Command {
   }
 
   async run() {
-    const {flags} = this.parse(CheckCommand)
-    const requiredFlagsArePresent = flags.user && flags.password && flags.company
-
-    if(requiredFlagsArePresent){
-      this.runWithoutSetup()
-    } else {
-      this.runUsingSetup()
-    }
-
+    this.runWithoutSetup()
   }
 
   async runUsingSetup() {
