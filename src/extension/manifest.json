@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "minimum_chrome_version": "90",
+  "name": "GamersClub Challenger",
+  "version": "1.0.1",
+  "description": "__MSG_appDescription__",
+  "author": "Carlos Henrique (C8) <carloshpds@gmail.com>",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "default_locale": "pt_BR",
+  "icons": {
+    "16": "assets/logo_16.png",
+    "48": "assets/logo_48.png",
+    "128": "assets/logo_128.png"
+  },
+
+  "action": {
+    "default_title": "Gamersclub Challenger",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://gamersclub.com.br/lobby*",
+        "*://csgo.gamersclub.gg/lobby*"
+      ],
+      "js": ["js/chunk-vendors.js", "js/contentScripts.js"],
+      "css": ["css/chunk-vendors.css", "css/contentScripts.css"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "web_accessible_resources" : [
+    { "resources": ["assets/*", "content-scripts/*"], "matches": ["*://gamersclub.com.br/*"],"extensions": ["__MSG_@@extension_id__"] }
+  ],
+
+  "permissions": [
+    "storage",
+    "nativeMessaging"
+  ],
+
+  "host_permissions": [
+    "*://gamersclub.com.br/*",
+    "*://csgo.gamersclub.gg/*"
+  ]
+
+}
