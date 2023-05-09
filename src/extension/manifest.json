@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "minimum_chrome_version": "90",
-  "name": "GamersClub Challenger",
+  "name": "My Worktime",
   "version": "1.0.1",
   "description": "__MSG_appDescription__",
   "author": "Carlos Henrique (C8) <carloshpds@gmail.com>",
@@ -21,34 +21,46 @@
   },
 
   "action": {
-    "default_title": "Gamersclub Challenger",
+    "default_title": "My Worktime",
     "default_popup": "popup.html"
   },
 
   "content_scripts": [
     {
       "matches": [
-        "*://gamersclub.com.br/lobby*",
-        "*://csgo.gamersclub.gg/lobby*"
+        "*://www.ahgora.com.br/externo/mirror*"
       ],
-      "js": ["js/chunk-vendors.js", "js/contentScripts.js"],
-      "css": ["css/chunk-vendors.css", "css/contentScripts.css"],
+      "js": ["js/chunk-vendors.js", "js/mirrorContentScripts.js"],
+      "css": ["css/chunk-vendors.css", "css/mirrorContentScripts.css"],
       "run_at": "document_end"
     }
   ],
 
-  "web_accessible_resources" : [
-    { "resources": ["assets/*", "content-scripts/*"], "matches": ["*://gamersclub.com.br/*"],"extensions": ["__MSG_@@extension_id__"] }
+  "web_accessible_resources" :[
+    {
+      "resources": [
+        "assets/*",
+        "fonts/*",
+        "content-scripts/*"
+      ],
+      "matches": [
+        "*://www.ahgora.com.br/*"
+      ],
+      "extensions": [
+        "__MSG_@@extension_id__"
+      ]
+    }
   ],
 
   "permissions": [
     "storage",
+    "storage",
+    "tabs",
     "nativeMessaging"
   ],
 
   "host_permissions": [
-    "*://gamersclub.com.br/*",
-    "*://csgo.gamersclub.gg/*"
+    "*://www.ahgora.com.br/*"
   ]
 
 }

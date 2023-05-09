@@ -1,29 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
 const WriteFilePlugin = require('write-file-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const buildFilesToCopy = require('./config/webpack/buildFilesToCopy');
 
-module.exports = {
+const config = {
   configureWebpack: {
     devtool: 'cheap-module-source-map',
     plugins: [
       new CopyWebpackPlugin({
-        patterns: [
-          {
-            from: 'manifest.json'
-          },
-          {
-            from: 'src/_locales',
-            to: '_locales'
-          },
-          {
-            from: 'src/assets',
-            to: 'assets'
-          },
-          {
-            from: 'background.js'
-          }
-        ]
+        patterns: buildFilesToCopy()
       }),
     ]
   },
@@ -33,16 +19,27 @@ module.exports = {
   pages: {
     popup: {
       entry: 'src/apps/popup/index.ts',
-      template: 'src/apps/popup/popup.html'
+      template: 'src/apps/popup/popup.html',
+      chunks: ['chunk-vendors', 'chunk-common', 'popup']
     },
 
-    contentScripts: {
-      entry: 'src/apps/content/index.js',
-      chunks: [],
+    globalContentScripts: {
+      entry: 'src/apps/contentScripts/global/global.runner.js',
+      chunks: ['chunk-vendors', 'chunk-common', 'globalContentScripts'],
+    },
+
+    mirrorContentScripts: {
+      entry: 'src/apps/contentScripts/mirror/mirror.runner.js',
+      chunks: ['chunk-vendors', 'chunk-common', 'mirrorContentScripts'],
     },
   },
   chainWebpack: (config) => {
     config.plugin('writeFile')
       .use(WriteFilePlugin)
+
+    // config.plugin('extensionLoader')
+    //   .use(ChromeExtensionReloader)
   },
 };
+
+module.exports = config;

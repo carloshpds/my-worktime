@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "noImplicitAny": false,
     "target": "esnext",
     "module": "esnext",
     "strict": true,
@@ -15,11 +16,12 @@
     "types": [
       "webpack-env",
       "jest",
-      "jquery"
+      "jquery",
     ],
     "paths": {
       "@/*": [
-        "src/*"
+        "src/*",
+        "src/typings/*"
       ]
     },
     "lib": [
@@ -34,8 +36,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
-, "src/apps/popup/index.ts"],
+    "tests/**/*.tsx",
+  ],
   "exclude": [
     "node_modules"
   ]
