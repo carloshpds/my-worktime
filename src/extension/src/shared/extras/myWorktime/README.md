@@ -4,13 +4,13 @@
 
 ### Activate debug mode
 ```javascript
-  const { logger } = window.gcChallenger.api
+  const { logger } = window.myWorktime.api
   logger.setLevel(logger.DEBUG)
 ```
 
 ### Activate debug mode for Intervals (like PreMatchCheck)
 ```javascript
-  const { logger, browserStorage } = window.gcChallenger.api
+  const { logger, browserStorage } = window.myWorktime.api
   browserStorage.settings.options.enableIntervalDebugLogs = true
   logger.setLevel(logger.DEBUG)
 
@@ -20,14 +20,14 @@
 
 ### Full Scan
 ```javascript
-const { checkGCSelectors } = window.gcChallenger.api.health
-const { selectors }        = window.gcChallenger.gc
+const { checkGCSelectors } = window.myWorktime.api.health
+const { selectors }        = window.myWorktime.gc
 const { missing, found }   = checkGCSelectors(selectors)
 ```
 
 ### Specific Scan
 ```javascript
-const { checkGCSelectors } = window.gcChallenger.api.health
-const { selectors }        = window.gcChallenger.gc
+const { checkGCSelectors } = window.myWorktime.api.health
+const { selectors }        = window.myWorktime.gc
 const { missing, found }   = checkGCSelectors(selectors.lobbies)
 ```

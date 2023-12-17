@@ -4,13 +4,13 @@ import { customDimentions } from "./dimentions"
 import LoggedUser from '@/apps/contentScripts/lobby/types/LoggedUser'
 
 class AnalyticsManager {
-  trackerName = 'gccAnalytics'
+  trackerName = 'mwAnalytics'
 
   isAlive(): boolean {
     return typeof window.ga !== 'undefined'
   }
 
-  setup(loggedPlayer?: Partial<LoggedUser>){
+  setup(loggedPlayer?: Partial<LoggedUser>) {
     const manifest = window.browser.runtime.getManifest()
     const userId = loggedPlayer?.id ? loggedPlayer.id : undefined
 
@@ -24,7 +24,7 @@ class AnalyticsManager {
     this.set('appName', 'My Worktime')
     manifest && this.set('appVersion', manifest.version)
 
-    if(loggedPlayer) {
+    if (loggedPlayer) {
       const { id, level, name } = loggedPlayer
       this.set(customDimentions.companyId, id)
       this.set(customDimentions.name, name)
@@ -32,7 +32,7 @@ class AnalyticsManager {
   }
 
   set(attribute: string, value: string | undefined) {
-    if(window.ga && value) {
+    if (window.ga && value) {
       window.ga(`${this.trackerName}.set`, attribute, value)
       const humanizedAttribute = customDimentions[attribute as AnalyticsCustomDimention] || attribute
       Logger.debug('📈 Set analytics attribute: ', humanizedAttribute, value)

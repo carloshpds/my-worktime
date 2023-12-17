@@ -4,8 +4,8 @@ const emojis: Record<string, string> = {}
 emojis[`${Logger.ERROR.value}`] = '🔴'
 emojis[`${Logger.WARN.value}`] = '🟡'
 
-const gccLogger = Logger.createDefaultHandler({
-  formatter: function(messages, context) {
+const mwLogger = Logger.createDefaultHandler({
+  formatter: function (messages, context) {
     // prefix each log message with a timestamp.
     messages.unshift('[My Worktime]')
 
@@ -18,4 +18,4 @@ const gccLogger = Logger.createDefaultHandler({
 
 Logger.useDefaults()
 Logger.setLevel(process.env.NODE_ENV === 'development' ? Logger.DEBUG : Logger.ERROR)
-Logger.setHandler(gccLogger)
+Logger.setHandler(mwLogger)

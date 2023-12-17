@@ -3,14 +3,14 @@ export { }
 declare global {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface browser {}
+  export interface browser { }
   export interface Window {
     ga: any,
     chrome: any,
     userId: number | string,
     localStorage: any,
     browser: any,
-    gcChallenger?: any
+    myWorktime?: any
   }
 
   interface String {

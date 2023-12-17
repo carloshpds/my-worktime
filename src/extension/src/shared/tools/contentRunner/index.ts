@@ -4,17 +4,17 @@ import Logger from "js-logger"
 import Analytics from '../analytics'
 import BrowserStorage from '../storage'
 
-import '@/apps/shared/extras/gcChallenger'
+import '@/apps/shared/extras/myWorktime'
 
 import serializer from '@/apps/contentScripts/lobby/serializer'
 type GAInitializeResponse = 'GA_INITIALIZED' | 'GA_FAILED'
-class GCChallengerContentRunner {
+class MWContentRunner {
   pageName = ''
 
   async preRun(response: GAInitializeResponse, resolve: any, reject: any) {
     try {
       const isGlobalRun = this.pageName === 'GLOBAL_SCRIPTS'
-      if(!response || response === 'GA_FAILED') {
+      if (!response || response === 'GA_FAILED') {
         Logger.error(`GA HAS NOT STARTED ON ${this.pageName}`)
       } else {
         Logger.debug(`🟢 GA INITIALIZED ON ${this.pageName}`)
@@ -22,7 +22,7 @@ class GCChallengerContentRunner {
 
       const loggedPlayer = serializer.serializeLoggedPlayer()
       Analytics.setup(loggedPlayer)
-      if(!isGlobalRun){
+      if (!isGlobalRun) {
         Analytics.set('title', this.pageName)
         Analytics.send('pageview')
       }
@@ -43,7 +43,7 @@ class GCChallengerContentRunner {
       try {
         Logger.log(`== 🚀 My Worktime is activated on ${pageName} ==`)
 
-        if(Analytics.isAlive()){
+        if (Analytics.isAlive()) {
           Logger.debug(`🟢 GA IS ALREARY LIVE -> INITIALIZED ON ${this.pageName}`)
           this.preRun('GA_INITIALIZED', resolve, reject)
         } else {
@@ -61,4 +61,4 @@ class GCChallengerContentRunner {
 
 }
 
-export default new GCChallengerContentRunner()
+export default new MWContentRunner()

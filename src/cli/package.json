@@ -1,0 +1,93 @@
+{
+  "author": "Carlos Henrique @carloshpds",
+  "contributors": [
+    "Matheus Soares <matheusb95@gmail.com> https://github.com/Matheusss",
+    "Beatriz Gidzinski Cardoso <beatriz.gidzinski@mercadolivre.com> https://github.com/bgidzinski",
+    "Marco Antonio De Souza <marco.souza@mercadolivre.com>",
+    "Otávio Martins Pinheiro <otavio.marpin@gmail.com> https://github.com/Tavisco"
+  ],
+  "bin": {
+    "my-worktime": "./bin/run.js"
+  },
+  "dependencies": {
+    "@oclif/core": "^3",
+    "@oclif/plugin-help": "^5",
+    "@oclif/plugin-plugins": "^4"
+  },
+  "description": "oclif example Hello World CLI (ESM)",
+  "devDependencies": {
+    "@oclif/prettier-config": "^0.2.1",
+    "@oclif/test": "^3",
+    "@types/chai": "^4",
+    "@types/mocha": "^10",
+    "@types/node": "^18",
+    "chai": "^4",
+    "eslint": "^8",
+    "eslint-config-oclif": "^5",
+    "eslint-config-oclif-typescript": "^3",
+    "eslint-config-prettier": "^9.1.0",
+    "mocha": "^10",
+    "oclif": "^4.1.0",
+    "shx": "^0.3.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "/bin",
+    "/dist",
+    "/oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/carloshpds/my-worktime",
+  "license": "MIT",
+  "main": "",
+  "name": "my-worktime",
+  "oclif": {
+    "bin": "my-worktime",
+    "dirname": "my-worktime",
+    "commands": "./dist/commands",
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
+    ],
+    "topicSeparator": " ",
+    "topics": {
+      "check": {
+        "description": "Check your worktime based on system server"
+      },
+      "hit": {
+        "description": "Adds a hit to your worktime"
+      }
+    }
+  },
+  "repository": "carloshpds/my-worktime",
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "lint": "eslint . --ext .ts",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "npm run lint",
+    "prepack": "npm run build && oclif manifest && oclif readme",
+    "prepare": "npm run build",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md"
+  },
+  "version": "0.0.0",
+  "bugs": "https://github.com/carloshpds/my-worktime/issues",
+  "types": "dist/index.d.ts",
+  "exports": "./lib/index.js",
+  "type": "module",
+  "keywords": [
+    "worktime",
+    "my-worktime",
+    "mw",
+    "time",
+    "hour",
+    "minute",
+    "ahgora",
+    "work",
+    "utility",
+    "oclif"
+  ]
+}
