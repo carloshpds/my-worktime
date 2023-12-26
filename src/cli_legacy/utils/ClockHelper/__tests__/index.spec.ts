@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as moment from 'moment'
+import moment from 'moment'
 import 'moment/locale/pt-br'
 import ClockHelper from '..'
 

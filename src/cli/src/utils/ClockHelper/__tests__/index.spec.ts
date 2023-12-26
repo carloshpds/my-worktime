@@ -1,7 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import * as moment from 'moment'
+import moment from 'moment'
 import 'moment/locale/pt-br'
-import ClockHelper from '..'
+
+import ClockHelper from '../index.ts'
 
 describe('Clock Helper', () => {
   describe('Convert hour string (clock format) in minutes', () => {

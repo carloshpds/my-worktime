@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-import * as moment from 'moment'
+import moment from 'moment'
 import { MeliBUs } from "../../enums/MeliBusinessUnits";
 import { WorktimeProviderOptions } from "../../providers/types";
 import { CLIError } from "@oclif/errors";
@@ -36,7 +36,7 @@ export function meliFluxSecondStep(): inquirer.QuestionCollection[] {
 
 export function otherCompaniesFluxSecondStep(): inquirer.QuestionCollection[] {
   const providersAsChoices = [{ name: WorktimeProviderName.AHGORA }];
-  if(process.env.NODE_ENV === 'development'){
+  if (process.env.NODE_ENV === 'development') {
     providersAsChoices.push({ name: WorktimeProviderName.FAKER })
   }
 
@@ -135,7 +135,7 @@ export function otherCompaniesGenerateOptions(secondStepInquirer: any, thirdStep
       companyId: secondStepInquirer.ahgoraCompanyId,
       date: moment().format("YYYY-MM-DD"),
       debug: false,
-      journeyTime: secondStepInquirer.journeytime !== OTHER? secondStepInquirer.journeytime: thirdStepInquirer.customJourneytime,
+      journeyTime: secondStepInquirer.journeytime !== OTHER ? secondStepInquirer.journeytime : thirdStepInquirer.customJourneytime,
       momentDate: moment(),
     };
   } else {

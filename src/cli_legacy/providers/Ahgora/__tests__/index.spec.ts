@@ -1,6 +1,6 @@
 import axios from 'axios';
 import Ahgora from '../index';
-import * as moment from 'moment'
+import moment from 'moment'
 import 'moment/locale/pt-br'
 import { WorktimeProviderOptions } from '../../types';
 
@@ -20,14 +20,14 @@ jest.spyOn(axios, 'post').mockImplementation(() => {
 
 const momentDate = moment()
 const defaultOptions: WorktimeProviderOptions = {
-  userId    : 'userId',
-  password  : 'pass',
-  systemId  : 'ahgora',
-  companyId : 'xpto',
-  date : momentDate.format('YYYY-MM-DD'),
+  userId: 'userId',
+  password: 'pass',
+  systemId: 'ahgora',
+  companyId: 'xpto',
+  date: momentDate.format('YYYY-MM-DD'),
   momentDate,
-  debug     : false,
-  journeyTime : '08:00',
+  debug: false,
+  journeyTime: '08:00',
 }
 
 describe('Ahgora', () => {
@@ -48,7 +48,8 @@ describe('Ahgora', () => {
       expect(marks).toStrictEqual([
         { clock: '10:36' },
         { clock: '13:21' },
-        { clock: '14:00',
+        {
+          clock: '14:00',
           correction: {
             approved: true,
             approvedBy: 'xpto@mercadolivre.com',
@@ -56,7 +57,7 @@ describe('Ahgora', () => {
             reason: 'entrei na replenishment e esqueci',
           },
         },
-        { clock: '19:20'}
+        { clock: '19:20' }
       ])
     })
   })

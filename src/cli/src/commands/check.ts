@@ -1,21 +1,18 @@
-import { Command, flags } from '@oclif/command'
-import * as chalk from 'chalk'
-import Conf from 'conf'
-import * as keytar from 'keytar'
-import * as moment from 'moment'
-import * as ora from 'ora'
+import { Command, Flags } from '@oclif/core'
+// import Conf from 'conf'
+// import * as keytar from 'keytar'
+import moment from 'moment'
 
-import { executeQuery } from '../logic/check/executeQuery'
+import { executeQuery } from '../logic/check/executeQuery.js'
 /*
  * Providers
  */
-import Ahgora from '../providers/Ahgora'
-import Faker from '../providers/Faker'
-import WorktimeProvider from '../providers/WorktimeProvider'
-import { WorktimeDayResume, WorktimeProviderOptions } from '../providers/types.js'
-import Setup from '../standBy/setup'
-import ClockHelper from '../utils/ClockHelper'
-import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
+import Ahgora from '../providers/Ahgora/index.js'
+import Faker from '../providers/Faker/index.js'
+import WorktimeProvider from '../providers/WorktimeProvider.js'
+import { WorktimeProviderOptions } from '../providers/types.js'
+// import Setup from '../standBy/setup.js'
+import ClockHelper from '../utils/ClockHelper/index.js'
 import { validateRunningDate } from '../utils/validateDateOption.js'
 
 /*
@@ -35,15 +32,15 @@ export default class CheckCommand extends Command {
   ]
 
   static flags = {
-    company: flags.string({ char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY' }),
-    date: flags.string({ char: 'd', default: moment().format('YYYY-MM-DD'), description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD' }),
-    debug: flags.boolean({ char: 'b', default: true, description: 'Debug - Exibe mais informações na execução' }),
-    help: flags.help({ char: 'h' }),
-    journeytime: flags.string({ char: 'j', default: '08:00', description: 'Quantidade de horas a serem trabalhadas por dia' }),
-    password: flags.string({ char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS' }),
-    system: flags.string({ char: 's', default: 'ahgora', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM' }),
-    useMocks: flags.boolean({ char: 'm', default: false, description: 'Simula os requests para o sistema de ponto' }),
-    user: flags.string({ char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER' }),
+    company: Flags.string({ char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY' }),
+    date: Flags.string({ char: 'd', default: moment().format('YYYY-MM-DD'), description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD' }),
+    debug: Flags.boolean({ char: 'b', default: true, description: 'Debug - Exibe mais informações na execução' }),
+    help: Flags.help({ char: 'h' }),
+    journeytime: Flags.string({ char: 'j', default: '08:00', description: 'Quantidade de horas a serem trabalhadas por dia' }),
+    password: Flags.string({ char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS' }),
+    system: Flags.string({ char: 's', default: 'ahgora', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM' }),
+    useMocks: Flags.boolean({ char: 'm', default: false, description: 'Simula os requests para o sistema de ponto' }),
+    user: Flags.string({ char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER' }),
   }
 
   describeUsage() {
@@ -57,45 +54,45 @@ export default class CheckCommand extends Command {
     this.runWithoutSetup()
   }
 
-  async runUsingSetup() {
-    const { flags } = this.parse(CheckCommand)
-    const config = new Conf();
-    const setupCommand = new Setup(this.argv, this.config)
+  // async runUsingSetup() {
+  //   const { flags } = await this.parse(CheckCommand)
+  //   const config = new Conf();
+  //   const setupCommand = new Setup(this.argv, this.config)
 
-    const requiredFlagsArePresent = flags.user && flags.password && flags.company
-    const setupOptions = config.get('options') as Partial<WorktimeProviderOptions>
+  //   const requiredFlagsArePresent = flags.user && flags.password && flags.company
+  //   const setupOptions = config.get('options') as Partial<WorktimeProviderOptions>
 
-    if (!requiredFlagsArePresent) {
-      if (setupOptions) {
-        setupOptions.date = flags.date || moment().format("YYYY-MM-DD")
-        setupOptions.momentDate = flags.date ? moment(flags.date) : moment()
+  //   if (!requiredFlagsArePresent) {
+  //     if (setupOptions) {
+  //       setupOptions.date = flags.date || moment().format("YYYY-MM-DD")
+  //       setupOptions.momentDate = flags.date ? moment(flags.date) : moment()
 
-        const passwords = await keytar.findCredentials('My-Worktime')
+  //       const passwords = await keytar.findCredentials('My-Worktime')
 
-        if (passwords.length > 0 && setupOptions.systemId) {
-          const password = passwords.filter(pwd => pwd.account === setupOptions.systemId?.toLowerCase()).map(pwd => pwd.password)
+  //       if (passwords.length > 0 && setupOptions.systemId) {
+  //         const password = passwords.filter(pwd => pwd.account === setupOptions.systemId?.toLowerCase()).map(pwd => pwd.password)
 
-          if (!password || password.length != 1) {
-            this.error("Ocorreu um erro ao obter senha do Keychain. O setup foi efetuado?")
-          } else {
-            setupOptions.password = password[0]
-            await executeQuery(providers[setupOptions.systemId?.toLowerCase()], setupOptions)
-            this.exit(0)
-          }
+  //         if (!password || password.length !== 1) {
+  //           this.error("Ocorreu um erro ao obter senha do Keychain. O setup foi efetuado?")
+  //         } else {
+  //           setupOptions.password = password[0]
+  //           await executeQuery(providers[setupOptions.systemId?.toLowerCase()], setupOptions)
+  //           this.exit(0)
+  //         }
 
-        } else {
-          this.warn("As configurações estão incompletas. Favor execute o setup novamente.")
-        }
-      }
+  //       } else {
+  //         this.warn("As configurações estão incompletas. Favor execute o setup novamente.")
+  //       }
+  //     }
 
-      await setupCommand.run()
-    } else if (!flags.user || !flags.password || !flags.system || !flags.company) {
-      await setupCommand.run()
-    }
-  }
+  //     await setupCommand.run()
+  //   } else if (!flags.user || !flags.password || !flags.system || !flags.company) {
+  //     await setupCommand.run()
+  //   }
+  // }
 
   async runWithoutSetup() {
-    const { flags } = this.parse(CheckCommand)
+    const { flags } = await this.parse(CheckCommand)
 
     const options: Partial<WorktimeProviderOptions> = WorktimeProvider.buildOptions({
       companyId: flags.company,

@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-import ClockHelper from '../../utils/ClockHelper'
-import WorktimeProvider from '../WorktimeProvider'
+import ClockHelper from '../../utils/ClockHelper/index.ts'
+import WorktimeProvider from '../WorktimeProvider.ts'
 import { WorktimeDayMark } from '../types.js'
-import { AhgoraDay, AhgoraDayMark, AhgoraMonthResume } from './types'
-import { AhgoraDayMarkType } from './types/AhgoraDayMarkType'
+import { AhgoraDayMarkType } from './types/AhgoraDayMarkType.ts'
+import { AhgoraDay, AhgoraMonthResume } from './types/index.ts'
 
 export default class Ahgora extends WorktimeProvider {
   name = 'Ahgora'
@@ -13,7 +13,7 @@ export default class Ahgora extends WorktimeProvider {
     getDayResume: 'https://www.ahgora.com.br/externo/getApuracao',
   }
 
-  async getDateMarks(requestOptions?): Promise<WorktimeDayMark[]> {
+  async getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]> {
     // eslint-disable-next-line no-useless-catch
     try {
       let marks: WorktimeDayMark[] = []
@@ -66,8 +66,7 @@ export default class Ahgora extends WorktimeProvider {
             },
           }))
 
-          marks = marks
-            .concat(justificationsMarks)
+          marks = [...marks, ...justificationsMarks]
             .sort((currentMark, nextMark) => ClockHelper.convertClockStringToMinutes(currentMark.clock) - ClockHelper.convertClockStringToMinutes(nextMark.clock))
         }
 
@@ -81,11 +80,16 @@ export default class Ahgora extends WorktimeProvider {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  handleGetDateMarksError(errorCode: string, requestBody) {
-    const errorMap = {
+  handleGetDateMarksError(errorCode: string, requestBody: any) {
+
+    const errorMap: Record<string, string> = {
+      // eslint-disable-next-line camelcase
       empty_required_data: 'Alguns dados obrigatórios não foram passados para a consulta',
+
+      // eslint-disable-next-line camelcase
       not_found: `Não foi possível recuperar os dados na data ${this.options.date}`,
     }
+
     const formatedError = errorMap[errorCode] || errorCode
     console.log('\nREQUEST ERROR:', formatedError)
   }

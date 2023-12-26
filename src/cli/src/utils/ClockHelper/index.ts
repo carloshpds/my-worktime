@@ -1,4 +1,4 @@
-import {WorktimeDayMark} from '../../providers/types'
+import { WorktimeDayMark } from '../../providers/types.ts'
 
 class ClockHelper {
   debug: boolean | undefined = false
@@ -21,7 +21,7 @@ class ClockHelper {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  convertClockStringToMinutes(hourString: string, options = {considerSeconds: false}) {
+  convertClockStringToMinutes(hourString: string, options = { considerSeconds: false }) {
     const formatedHourString = hourString.replaceAll(':', '')
     const hoursAsMinutes = Number.parseInt(formatedHourString.slice(0, 2), 10) * 60
     const tailMinutes = Number.parseInt(formatedHourString.slice(2), 10)
@@ -39,12 +39,12 @@ class ClockHelper {
   }
 
   // eslint-disable-next-line unicorn/no-object-as-default-parameter
-  humanizeMinutesToClock(minutes: number | string, options = {separator: ':'}): string {
+  humanizeMinutesToClock(minutes: number | string, options = { separator: ':' }): string {
     const minutesNumber = typeof minutes === 'number' ? Math.abs(minutes) : Math.abs(Number.parseInt(minutes, 10))
     const realHoursNumbers = Math.floor(minutesNumber / 60)
     const realMinutes = minutesNumber % 60
 
-    const humanizedHours   = String(realHoursNumbers).padStart(2, '0')
+    const humanizedHours = String(realHoursNumbers).padStart(2, '0')
     const humanizedMinutes = String(realMinutes).padStart(2, '0')
 
     return `${humanizedHours}${options.separator}${humanizedMinutes}`

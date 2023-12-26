@@ -1,5 +1,5 @@
-import {WorktimeProviderOptions, WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime} from './types'
-import * as moment from 'moment'
+import { WorktimeProviderOptions, WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime } from './types'
+import moment from 'moment'
 import ClockHelper from '../utils/ClockHelper'
 
 export default abstract class WorktimeProvider {
@@ -9,7 +9,7 @@ export default abstract class WorktimeProvider {
   urls: {
     getDayResume: string | null;
     [prop: string]: any;
-  } = {getDayResume: null};
+  } = { getDayResume: null };
 
   [prop: string]: any
 
@@ -90,7 +90,7 @@ export default abstract class WorktimeProvider {
     const breakMinutesToCalculateShouldLeaveClockTime = breakMinutes > 60 && registeredWorkedMinutes > journeyTimeInMinutes && !lastPeriodIsOpen ? breakMinutes - 60 : 0
     const shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock((minutesFromTheLastMark + missingMinutesToCompleteJourney) - breakMinutesToCalculateShouldLeaveClockTime)
 
-    if(lastPeriodIsOpen){
+    if (lastPeriodIsOpen) {
       missingMinutesToCompleteJourney = journeyTimeInMinutes - workedMinutesUntilNow
     }
 
@@ -117,7 +117,7 @@ export default abstract class WorktimeProvider {
       marks
     }
 
-    if(marks.length){
+    if (marks.length) {
       worktimeDayResume = this.calculateWorkedTimeMinutes(marks, date)
     }
 

@@ -1,6 +1,6 @@
-import {Command, flags} from '@oclif/command'
-import * as moment from 'moment'
-import {WorktimeDayResume, WorktimeProviderOptions} from '../providers/types'
+import { Command, flags } from '@oclif/command'
+import moment from 'moment'
+import { WorktimeDayResume, WorktimeProviderOptions } from '../providers/types'
 import ClockHelper from '../utils/ClockHelper'
 import * as chalk from 'chalk'
 import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
@@ -34,14 +34,14 @@ export default class CheckCommand extends Command {
   ]
 
   static flags = {
-    help: flags.help({char: 'h'}),
-    user: flags.string({char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER'}),
-    password: flags.string({char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS'}),
-    system: flags.string({char: 's', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM', default: 'ahgora'}),
-    company: flags.string({char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY'}),
-    date: flags.string({char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD')}),
-    debug: flags.boolean({char: 'b', description: 'Debug - Exibe mais informações na execução', default: true}),
-    journeytime: flags.string({char: 'j', description: 'Quantidade de horas a serem trabalhadas por dia', default: '08:00'}),
+    help: flags.help({ char: 'h' }),
+    user: flags.string({ char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER' }),
+    password: flags.string({ char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS' }),
+    system: flags.string({ char: 's', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM', default: 'ahgora' }),
+    company: flags.string({ char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY' }),
+    date: flags.string({ char: 'd', description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD', default: moment().format('YYYY-MM-DD') }),
+    debug: flags.boolean({ char: 'b', description: 'Debug - Exibe mais informações na execução', default: true }),
+    journeytime: flags.string({ char: 'j', description: 'Quantidade de horas a serem trabalhadas por dia', default: '08:00' }),
     useMocks: flags.boolean({ char: 'm', description: 'Simula os requests para o sistema de ponto', default: false }),
   }
 
@@ -65,15 +65,15 @@ export default class CheckCommand extends Command {
         const passwords = await keytar.findCredentials('My-Worktime')
 
         if (passwords.length != 0 && setupOptions.systemId) {
-            const password = passwords.filter(pwd => pwd.account === setupOptions.systemId?.toLowerCase()).map(pwd => pwd.password)
+          const password = passwords.filter(pwd => pwd.account === setupOptions.systemId?.toLowerCase()).map(pwd => pwd.password)
 
-            if (!password || password.length != 1) {
-              this.error("Ocorreu um erro ao obter senha do Keychain. O setup foi efetuado?")
-            } else {
-              setupOptions.password = password[0]
-              await executeQuery(providers[setupOptions.systemId?.toLowerCase()], setupOptions)
-              this.exit(0)
-            }
+          if (!password || password.length != 1) {
+            this.error("Ocorreu um erro ao obter senha do Keychain. O setup foi efetuado?")
+          } else {
+            setupOptions.password = password[0]
+            await executeQuery(providers[setupOptions.systemId?.toLowerCase()], setupOptions)
+            this.exit(0)
+          }
 
         } else {
           this.warn("As configurações estão incompletas. Favor execute o setup novamente.")
@@ -100,7 +100,7 @@ export default class CheckCommand extends Command {
       useMocks: flags.useMocks
     }
 
-    if(!DATE_REGEXP.test(options.date as string) || !moment().isValid()){
+    if (!DATE_REGEXP.test(options.date as string) || !moment().isValid()) {
       this.error(chalk.red(`Este formato de data é inválido, utilize o padrão ${DATE_FORMAT}`))
     }
 

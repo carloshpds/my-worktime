@@ -1,17 +1,9 @@
 import axios from 'axios';
-import Ahgora from '../index';
-import * as moment from 'moment'
+import moment from 'moment'
 import 'moment/locale/pt-br'
-import { WorktimeProviderOptions } from '../../types';
 
-// jest.mock('axios', () => {
-//   return {
-//     post: () => {
-//       const mock = require('../mocks/dayResume.mock.json')
-//       return {data: mock}
-//     }
-//   }
-// })
+import { WorktimeProviderOptions } from '../../types.ts';
+import Ahgora from '../index.ts';
 
 jest.spyOn(axios, 'post').mockImplementation(() => {
   const mock = require('../mocks/dayResume.mock.json')
@@ -20,14 +12,14 @@ jest.spyOn(axios, 'post').mockImplementation(() => {
 
 const momentDate = moment()
 const defaultOptions: WorktimeProviderOptions = {
-  userId    : 'userId',
-  password  : 'pass',
-  systemId  : 'ahgora',
-  companyId : 'xpto',
-  date : momentDate.format('YYYY-MM-DD'),
+  companyId: 'xpto',
+  date: momentDate.format('YYYY-MM-DD'),
+  debug: false,
+  journeyTime: '08:00',
   momentDate,
-  debug     : false,
-  journeyTime : '08:00',
+  password: 'pass',
+  systemId: 'ahgora',
+  userId: 'userId',
 }
 
 describe('Ahgora', () => {
@@ -39,8 +31,8 @@ describe('Ahgora', () => {
       const options = {
         ...defaultOptions,
         date: date.format('YYYY-MM-DD'),
-        momentDate: date,
-        journeyTime: '08:48'
+        journeyTime: '08:48',
+        momentDate: date
       }
 
       const ahgoraProvider = new Ahgora(options)
@@ -48,7 +40,8 @@ describe('Ahgora', () => {
       expect(marks).toStrictEqual([
         { clock: '10:36' },
         { clock: '13:21' },
-        { clock: '14:00',
+        {
+          clock: '14:00',
           correction: {
             approved: true,
             approvedBy: 'xpto@mercadolivre.com',
@@ -56,7 +49,15 @@ describe('Ahgora', () => {
             reason: 'entrei na replenishment e esqueci',
           },
         },
-        { clock: '19:20'}
+        {
+          clock: '19:20',
+          correction: {
+            approved: false,
+            approvedBy: "xpto@mercadolivre.com",
+            date: "2021-01-11",
+            reason: "Esqueci totalmente",
+          },
+        }
       ])
     })
   })

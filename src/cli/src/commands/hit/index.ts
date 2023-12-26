@@ -1,5 +1,5 @@
 import { Args, Command, Flags } from '@oclif/core'
-import * as moment from 'moment'
+import moment from 'moment'
 
 import CheckDisplayer from '../../logic/check/displayer.js'
 import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.js'
