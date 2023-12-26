@@ -1,29 +1,30 @@
 
-import { WorktimeDayMark, WorktimeDayWorkedTime, WorktimeProviderOptions } from '../../providers/types'
 import * as moment from 'moment'
 import 'moment/locale/pt-br'
-import WorktimeProvider from '../WorktimeProvider'
+
+import { WorktimeDayMark, WorktimeDayWorkedTime, WorktimeProviderOptions } from '../../providers/types.js'
+import WorktimeProvider from '../WorktimeProvider.js'
 
 const momentDate = moment()
 const defaultOptions: WorktimeProviderOptions = {
-  userId    : 'userId',
-  password  : 'pass',
-  systemId  : 'ahgora',
-  companyId : 'xpto',
-  date : momentDate.format('YYYY-MM-DD'),
+  companyId: 'xpto',
+  date: momentDate.format('YYYY-MM-DD'),
+  debug: false,
+  journeyTime: '08:00',
   momentDate,
-  debug     : false,
-  journeyTime : '08:00',
+  password: 'pass',
+  systemId: 'ahgora',
+  userId: 'userId',
 }
 
 class AbstractProvider extends WorktimeProvider {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]> {
     return [
-      { clock: '09:00'},
-      { clock: '12:00'},
-      { clock: '13:00'},
-      { clock: '18:00'},
+      { clock: '09:00' },
+      { clock: '12:00' },
+      { clock: '13:00' },
+      { clock: '18:00' },
     ]
   }
 }
@@ -33,10 +34,10 @@ describe('WorktimeProvier', () => {
     describe('Calculate interval Of Mark Pairs', () => {
       it('Calulates to perfect default pairs', () => {
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'},
-          { clock: '13:00'},
-          { clock: '21:00'},
+          { clock: '09:00' },
+          { clock: '12:00' },
+          { clock: '13:00' },
+          { clock: '21:00' },
         ]
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
         const minutes = worktimeProvider.calculateBreakMinutes(marks)
@@ -45,12 +46,12 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to many pairs', () => {
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'},
-          { clock: '13:00'},
-          { clock: '21:00'},
-          { clock: '22:00'},
-          { clock: '23:00'},
+          { clock: '09:00' },
+          { clock: '12:00' },
+          { clock: '13:00' },
+          { clock: '21:00' },
+          { clock: '22:00' },
+          { clock: '23:00' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -60,9 +61,9 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to odd marks', () => {
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'},
-          { clock: '13:00'},
+          { clock: '09:00' },
+          { clock: '12:00' },
+          { clock: '13:00' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -72,9 +73,9 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to odd marks', () => {
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'},
-          { clock: '13:00'},
+          { clock: '09:00' },
+          { clock: '12:00' },
+          { clock: '13:00' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -84,9 +85,9 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to values less than an hour', () => {
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'},
-          { clock: '12:25'},
+          { clock: '09:00' },
+          { clock: '12:00' },
+          { clock: '12:25' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -100,16 +101,16 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to perfect default pairs', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T18:00:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T18:00:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'},
-          { clock: '13:00'},
-          { clock: '18:00'},
+          { clock: '09:00' },
+          { clock: '12:00' },
+          { clock: '13:00' },
+          { clock: '18:00' },
         ]
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
         const worktimeDayResume: WorktimeDayWorkedTime = worktimeProvider.calculateWorkedTimeMinutes(marks, currentMomentDate.format())
@@ -122,18 +123,18 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to many pairs', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T23:30:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T23:30:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'}, // +3
-          { clock: '13:00'},
-          { clock: '21:00'}, // +8
-          { clock: '22:00'},
-          { clock: '23:00'}, // +1
+          { clock: '09:00' },
+          { clock: '12:00' }, // +3
+          { clock: '13:00' },
+          { clock: '21:00' }, // +8
+          { clock: '22:00' },
+          { clock: '23:00' }, // +1
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -150,18 +151,18 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to many pairs', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T23:30:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T23:30:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:07'},
-          { clock: '12:00'}, // +2:53
-          { clock: '13:00'},
-          { clock: '21:20'}, // +8:20 -> 11h13 total
-          { clock: '22:14'},
-          { clock: '23:10'}, // +0:56 -> 12h09 total
+          { clock: '09:07' },
+          { clock: '12:00' }, // +2:53
+          { clock: '13:00' },
+          { clock: '21:20' }, // +8:20 -> 11h13 total
+          { clock: '22:14' },
+          { clock: '23:10' }, // +0:56 -> 12h09 total
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -176,16 +177,16 @@ describe('WorktimeProvier', () => {
 
       it('Calulates pair marks with less than 8h total', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T23:30:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T23:30:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:07'},
-          { clock: '12:00'}, // +2:53
-          { clock: '13:00'},
-          { clock: '15:20'}, // +2:20 -> 5:13 total
+          { clock: '09:07' },
+          { clock: '12:00' }, // +2:53
+          { clock: '13:00' },
+          { clock: '15:20' }, // +2:20 -> 5:13 total
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -200,15 +201,15 @@ describe('WorktimeProvier', () => {
 
       it('Calulates odd marks with less than 8h total (case 1)', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T13:00:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T13:00:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:07'},
-          { clock: '12:00'}, // +2:53
-          { clock: '13:00'},
+          { clock: '09:07' },
+          { clock: '12:00' }, // +2:53
+          { clock: '13:00' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -223,17 +224,17 @@ describe('WorktimeProvier', () => {
 
       it('Calulates odd marks with less than 8h total (case 2)', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T14:30:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T14:30:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:07'},
-          { clock: '12:00'}, // +2:53
-          { clock: '13:00'},
-          { clock: '14:00'}, // +1:00
-          { clock: '14:30'},
+          { clock: '09:07' },
+          { clock: '12:00' }, // +2:53
+          { clock: '13:00' },
+          { clock: '14:00' }, // +1:00
+          { clock: '14:30' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -248,19 +249,19 @@ describe('WorktimeProvier', () => {
 
       it('Calulates odd marks with less than 8h total (case 3)', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T18:30:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T18:30:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:07'},
-          { clock: '12:22'}, // +3:15
-          { clock: '12:56'},
-          { clock: '14:00'}, // +1:04
-          { clock: '14:30'},
-          { clock: '15:27'}, // 0:57
-          { clock: '17:30'},
+          { clock: '09:07' },
+          { clock: '12:22' }, // +3:15
+          { clock: '12:56' },
+          { clock: '14:00' }, // +1:04
+          { clock: '14:30' },
+          { clock: '15:27' }, // 0:57
+          { clock: '17:30' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -276,21 +277,21 @@ describe('WorktimeProvier', () => {
 
       it('Calulates odd marks with less than 8h total (case 4)', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T18:30:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T18:30:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:07'},
-          { clock: '12:22'}, // +3:15
-          { clock: '12:56'},
-          { clock: '14:00'}, // +1:04
-          { clock: '14:30'},
-          { clock: '15:27'}, // 0:57
-          { clock: '17:30'},
-          { clock: '17:40'}, // 0:10
-          { clock: '18:30'},
+          { clock: '09:07' },
+          { clock: '12:22' }, // +3:15
+          { clock: '12:56' },
+          { clock: '14:00' }, // +1:04
+          { clock: '14:30' },
+          { clock: '15:27' }, // 0:57
+          { clock: '17:30' },
+          { clock: '17:40' }, // 0:10
+          { clock: '18:30' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -305,17 +306,17 @@ describe('WorktimeProvier', () => {
 
       it('Calulates odd marks with more than 8h total (case 5)', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T19:00:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T19:00:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:07'},
-          { clock: '12:00'}, // +2:53
-          { clock: '13:20'},
-          { clock: '18:30'}, // +5:10
-          { clock: '19:00'},
+          { clock: '09:07' },
+          { clock: '12:00' }, // +2:53
+          { clock: '13:20' },
+          { clock: '18:30' }, // +5:10
+          { clock: '19:00' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -330,17 +331,17 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to many odd marks', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T23:59:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T23:59:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'}, // +3
-          { clock: '13:00'},
-          { clock: '21:00'}, // +8
-          { clock: '22:00'},
+          { clock: '09:00' },
+          { clock: '12:00' }, // +3
+          { clock: '13:00' },
+          { clock: '21:00' }, // +8
+          { clock: '22:00' },
           // 23:59 = +1:59
         ]
 
@@ -358,15 +359,15 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to odd marks', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T18:00:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T18:00:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'},
-          { clock: '13:00'},
+          { clock: '09:00' },
+          { clock: '12:00' },
+          { clock: '13:00' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -381,8 +382,8 @@ describe('WorktimeProvier', () => {
 
       it('Calulates to values less than an hour', () => {
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '09:45'},
+          { clock: '09:00' },
+          { clock: '09:45' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -395,15 +396,15 @@ describe('WorktimeProvier', () => {
 
       it('Calculates max value as last pair mark for odd marks when today is not the informed date', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-02T09:00:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-02T09:00:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:00'},
-          { clock: '12:00'},
-          { clock: '13:00'},
+          { clock: '09:00' },
+          { clock: '12:00' },
+          { clock: '13:00' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -416,15 +417,15 @@ describe('WorktimeProvier', () => {
 
       it('Odd marks using less than 1 hour on breakMinutes', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T18:00:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T18:00:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:10'},
-          { clock: '12:27'},
-          { clock: '13:19'},
+          { clock: '09:10' },
+          { clock: '12:27' },
+          { clock: '13:19' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider(defaultOptions)
@@ -439,15 +440,15 @@ describe('WorktimeProvier', () => {
 
       it('Odd marks using less than 1 hour on breakMinutes and custom journeyTime', () => {
         jest
-        .spyOn(global.Date, 'now')
-        .mockImplementationOnce(() =>
-          new Date('2020-01-01T18:00:00').valueOf()
-        )
+          .spyOn(global.Date, 'now')
+          .mockImplementationOnce(() =>
+            new Date('2020-01-01T18:00:00').valueOf()
+          )
 
         const marks: WorktimeDayMark[] = [
-          { clock: '09:10'},
-          { clock: '12:27'},
-          { clock: '13:19'},
+          { clock: '09:10' },
+          { clock: '12:27' },
+          { clock: '13:19' },
         ]
 
         const worktimeProvider: WorktimeProvider = new AbstractProvider({

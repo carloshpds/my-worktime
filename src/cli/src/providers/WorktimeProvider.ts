@@ -1,47 +1,52 @@
-import {WorktimeProviderOptions, WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime} from './types'
 import * as moment from 'moment'
-import ClockHelper from '../utils/ClockHelper'
+
+import ClockHelper from '../utils/ClockHelper/index.js'
+import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.js'
 
 export default abstract class WorktimeProvider {
+  [prop: string]: any
   marks: WorktimeDayMark[] = []
+
   options: WorktimeProviderOptions
 
   urls: {
-    getDayResume: string | null;
     [prop: string]: any;
-  } = {getDayResume: null};
-
-  [prop: string]: any
-
-  abstract getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]>
+    getDayResume: null | string;
+  } = { getDayResume: null };
 
   constructor(options: WorktimeProviderOptions) {
     this.options = options
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async getWorktimeDayResume(requestOptions?: any): Promise<WorktimeDayResume> {
-    try {
-      this.marks = await this.getDateMarks()
-      const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(this.marks)
-      return worktimeDayResume
-    } catch (error) {
-      throw error
+  static buildOptions(options: Partial<WorktimeProviderOptions>): WorktimeProviderOptions {
+    const defaultOptions: WorktimeProviderOptions = {
+      companyId: '',
+      date: '',
+      debug: false,
+      journeyTime: '',
+      momentDate: moment(),
+      password: '',
+      systemId: '',
+      useMocks: false,
+      userId: '',
     }
+
+    return Object.assign(defaultOptions, options)
   }
 
   calculateBreakMinutes(marks: WorktimeDayMark[] = this.marks) {
     let minutes = 0
 
-    marks.forEach((mark, index) => {
+    for (const [index, mark] of marks.entries()) {
       const isStartingPeriod = index % 2 === 0
       if (index >= 2 && isStartingPeriod) {
         const currentMarkInMinutes = ClockHelper.convertClockStringToMinutes(mark.clock)
         const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[index - 1].clock)
         minutes += currentMarkInMinutes - lastMarkInMinutes
       }
-      return mark.clock
-    })
+
+      mark.clock; continue;
+    }
 
     return minutes
   }
@@ -51,15 +56,16 @@ export default abstract class WorktimeProvider {
     let workedMinutesUntilNow = 0
     const now = moment()
 
-    marks.forEach((mark, index) => {
+    for (const [index, mark] of marks.entries()) {
       const isClosingPeriod = index % 2 === 1
       if (isClosingPeriod) {
         const currentMarkInMinutes = ClockHelper.convertClockStringToMinutes(mark.clock)
         const lastMarkInMinutes = ClockHelper.convertClockStringToMinutes(marks[index - 1].clock)
         registeredWorkedMinutes += currentMarkInMinutes - lastMarkInMinutes
       }
-      return mark.clock
-    })
+
+      mark.clock; continue;
+    }
 
     const lastPeriodIsOpen: boolean = this.isMissingMark(marks)
     const breakMinutes = this.calculateBreakMinutes(marks)
@@ -67,7 +73,7 @@ export default abstract class WorktimeProvider {
     const nowClock = now.format('HH:mm')
 
     if (lastPeriodIsOpen && todayIsTheCurrentDate) {
-      const lastStartingPeriodMarkMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
+      const lastStartingPeriodMarkMinutes = ClockHelper.convertClockStringToMinutes(marks.at(-1).clock)
       this.options.debug && console.log('nowClock', nowClock)
 
       let partialWorkedMinutesUntilNow = ClockHelper.convertClockStringToMinutes(nowClock)
@@ -86,45 +92,58 @@ export default abstract class WorktimeProvider {
     }
 
     let missingMinutesToCompleteJourney = journeyTimeInMinutes - registeredWorkedMinutes
-    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveMarks[shouldLeaveMarks.length - 1].clock)
+    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveMarks.at(-1).clock)
     const breakMinutesToCalculateShouldLeaveClockTime = breakMinutes > 60 && registeredWorkedMinutes > journeyTimeInMinutes && !lastPeriodIsOpen ? breakMinutes - 60 : 0
     const shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock((minutesFromTheLastMark + missingMinutesToCompleteJourney) - breakMinutesToCalculateShouldLeaveClockTime)
 
-    if(lastPeriodIsOpen){
+    if (lastPeriodIsOpen) {
       missingMinutesToCompleteJourney = journeyTimeInMinutes - workedMinutesUntilNow
     }
 
     return {
-      registeredWorkedMinutes,
-      workedMinutesUntilNow,
-      isMissingPairMark: lastPeriodIsOpen,
-      shouldLeaveClockTime,
       breakMinutes,
+      isMissingPairMark: lastPeriodIsOpen,
       journeyTimeInMinutes,
-      missingMinutesToCompleteJourney,
       marks,
+      missingMinutesToCompleteJourney,
       now,
+      registeredWorkedMinutes,
+      shouldLeaveClockTime,
+      workedMinutesUntilNow,
     }
   }
 
   calculateWorktimeDayResume(marks: WorktimeDayMark[] = this.marks, date: string = this.options.date): WorktimeDayResume {
     let worktimeDayResume: WorktimeDayResume = {
-      isMissingPairMark: false,
-      registeredWorkedMinutes: 0,
-      workedMinutesUntilNow: 0,
-      missingMinutesToCompleteJourney: 0,
       breakMinutes: 0,
-      marks
+      isMissingPairMark: false,
+      marks,
+      missingMinutesToCompleteJourney: 0,
+      registeredWorkedMinutes: 0,
+      workedMinutesUntilNow: 0
     }
 
-    if(marks.length){
+    if (marks.length > 0) {
       worktimeDayResume = this.calculateWorkedTimeMinutes(marks, date)
     }
 
     return worktimeDayResume
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async getWorktimeDayResume(requestOptions?: any): Promise<WorktimeDayResume> {
+    try {
+      this.marks = await this.getDateMarks()
+      const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(this.marks)
+      return worktimeDayResume
+    } catch (error) {
+      throw error
+    }
+  }
+
   isMissingMark(marks = this.marks): boolean {
     return marks.length > 0 && marks.length % 2 === 1
   }
+
+  abstract getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]>
 }

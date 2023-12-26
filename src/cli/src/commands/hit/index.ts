@@ -1,5 +1,11 @@
-import { Args, Command, flags } from '@oclif/command'
+import { Args, Command, Flags } from '@oclif/core'
 import * as moment from 'moment'
+
+import CheckDisplayer from '../../logic/check/displayer.js'
+import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.js'
+import WorktimeProvider from '../../providers/WorktimeProvider.js'
+import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.js'
+import { validateRunningDate } from '../../utils/validateDateOption.js'
 
 export default class HitCommand extends Command {
   static args = {
@@ -13,19 +19,27 @@ export default class HitCommand extends Command {
   ]
 
   static flags = {
-    date: flags.string({ char: 'd', default: moment().format('YYYY-MM-DD'), description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD' }),
-    debug: flags.boolean({ char: 'b', default: true, description: 'Debug - Exibe mais informações na execução' }),
-    help: flags.help({ char: 'h' }),
+    date: Flags.string({ char: 'd', default: moment().format('YYYY-MM-DD'), description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD' }),
+    debug: Flags.boolean({ char: 'b', default: true, description: 'Debug - Exibe mais informações na execução' }),
+    help: Flags.help({ char: 'h' }),
   }
 
   async run() {
-    const { args: { time }, flags: { date, debug, system } } = this.parse(HitCommand);
+    const { args: { time: clocksString }, flags: { date, debug, system } } = this.parse(HitCommand);
 
-    if (debug) {
-      this.log(`Adding ${time} on ${date}`);
-    }
+    validateRunningDate.call(this, date)
 
-    this.log('Hit added');
+    const options: WorktimeProviderOptions = WorktimeProvider.buildOptions({
+      date,
+      debug,
+      systemId: system,
+    })
+
+    const provider = new LocalFileSystemProvider(options)
+    const worktimeDayResume: WorktimeDayResume = provider.addMarksByClockStrings(clocksString)
+    const displayer = new CheckDisplayer(provider)
+
+    displayer.displayResult(worktimeDayResume, options)
   }
 
 }

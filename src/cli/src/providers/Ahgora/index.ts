@@ -1,7 +1,8 @@
-import {WorktimeDayMark} from '../types'
 import axios from 'axios'
+
 import ClockHelper from '../../utils/ClockHelper'
 import WorktimeProvider from '../WorktimeProvider'
+import { WorktimeDayMark } from '../types.js'
 import { AhgoraDay, AhgoraDayMark, AhgoraMonthResume } from './types'
 import { AhgoraDayMarkType } from './types/AhgoraDayMarkType'
 
@@ -13,6 +14,7 @@ export default class Ahgora extends WorktimeProvider {
   }
 
   async getDateMarks(requestOptions?): Promise<WorktimeDayMark[]> {
+    // eslint-disable-next-line no-useless-catch
     try {
       let marks: WorktimeDayMark[] = []
       let data: AhgoraMonthResume
@@ -20,13 +22,13 @@ export default class Ahgora extends WorktimeProvider {
       const requestBody = {
         ano: this.options.momentDate.year(),
         company: this.options.companyId,
-        senha: this.options.password,
         matricula: this.options.userId,
         mes: this.options.momentDate.month() + 1, // Not a zero based service
+        senha: this.options.password,
       }
 
       this.options.debug && console.log('\nRequest body', requestBody)
-      if(this.options.useMocks){
+      if (this.options.useMocks) {
         data = require('./mocks/dayResume.mock.json')
       } else {
         const response = await axios.post(
@@ -37,44 +39,39 @@ export default class Ahgora extends WorktimeProvider {
 
         data = response.data
       }
+
       this.options.debug && console.log('\nAhgora returned data', data)
 
-      // eslint-disable-next-line no-negated-condition
-      if (!data.error) {
-        const {dias} = data
+
+      if (data.error) {
+        this.handleGetDateMarksError(data.error, requestBody)
+      } else {
+        const { dias } = data
         const dateResume: AhgoraDay = dias[this.options.momentDate.format('YYYY-MM-DD')]
         this.options.debug && console.log(`\nDATE ${this.options.momentDate.format('L')}`, dateResume)
 
         const ahgoraMarks = dateResume.batidas.filter((mark) => mark.tipo !== AhgoraDayMarkType.PUNCH)
-        marks = ahgoraMarks.map(mark => {
-          return {
-            clock: ClockHelper.formatClockString(mark.hora),
-          }
-        })
+        marks = ahgoraMarks.map(mark => ({
+          clock: ClockHelper.formatClockString(mark.hora),
+        }))
 
-        if(dateResume.justificativa) {
-          const justificationsMarks: WorktimeDayMark[] = dateResume.justificativa.map((justification) => {
-            return {
-              clock: ClockHelper.formatClockString(justification.addPunch.punch),
-              correction: {
-                date: justification.data_batida,
-                reason: justification.informacao ? justification.informacao.trim() : undefined,
-                approved: justification.approved,
-                approvedBy: justification.confirmado && justification.confirmado.usuario ? justification.confirmado.usuario : undefined,
-              },
-            }
-          })
+        if (dateResume.justificativa) {
+          const justificationsMarks: WorktimeDayMark[] = dateResume.justificativa.map((justification) => ({
+            clock: ClockHelper.formatClockString(justification.addPunch.punch),
+            correction: {
+              approved: justification.approved,
+              approvedBy: justification.confirmado && justification.confirmado.usuario ? justification.confirmado.usuario : undefined,
+              date: justification.data_batida,
+              reason: justification.informacao ? justification.informacao.trim() : undefined,
+            },
+          }))
 
           marks = marks
-          .concat(justificationsMarks)
-          .sort((currentMark, nextMark) => {
-            return ClockHelper.convertClockStringToMinutes(currentMark.clock) - ClockHelper.convertClockStringToMinutes(nextMark.clock)
-          })
+            .concat(justificationsMarks)
+            .sort((currentMark, nextMark) => ClockHelper.convertClockStringToMinutes(currentMark.clock) - ClockHelper.convertClockStringToMinutes(nextMark.clock))
         }
 
 
-      } else {
-        this.handleGetDateMarksError(data.error, requestBody)
       }
 
       return marks
