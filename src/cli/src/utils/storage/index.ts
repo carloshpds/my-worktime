@@ -3,7 +3,7 @@ import Logger from "js-logger";
 import deepAssign from "../deepAssign.js";
 import { MWInMemorySettings, MWStorageSettings } from "./types.js";
 
-class BrowserStorage {
+class AppStorage {
 
   defaultSettings: Partial<MWStorageSettings> = {
     betaTesters: [],
@@ -63,7 +63,7 @@ class BrowserStorage {
     })
   }
 
-  async getLocalFileSettings() {
+  async getLocalFileSettings(): Promise<Partial<MWStorageSettings>> {
     let settings = {}
 
     const configManager = await import('../../tools/LocalConfigManager/index.js')
@@ -169,4 +169,4 @@ class BrowserStorage {
   }
 }
 
-export default new BrowserStorage()
+export default new AppStorage()
