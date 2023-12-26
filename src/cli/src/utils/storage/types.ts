@@ -32,7 +32,7 @@ export interface MWCustomPagesTheme {
 
 export interface MWCustomStorageSettings {
   marks?: Partial<{
-    [key: string]: Partial<WorktimeDayMark>
+    [key: string]: Partial<WorktimeDayMark>[]
   }>
 }
 
