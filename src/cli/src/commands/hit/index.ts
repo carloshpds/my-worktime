@@ -1,4 +1,4 @@
-import { Args, Command, Flags } from '@oclif/core'
+import { Args, Command, Flags, ux } from '@oclif/core'
 import moment from 'moment'
 
 import CheckDisplayer from '../../logic/check/displayer.ts'
@@ -27,6 +27,7 @@ export default class HitCommand extends Command {
   }
 
   async run() {
+    ux.log('\n')
     const { args: { time: clocksString }, flags: { date, debug, system } } = await this.parse(HitCommand);
 
     validateRunningDate.call(this, date)
