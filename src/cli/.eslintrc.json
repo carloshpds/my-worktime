@@ -11,6 +11,7 @@
       2,
       5
     ],
-    "unicorn/no-object-as-default-parameter": "off"
+    "unicorn/no-object-as-default-parameter": "off",
+    "unicorn/prefer-spread": "off"
   }
 }
