@@ -24,24 +24,27 @@ export default class HitCommand extends Command {
     date: Flags.string({ char: 'd', default: moment().format('YYYY-MM-DD'), description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD' }),
     debug: Flags.boolean({ char: 'b', default: true, description: 'Debug - Exibe mais informações na execução' }),
     help: Flags.help({ char: 'h' }),
+    journeyTime: Flags.string({ char: 'j', default: '08:00', description: 'Quantidade de horas a serem trabalhadas por dia' }),
   }
 
   async run() {
     ux.log('\n')
-    const { args: { time: clocksString }, flags: { date, debug, system } } = await this.parse(HitCommand);
+    const { args: { time: clocksString }, flags: { date, debug, journeyTime } } = await this.parse(HitCommand);
 
     validateRunningDate.call(this, date)
 
     const options: WorktimeProviderOptions = WorktimeProvider.buildOptions({
       date,
       debug,
-      systemId: system,
+      journeyTime,
+      systemId: 'local',
     })
 
     const provider = new LocalFileSystemProvider(options)
     const worktimeDayResume: WorktimeDayResume = await provider.addMarksByClocksString(clocksString)
     const displayer = new CheckDisplayer(provider)
 
+    ux.info(`\nSeu horário de saída ideal é ${ux.colorize('bgGreen', ' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
     displayer.displayResult(worktimeDayResume, options)
   }
 

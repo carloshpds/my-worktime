@@ -73,7 +73,7 @@ export default abstract class WorktimeProvider {
     const todayIsTheCurrentDate = moment(date).isSame(now, 'day')
     const nowClock = now.format('HH:mm')
 
-    const lastMark = marks.at(-1);
+    const lastMark = marks[marks.length - 1];
     if (lastPeriodIsOpen && todayIsTheCurrentDate && marks.length > 0 && lastMark) {
       const lastStartingPeriodMarkMinutes = ClockHelper.convertClockStringToMinutes(lastMark.clock)
       this.options.debug && ux.log(`\nHorário atual ${ux.colorize('bgCyan', nowClock)}`)
@@ -94,10 +94,24 @@ export default abstract class WorktimeProvider {
     }
 
     let missingMinutesToCompleteJourney = journeyTimeInMinutes - registeredWorkedMinutes
-    const shouldLeaveLast = shouldLeaveMarks.at(-1)
-    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveLast?.clock || '')
+    const shouldLeaveLast = shouldLeaveMarks[shouldLeaveMarks.length - 1]
+    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveLast?.clock || 'ERROR')
     const breakMinutesToCalculateShouldLeaveClockTime = breakMinutes > 60 && registeredWorkedMinutes > journeyTimeInMinutes && !lastPeriodIsOpen ? breakMinutes - 60 : 0
-    const shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock((minutesFromTheLastMark + missingMinutesToCompleteJourney) - breakMinutesToCalculateShouldLeaveClockTime)
+    const shouldLeaveMinutes = (minutesFromTheLastMark + missingMinutesToCompleteJourney) - breakMinutesToCalculateShouldLeaveClockTime
+    const shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(shouldLeaveMinutes)
+
+    this.options.debug && console.table({
+      breakMinutes,
+      breakMinutesToCalculateShouldLeaveClockTime,
+      journeyTimeInMinutes,
+      minutesFromTheLastMark,
+      missingMinutesToCompleteJourney,
+      registeredWorkedMinutes,
+      shouldLeaveClockTime,
+      shouldLeaveLast,
+      shouldLeaveLastClock: shouldLeaveLast?.clock,
+      shouldLeaveMinutes,
+    })
 
     if (lastPeriodIsOpen) {
       missingMinutesToCompleteJourney = journeyTimeInMinutes - workedMinutesUntilNow
