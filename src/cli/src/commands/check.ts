@@ -1,4 +1,4 @@
-import { Command, Flags } from '@oclif/core'
+import { Command, Flags, ux } from '@oclif/core'
 // import Conf from 'conf'
 // import * as keytar from 'keytar'
 import moment from 'moment'
@@ -53,6 +53,7 @@ export default class CheckCommand extends Command {
   }
 
   async run() {
+    ux.log('\n')
     this.runWithoutSetup()
   }
 
@@ -113,7 +114,7 @@ export default class CheckCommand extends Command {
     if (options.debug) {
       console.group('WorktimeOptions')
       console.log('Iniciando com os parâmetros')
-      console.table(options)
+      console.table({ ...options, momentDate: undefined })
       console.groupEnd()
     }
 
