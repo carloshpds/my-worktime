@@ -1,18 +1,59 @@
 {
   "version": "0.2.0",
   "configurations": [
-      {
-          "type": "node",
-          "request": "launch",
-          "name": "Execute Command",
-          "skipFiles": [
-              "<node_internals>/**"
-          ],
-          "program": "${workspaceFolder}/bin/dev.js",
-          "args": [
-            "hello",
-            "world",
-          ],
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "NVS",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/src/nvs-test.js",
+      "args": [],
+      "runtimeArgs": [
+        "20.10.0"
+      ],
+      "windows": {
+        "runtimeExecutable": "${env:NVS_HOME}/nvs.cmd"
+      },
+      "osx": {
+        "runtimeExecutable": "${env:NVS_HOME}/nvs"
+      },
+      "linux": {
+        "runtimeExecutable": "${env:NVS_HOME}/nvs"
       }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Execute Command",
+      "skipFiles": [
+        "<node_internals>/**"
+      ],
+      "program": "${workspaceFolder}/bin/dev.js",
+      "args": [
+        "hello",
+        "world"
+      ]
+    },
+    {
+      "type": "node",
+      "name": "vscode-jest-tests.v2",
+      "request": "launch",
+      "args": [
+        "test",
+        "--runInBand",
+        "--watchAll=false",
+        "--testNamePattern",
+        "${jest.testNamePattern}",
+        "--runTestsByPath",
+        "${jest.testFile}"
+      ],
+      "cwd": "d:\\Documents\\workspace\\personal\\my-worktime\\src\\cli",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true,
+      "runtimeExecutable": "jest"
+    }
   ]
 }
