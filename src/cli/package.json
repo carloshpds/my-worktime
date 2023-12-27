@@ -18,6 +18,8 @@
     "axios": "1.6.2",
     "chalk": "^4.1.0",
     "conf": "12.0.0",
+    "inquirer": "^9.2.12",
+    "js-logger": "^1.6.1",
     "keytar": "^7.0.0",
     "moment": "^2.28.0",
     "ora": "^5.1.0"
@@ -28,8 +30,7 @@
     "@jest/globals": "^29.7.0",
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^3",
-    "@types/chai": "^4",
-    "@types/mocha": "^10",
+    "@types/inquirer": "^9.0.7",
     "@types/node": "^18",
     "eslint": "^8",
     "eslint-config-oclif": "^5",
