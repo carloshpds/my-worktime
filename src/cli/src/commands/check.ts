@@ -9,6 +9,7 @@ import { executeQuery } from '../logic/check/executeQuery.ts'
  */
 import Ahgora from '../providers/Ahgora/index.ts'
 import Faker from '../providers/Faker/index.ts'
+import LocalFileSystemProvider from '../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../providers/WorktimeProvider.ts'
 import { WorktimeProviderOptions } from '../providers/types.ts'
 // import Setup from '../standBy/setup.ts'
@@ -21,6 +22,7 @@ import { validateRunningDate } from '../utils/validateDateOption.ts'
 const providers: Record<string, any> = {
   ahgora: Ahgora,
   faker: Faker,
+  local: LocalFileSystemProvider
 }
 export default class CheckCommand extends Command {
   static description = 'Busca as batidas e calcula as horas trabalhadas para uma data específica'
