@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"name": "extension",
+			"path": "../extension"
+		},
+		{
+			"name": "cli",
+			"path": "."
+		},
+		{
+			"name": "cli_legacy",
+			"path": "../cli_legacy"
+		}
+	],
+	"settings": {
+		"jest.disabledWorkspaceFolders": [
+			"cli_legacy"
+		]
+	}
+}
