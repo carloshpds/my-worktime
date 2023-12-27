@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import moment from 'moment'
 
-import { DATE_FORMAT, DATE_REGEXP } from "./dateFormat.js"
+import { DATE_FORMAT, DATE_REGEXP } from "./dateFormat.ts"
 
 export default validateRunningDateFormat
 

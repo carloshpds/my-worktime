@@ -1,13 +1,15 @@
 import { Args, Command, Flags } from '@oclif/core'
 import moment from 'moment'
 
-import CheckDisplayer from '../../logic/check/displayer.js'
-import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.js'
-import WorktimeProvider from '../../providers/WorktimeProvider.js'
-import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.js'
-import { validateRunningDate } from '../../utils/validateDateOption.js'
+import CheckDisplayer from '../../logic/check/displayer.ts'
+import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
+import WorktimeProvider from '../../providers/WorktimeProvider.ts'
+import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
+import { validateRunningDate } from '../../utils/validateDateOption.ts'
 
 export default class HitCommand extends Command {
+  static aliases = ['punch']
+
   static args = {
     time: Args.string({ description: 'Person to say hello to', required: true }),
   }
@@ -25,7 +27,7 @@ export default class HitCommand extends Command {
   }
 
   async run() {
-    const { args: { time: clocksString }, flags: { date, debug, system } } = this.parse(HitCommand);
+    const { args: { time: clocksString }, flags: { date, debug, system } } = await this.parse(HitCommand);
 
     validateRunningDate.call(this, date)
 
@@ -36,7 +38,7 @@ export default class HitCommand extends Command {
     })
 
     const provider = new LocalFileSystemProvider(options)
-    const worktimeDayResume: WorktimeDayResume = provider.addMarksByClockStrings(clocksString)
+    const worktimeDayResume: WorktimeDayResume = await provider.addMarksByClocksString(clocksString)
     const displayer = new CheckDisplayer(provider)
 
     displayer.displayResult(worktimeDayResume, options)

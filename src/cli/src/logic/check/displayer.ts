@@ -1,35 +1,22 @@
-import * as chalk from 'chalk'
-import { WorktimeDayMark, WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types'
-import WorktimeProvider from '../../providers/WorktimeProvider'
-import ClockHelper from '../../utils/ClockHelper'
+import chalk from 'chalk'
+
+import WorktimeProvider from '../../providers/WorktimeProvider.ts'
+import { WorktimeDayMark, WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
+import ClockHelper from '../../utils/ClockHelper/index.ts'
 
 export default class CheckDisplayer {
   provider: WorktimeProvider
 
-  constructor(provider: WorktimeProvider){
+  constructor(provider: WorktimeProvider) {
     this.provider = provider
   }
 
-  private formatMarkToConsole(mark: WorktimeDayMark): string {
-    let markOnConsole = chalk.blueBright(mark.clock)
-
-    if(mark.correction){
-      if(mark.correction.approved){
-        markOnConsole = `${chalk.green('✔')} ${markOnConsole}`
-      } else {
-        markOnConsole = `${chalk.yellow('o')} ${markOnConsole}`
-      }
-    }
-
-    return markOnConsole
-  }
-
-  displayResult(worktimeDayResume: WorktimeDayResume, options: Partial<WorktimeProviderOptions>){
+  displayResult(worktimeDayResume: WorktimeDayResume, options: Partial<WorktimeProviderOptions>) {
     const marksToConsole = worktimeDayResume.marks.map((mark, index) => {
       const isLastMark = index === worktimeDayResume.marks.length - 1
       let markOnConsole = this.formatMarkToConsole(mark)
 
-      if(isLastMark && worktimeDayResume.isMissingPairMark){
+      if (isLastMark && worktimeDayResume.isMissingPairMark) {
         markOnConsole = chalk.yellow(mark.clock) + chalk.gray(' Batida ímpar')
       }
 
@@ -38,19 +25,15 @@ export default class CheckDisplayer {
 
     let workedMinutesUntilNowOnConsole = ClockHelper.humanizeMinutesToClock(worktimeDayResume.workedMinutesUntilNow)
 
-    if(worktimeDayResume.isMissingPairMark){
+    if (worktimeDayResume.isMissingPairMark) {
       workedMinutesUntilNowOnConsole = chalk.yellow(workedMinutesUntilNowOnConsole) + ' '
     }
 
-    if(worktimeDayResume.missingMinutesToCompleteJourney){
+    if (worktimeDayResume.missingMinutesToCompleteJourney) {
       const humanizedMissingMinutes = ClockHelper.humanizeMinutesToClock(worktimeDayResume.missingMinutesToCompleteJourney)
 
       workedMinutesUntilNowOnConsole += chalk.gray(` - ${options.journeyTime} = `)
-      if(worktimeDayResume.missingMinutesToCompleteJourney > 0) {
-        workedMinutesUntilNowOnConsole += chalk.red(`-${humanizedMissingMinutes} `)
-      } else {
-        workedMinutesUntilNowOnConsole += chalk.green(`+${humanizedMissingMinutes} `)
-      }
+      workedMinutesUntilNowOnConsole += worktimeDayResume.missingMinutesToCompleteJourney > 0 ? chalk.red(`-${humanizedMissingMinutes} `) : chalk.green(`+${humanizedMissingMinutes} `);
     }
 
     console.log('')
@@ -62,15 +45,25 @@ export default class CheckDisplayer {
 
     const marksWithCorrection = worktimeDayResume.marks.filter((mark) => mark.correction)
 
-    if(marksWithCorrection.length){
+    if (marksWithCorrection.length > 0) {
       console.log(`${chalk.bgYellow.black('Justificativas')}`)
       console.log('')
 
-      marksWithCorrection.forEach((mark) => {
+      for (const mark of marksWithCorrection) {
         console.log(`  ${this.formatMarkToConsole(mark)}`)
         mark.correction && mark.correction.reason && console.log(`  ${chalk.bgYellow.black(mark.correction.reason)}`)
         console.log(chalk.white('---------'))
-      })
+      }
     }
+  }
+
+  private formatMarkToConsole(mark: WorktimeDayMark): string {
+    let markOnConsole = chalk.blueBright(mark.clock)
+
+    if (mark.correction) {
+      markOnConsole = mark.correction.approved ? `${chalk.green('✔')} ${markOnConsole}` : `${chalk.yellow('o')} ${markOnConsole}`;
+    }
+
+    return markOnConsole
   }
 }

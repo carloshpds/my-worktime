@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import ClockHelper from '../../utils/ClockHelper/index.ts'
 import WorktimeProvider from '../WorktimeProvider.ts'
-import { WorktimeDayMark } from '../types.js'
+import { WorktimeDayMark } from '../types.ts'
 import { AhgoraDayMarkType } from './types/AhgoraDayMarkType.ts'
 import { AhgoraDay, AhgoraMonthResume } from './types/index.ts'
 

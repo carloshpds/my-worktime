@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 import ClockHelper from '../utils/ClockHelper/index.ts'
-import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.js'
+import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.ts'
 
 export default abstract class WorktimeProvider {
   [prop: string]: any
@@ -72,8 +72,9 @@ export default abstract class WorktimeProvider {
     const todayIsTheCurrentDate = moment(date).isSame(now, 'day')
     const nowClock = now.format('HH:mm')
 
-    if (lastPeriodIsOpen && todayIsTheCurrentDate && marks.length > 0) {
-      const lastStartingPeriodMarkMinutes = ClockHelper.convertClockStringToMinutes(marks[marks.length - 1].clock)
+    const lastMark = marks.at(-1);
+    if (lastPeriodIsOpen && todayIsTheCurrentDate && marks.length > 0 && lastMark) {
+      const lastStartingPeriodMarkMinutes = ClockHelper.convertClockStringToMinutes(lastMark.clock)
       this.options.debug && console.log('nowClock', nowClock)
 
       let partialWorkedMinutesUntilNow = ClockHelper.convertClockStringToMinutes(nowClock)
@@ -92,7 +93,8 @@ export default abstract class WorktimeProvider {
     }
 
     let missingMinutesToCompleteJourney = journeyTimeInMinutes - registeredWorkedMinutes
-    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveMarks[shouldLeaveMarks.length - 1].clock)
+    const shouldLeaveLast = shouldLeaveMarks.at(-1)
+    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveLast?.clock || '')
     const breakMinutesToCalculateShouldLeaveClockTime = breakMinutes > 60 && registeredWorkedMinutes > journeyTimeInMinutes && !lastPeriodIsOpen ? breakMinutes - 60 : 0
     const shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock((minutesFromTheLastMark + missingMinutesToCompleteJourney) - breakMinutesToCalculateShouldLeaveClockTime)
 

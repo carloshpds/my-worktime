@@ -1,5 +1,5 @@
 
-import { WorktimeDayMark } from "../../providers/types.js";
+import { WorktimeDayMark } from "../../providers/types.ts";
 export interface MWOptions {
 }
 

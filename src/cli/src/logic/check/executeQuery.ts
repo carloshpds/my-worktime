@@ -1,8 +1,9 @@
-import * as ora from 'ora'
-import * as chalk from 'chalk'
-import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types'
-import WorktimeProvider from '../../providers/WorktimeProvider'
-import CheckDisplayer from './displayer'
+import chalk from 'chalk'
+import ora from 'ora'
+
+import WorktimeProvider from '../../providers/WorktimeProvider.ts'
+import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
+import CheckDisplayer from './displayer.ts'
 
 
 export async function executeQuery(CurrentProviderClass: any, options: Partial<WorktimeProviderOptions>) {
@@ -15,7 +16,7 @@ export async function executeQuery(CurrentProviderClass: any, options: Partial<W
 
       const worktimeDayResume: WorktimeDayResume = await worktimeProvider.getWorktimeDayResume()
 
-      if (worktimeDayResume.marks.length) {
+      if (worktimeDayResume.marks.length > 0) {
         console.log('')
         loader.succeed(`Dados encontrados, seu horário de saída ideal é ${chalk.black.bgGreen(' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
         displayer.displayResult(worktimeDayResume, options)

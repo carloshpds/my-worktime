@@ -3,17 +3,17 @@ import { Command, Flags } from '@oclif/core'
 // import * as keytar from 'keytar'
 import moment from 'moment'
 
-import { executeQuery } from '../logic/check/executeQuery.js'
+import { executeQuery } from '../logic/check/executeQuery.ts'
 /*
  * Providers
  */
-import Ahgora from '../providers/Ahgora/index.js'
-import Faker from '../providers/Faker/index.js'
-import WorktimeProvider from '../providers/WorktimeProvider.js'
-import { WorktimeProviderOptions } from '../providers/types.js'
-// import Setup from '../standBy/setup.js'
-import ClockHelper from '../utils/ClockHelper/index.js'
-import { validateRunningDate } from '../utils/validateDateOption.js'
+import Ahgora from '../providers/Ahgora/index.ts'
+import Faker from '../providers/Faker/index.ts'
+import WorktimeProvider from '../providers/WorktimeProvider.ts'
+import { WorktimeProviderOptions } from '../providers/types.ts'
+// import Setup from '../standBy/setup.ts'
+import ClockHelper from '../utils/ClockHelper/index.ts'
+import { validateRunningDate } from '../utils/validateDateOption.ts'
 
 /*
  * Constants

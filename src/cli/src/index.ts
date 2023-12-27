@@ -1,1 +1,2 @@
-export {run} from '@oclif/core'
+import './settings/window.setup.ts'
+export { run } from '@oclif/core'

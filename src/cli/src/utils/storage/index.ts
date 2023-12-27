@@ -1,7 +1,7 @@
-import Logger from "js-logger";
-
-import deepAssign from "../deepAssign.js";
-import { MWInMemorySettings, MWStorageSettings } from "./types.js";
+import logger from "js-logger";
+const Logger = logger.default;
+import deepAssign from "../deepAssign.ts";
+import { MWInMemorySettings, MWStorageSettings } from "./types.ts";
 
 class AppStorage {
 
@@ -66,7 +66,7 @@ class AppStorage {
   async getLocalFileSettings(): Promise<Partial<MWStorageSettings>> {
     let settings = {}
 
-    const configManager = await import('../../tools/LocalConfigManager/index.js')
+    const configManager = await import('../../tools/LocalConfigManager/index.ts')
     settings = configManager.default.retrieveSettings()
 
     return settings
@@ -93,7 +93,7 @@ class AppStorage {
       try {
         if (window.browser.storage) {
           window.browser.storage[strategy].set(data, (response: any) => {
-            window.browser.runtime.lastError ? reject(window.browser.runtime.lastError) : void 0
+            window.browser.runtime.lastError ? reject(window.browser.runtime.lastError) : undefined
             resolve(response)
           });
         }
@@ -108,7 +108,7 @@ class AppStorage {
       Logger.debug('⚙️ Setup storage')
 
       uploadedSettings && Logger.debug('⚙️ Loading uploaded settings', uploadedSettings)
-      const settings = uploadedSettings || this.getLocalFileSettings()
+      const settings = uploadedSettings || await this.getLocalFileSettings()
 
       if (settings && Object.keys(settings).length > 0) {
         try {
@@ -151,7 +151,7 @@ class AppStorage {
     return this.set(this.settings)
   }
 
-  uploadSettingsByFile(file) {
+  uploadSettingsByFile(file: any) {
     const reader = new FileReader();
     reader.addEventListener('load', (e) => {
       const contents = e.target?.result as string;

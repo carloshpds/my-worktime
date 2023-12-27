@@ -1,19 +1,18 @@
-import inquirer from "inquirer";
+
+const CLIError = require('@oclif/core/handle');
+import { QuestionCollection } from "inquirer";
 import moment from 'moment'
-import { MeliBUs } from "../../enums/MeliBusinessUnits";
-import { WorktimeProviderOptions } from "../../providers/types";
-import { CLIError } from "@oclif/errors";
-import { WorktimeProviderName } from "../../enums/WorktimeProviderName";
+
+import { MeliBUs } from "../../enums/MeliBusinessUnits.ts";
+import { WorktimeProviderName } from "../../enums/WorktimeProviderName.ts";
+import { WorktimeProviderOptions } from "../../providers/types.ts";
 
 export const OTHER = "Outro";
 export const AHGORA = "Ahgora";
 
-export function meliFluxSecondStep(): inquirer.QuestionCollection[] {
+export function meliFluxSecondStep(): QuestionCollection[] {
   return [
     {
-      name: "whichMeli",
-      message: "Para qual BU você trabalha?",
-      type: "list",
       choices: [
         {
           name: MeliBUs.MARKETPLACE.name,
@@ -24,17 +23,20 @@ export function meliFluxSecondStep(): inquirer.QuestionCollection[] {
           value: MeliBUs.MERCADO_ENVIOS.code,
         },
       ],
+      message: "Para qual BU você trabalha?",
+      name: "whichMeli",
+      type: "list",
     },
     {
-      name: "isDefaultMeliWorktime",
-      message: "Você tem o expediente padrão do Meli (08:48)?",
-      type: "confirm",
       default: true,
+      message: "Você tem o expediente padrão do Meli (08:48)?",
+      name: "isDefaultMeliWorktime",
+      type: "confirm",
     },
-  ].concat(inquireAhgoraCredentials()) as inquirer.QuestionCollection[];
+  ].concat(inquireAhgoraCredentials()) as QuestionCollection[];
 }
 
-export function otherCompaniesFluxSecondStep(): inquirer.QuestionCollection[] {
+export function otherCompaniesFluxSecondStep(): QuestionCollection[] {
   const providersAsChoices = [{ name: WorktimeProviderName.AHGORA }];
   if (process.env.NODE_ENV === 'development') {
     providersAsChoices.push({ name: WorktimeProviderName.FAKER })
@@ -42,65 +44,66 @@ export function otherCompaniesFluxSecondStep(): inquirer.QuestionCollection[] {
 
   return [
     {
-      name: "provider",
-      message: "Selecione um sistema de pontos",
-      type: "list",
       choices: providersAsChoices,
+      message: "Selecione um sistema de pontos",
+      name: "provider",
+      type: "list",
     },
     {
-      name: "journeytime",
-      message: "Selecione o período da sua jornada de trabalho",
-      type: "list",
       choices: [
         { name: "08:00" },
         { name: "08:48" },
         { name: "06:00" },
         // { name: OTHER }, // TODO: review this option to add another step to inform the journey time
       ],
+      message: "Selecione o período da sua jornada de trabalho",
+      name: "journeytime",
+      type: "list",
     },
     {
-      name: "ahgoraCompanyId",
       message: 'Digite o código da sua empresa no sistema de ponto',
+      name: "ahgoraCompanyId",
       type: "input",
     },
-  ] as inquirer.QuestionCollection[];
+  ] as QuestionCollection[];
 }
 
 export function inquireAhgoraCredentials(): any {
   return [
     {
-      name: "ahgoraUsername",
       message: "Digite o código do seu usuário no Ahgora (RE):",
+      name: "ahgoraUsername",
       type: "input",
     },
     {
-      name: "ahgoraPassword",
-      message: "Digite sua senha do Ahgora:",
-      type: "password",
       mask: "*",
+      message: "Digite sua senha do Ahgora:",
+      name: "ahgoraPassword",
+      type: "password",
     },
-  ] as inquirer.QuestionCollection[];
+  ] as QuestionCollection[];
 }
 
 export function inquireCustomJourneyTime(): any {
   return [
     {
-      name: "customJourneytime",
       message: "Especifique sua jornada de trabalho no formato HH:MM :",
+      name: "customJourneytime",
       type: "input",
     },
-  ] as inquirer.QuestionCollection[];
+  ] as QuestionCollection[];
 }
 
-export function meliFluxThirdStep(secondStepInquirer: any): inquirer.QuestionCollection[] {
+export function meliFluxThirdStep(secondStepInquirer: any): QuestionCollection[] {
   if (secondStepInquirer.isDefaultMeliWorktime === false) {
     return inquireCustomJourneyTime();
   }
-  return [] as inquirer.QuestionCollection[];
+
+  return [] as QuestionCollection[];
 }
 
-export function otherCompaniesFluxThirdStep(secondStepInquirer: any): inquirer.QuestionCollection[] {
-  var inquiries = [] as inquirer.QuestionCollection[];
+export function otherCompaniesFluxThirdStep(secondStepInquirer: any): QuestionCollection[] {
+  let inquiries = [] as QuestionCollection[];
 
   if (secondStepInquirer.journeytime === OTHER) {
     inquiries = inquiries.concat(inquireCustomJourneyTime());
@@ -115,38 +118,40 @@ export function otherCompaniesFluxThirdStep(secondStepInquirer: any): inquirer.Q
 
 export function meliFluxGenerateOptions(secondStepInquirer: any, thirdStepInquirer: any): WorktimeProviderOptions {
   return {
-    userId: secondStepInquirer.ahgoraUsername,
-    password: secondStepInquirer.ahgoraPassword,
-    systemId: WorktimeProviderName.AHGORA.toLowerCase(),
     companyId: secondStepInquirer.whichMeli,
     date: moment().format("YYYY-MM-DD"),
     debug: false,
     journeyTime: secondStepInquirer.isDefaultMeliWorktime ? "08:48" : thirdStepInquirer.customJourneytime,
     momentDate: moment(),
+    password: secondStepInquirer.ahgoraPassword,
+    systemId: WorktimeProviderName.AHGORA.toLowerCase(),
+    userId: secondStepInquirer.ahgoraUsername,
   };
 }
 
 export function otherCompaniesGenerateOptions(secondStepInquirer: any, thirdStepInquirer: any): WorktimeProviderOptions {
   if (secondStepInquirer.provider === AHGORA) {
     return {
-      userId: thirdStepInquirer.ahgoraUsername,
-      password: thirdStepInquirer.ahgoraPassword,
-      systemId: "ahgora",
       companyId: secondStepInquirer.ahgoraCompanyId,
       date: moment().format("YYYY-MM-DD"),
       debug: false,
-      journeyTime: secondStepInquirer.journeytime !== OTHER ? secondStepInquirer.journeytime : thirdStepInquirer.customJourneytime,
+      journeyTime: secondStepInquirer.journeytime === OTHER ? thirdStepInquirer.customJourneytime : secondStepInquirer.journeytime,
       momentDate: moment(),
+      password: thirdStepInquirer.ahgoraPassword,
+      systemId: "ahgora",
+      userId: thirdStepInquirer.ahgoraUsername,
     };
-  } else {
-    throw new CLIError("Somente o Ahgora é suportado no momento!");
   }
+
+  throw new CLIError("Somente o Ahgora é suportado no momento!");
+
 }
 
-export function meliFluxGetPassword(secondStepInquirer: any, thirdStepInquirer: any): String {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export function meliFluxGetPassword(secondStepInquirer: any, thirdStepInquirer: any): string {
   return secondStepInquirer.ahgoraPassword
 }
 
-export function otherCompaniesGetPassword(secondStepInquirer: any, thirdStepInquirer: any): String {
+export function otherCompaniesGetPassword(secondStepInquirer: any, thirdStepInquirer: any): string {
   return thirdStepInquirer.ahgoraPassword
 }

@@ -1,24 +1,24 @@
-import { Command, flags } from '@oclif/command'
+import { Command, Flags } from '@oclif/core'
 import Conf from 'conf'
-import * as inquirer from 'inquirer'
+import inquirer from 'inquirer'
 import * as keytar from 'keytar'
 
-import { executeQuery } from '../logic/check/executeQuery'
-import { meliFluxGenerateOptions, meliFluxGetPassword, meliFluxSecondStep, meliFluxThirdStep, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions, otherCompaniesGetPassword } from '../logic/setup/inputs'
-import Ahgora from '../providers/Ahgora'
-import { WorktimeProviderOptions } from '../providers/types'
+import { executeQuery } from '../logic/check/executeQuery.ts'
+import { meliFluxGenerateOptions, meliFluxGetPassword, meliFluxSecondStep, meliFluxThirdStep, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions, otherCompaniesGetPassword } from '../logic/setup/inputs.ts'
+import Ahgora from '../providers/Ahgora/index.ts'
+import { WorktimeProviderOptions } from '../providers/types.ts'
 
 export default class Setup extends Command {
   static description = 'Sets up the CLI for checking the worktime without entering the credentials every time.'
 
   static flags = {
-    check: flags.boolean({ char: 'c', default: false, description: 'Exibe os dados armazenados até o momento' }),
-    delete: flags.boolean({ char: 'd', default: false, description: 'Deleta os dados armazenados' }),
-    help: flags.help({ char: 'h' }),
+    check: Flags.boolean({ char: 'c', default: false, description: 'Exibe os dados armazenados até o momento' }),
+    delete: Flags.boolean({ char: 'd', default: false, description: 'Deleta os dados armazenados' }),
+    help: Flags.help({ char: 'h' }),
   }
 
   async run() {
-    const { flags } = this.parse(Setup)
+    const { flags } = await this.parse(Setup)
     const config = new Conf();
 
     if (flags.delete) {
@@ -56,7 +56,12 @@ export default class Setup extends Command {
       type: 'confirm'
     }])
 
-    const fluxs = {
+    const fluxs: Record<'false' | 'true', {
+      generateOptions: (secondStepInquirer: any, thirdStepInquirer: any) => WorktimeProviderOptions,
+      getPassword: (secondStepInquirer: any, thirdStepInquirer: any) => string,
+      secondStep: () => any,
+      thirdStep: (secondStepInquirer: any) => any,
+    }> = {
       false: {
         generateOptions: otherCompaniesGenerateOptions,
         getPassword: otherCompaniesGetPassword,
@@ -71,12 +76,13 @@ export default class Setup extends Command {
       }
     }
 
-    const secondStepInquirer: any = await inquirer.prompt(fluxs[firstStepInquirer.isMeli].secondStep())
-    const thirdStepInquirer: any = await inquirer.prompt(fluxs[firstStepInquirer.isMeli].thirdStep(secondStepInquirer))
+    const currentFlux = fluxs[firstStepInquirer.isMeli as "false" | "true"]
+    const secondStepInquirer: any = await inquirer.prompt(currentFlux.secondStep())
+    const thirdStepInquirer: any = await inquirer.prompt(currentFlux.thirdStep(secondStepInquirer))
 
 
-    const options: WorktimeProviderOptions = fluxs[firstStepInquirer.isMeli].generateOptions(secondStepInquirer, thirdStepInquirer)
-    const password = fluxs[firstStepInquirer.isMeli].getPassword(secondStepInquirer, thirdStepInquirer)
+    const options: WorktimeProviderOptions = currentFlux.generateOptions(secondStepInquirer, thirdStepInquirer)
+    const password = currentFlux.getPassword(secondStepInquirer, thirdStepInquirer)
 
     keytar.setPassword('My-Worktime', options.systemId, password)
 
