@@ -1,4 +1,4 @@
-import * as fs from 'node:fs';
+import Conf from 'conf';
 import * as os from 'node:os';
 import * as path from 'node:path';
 
@@ -8,30 +8,16 @@ class LocalConfigManager {
   static APP_NAME = 'my-worktime'
 
   configDir: string
-  configFile: string
-  // private settings: Partial<{
-  //   marks: { [key: string]: Partial<WorktimeDayMark> };
-  // }> = {}
+  configFilePath: string
+  settings: Conf<Partial<MWStorageSettings>>
 
   constructor() {
     this.configDir = path.join(os.homedir(), 'AppData', 'Local', LocalConfigManager.APP_NAME);
-    this.configFile = path.join(this.configDir, 'my-worktime-settings.json');
-  }
-
-  retrieveSettings(): Partial<MWStorageSettings> {
-    let settings = {};
-
-    if (fs.existsSync(this.configFile)) {
-      const rawData = fs.readFileSync(this.configFile);
-      settings = JSON.parse(rawData.toString());
-    }
-
-    return settings
-  }
-
-  saveSettings(settings: any) {
-    fs.mkdirSync(this.configDir, { recursive: true });
-    fs.writeFileSync(this.configFile, JSON.stringify(settings, null, 2));
+    this.configFilePath = path.join(this.configDir, 'my-worktime-settings.json');
+    this.settings = new Conf({
+      configName: 'my-worktime-settings',
+      cwd: this.configDir,
+    })
   }
 }
 
