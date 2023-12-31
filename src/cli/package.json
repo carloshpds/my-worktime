@@ -63,7 +63,7 @@
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
     ],
-    "topicSeparator": " ",
+    "topicSeparator": ":",
     "topics": {
       "check": {
         "description": "Check your worktime based on system server"
