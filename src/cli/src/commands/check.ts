@@ -28,9 +28,9 @@ export default class CheckCommand extends Command {
   static description = 'Busca as batidas e calcula as horas trabalhadas para uma data específica'
 
   static examples = [
-    '$ my-worktime check -u 321 -p 123 -c a22',
-    '$ my-worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48',
-    '$ my-worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48 -d 2020-09-23',
+    '$ <%= config.bin %> <%= command.id %> -u 321 -p 123 -c a22',
+    '$ <%= config.bin %> <%= command.id %> -u 321 -p 123 -s ahgora -c a22 -j 08:48',
+    '$ <%= config.bin %> <%= command.id %> -u 321 -p 123 -s ahgora -c a22 -j 08:48 -d 2020-09-23',
   ]
 
   static flags = {
