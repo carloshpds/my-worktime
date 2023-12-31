@@ -32,7 +32,10 @@ export default abstract class WorktimeProvider {
       userId: '',
     }
 
-    return Object.assign(defaultOptions, options)
+    Object.assign(defaultOptions, options)
+    defaultOptions.momentDate = defaultOptions.date ? moment(defaultOptions.date) : undefined;
+
+    return defaultOptions
   }
 
   calculateBreakMinutes(marks: WorktimeDayMark[] = this.marks) {
@@ -94,8 +97,8 @@ export default abstract class WorktimeProvider {
     }
 
     let missingMinutesToCompleteJourney = journeyTimeInMinutes - registeredWorkedMinutes
-    const shouldLeaveLast = shouldLeaveMarks[shouldLeaveMarks.length - 1]
-    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(shouldLeaveLast?.clock || 'ERROR')
+    const missinPairMark = shouldLeaveMarks[shouldLeaveMarks.length - 1]
+    const minutesFromTheLastMark = ClockHelper.convertClockStringToMinutes(missinPairMark?.clock || 'ERROR')
     const breakMinutesToCalculateShouldLeaveClockTime = breakMinutes > 60 && registeredWorkedMinutes > journeyTimeInMinutes && !lastPeriodIsOpen ? breakMinutes - 60 : 0
     const shouldLeaveMinutes = (minutesFromTheLastMark + missingMinutesToCompleteJourney) - breakMinutesToCalculateShouldLeaveClockTime
     const shouldLeaveClockTime = ClockHelper.humanizeMinutesToClock(shouldLeaveMinutes)
@@ -105,11 +108,11 @@ export default abstract class WorktimeProvider {
       breakMinutesToCalculateShouldLeaveClockTime,
       journeyTimeInMinutes,
       minutesFromTheLastMark,
+      missinPairMark,
+      missinPairMarkClock: missinPairMark?.clock,
       missingMinutesToCompleteJourney,
       registeredWorkedMinutes,
       shouldLeaveClockTime,
-      shouldLeaveLast,
-      shouldLeaveLastClock: shouldLeaveLast?.clock,
       shouldLeaveMinutes,
     })
 
@@ -149,13 +152,9 @@ export default abstract class WorktimeProvider {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getWorktimeDayResume(requestOptions?: any): Promise<WorktimeDayResume> {
-    try {
-      this.marks = await this.getDateMarks()
-      const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(this.marks)
-      return worktimeDayResume
-    } catch (error) {
-      throw error
-    }
+    this.marks = await this.getDateMarks()
+    const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(this.marks)
+    return worktimeDayResume
   }
 
   isMissingMark(marks = this.marks): boolean {
