@@ -1,4 +1,4 @@
-import {Moment} from 'moment'
+import { Moment } from 'moment'
 
 export interface WorktimeDayWorkedTime {
   breakMinutes: number;
@@ -37,7 +37,7 @@ export interface WorktimeProviderOptions {
   date: string;
   debug?: boolean;
   journeyTime?: string; // Clock time HH:mm
-  momentDate: Moment;
+  momentDate: Moment | undefined;
   password: string;
   systemId: string;
   useMocks?: boolean;
