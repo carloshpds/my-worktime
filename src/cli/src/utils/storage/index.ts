@@ -67,7 +67,7 @@ class AppStorage {
     let settings = {}
 
     const configManager = await import('../../tools/LocalConfigManager/index.ts')
-    settings = configManager.default.retrieveSettings()
+    settings = configManager.default.settings
 
     return settings
   }

@@ -1,7 +1,7 @@
 import { ux } from "@oclif/core";
 import moment from "moment";
 
-import LocalConfigManager from "../../tools/LocalConfigManager/index.ts";
+import localConfigManager from "../../tools/LocalConfigManager/index.ts";
 import WorktimeProvider from "../WorktimeProvider.ts";
 import { WorktimeDayMark, WorktimeDayResume } from "../types.ts";
 
@@ -9,7 +9,7 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
   async addMarksByClocksString(marksString: string): Promise<WorktimeDayResume> {
     const registeredMarks = await this.getDateMarks()
     const newMarksToValidate = marksString.split(',')
-    const validNewMarks = this.validateNewMarksByClockStrings(registeredMarks, newMarksToValidate)
+    const validNewMarks = this.filterNewValidMarks(registeredMarks, newMarksToValidate)
 
     const newMarks = validNewMarks.map(clock => {
 
@@ -22,18 +22,46 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
 
     const marks = [...registeredMarks, ...newMarks]
     const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(marks)
-    LocalConfigManager.saveSettings({ custom: { marks: { [this.options.date]: marks } } })
+
+    localConfigManager.settings.set(`custom.marks.${this.options.date}`, marks)
+    return worktimeDayResume
+  }
+
+  async deleteMarks(marksString?: string): Promise<WorktimeDayResume> {
+    const registeredMarks = localConfigManager.settings.get(`custom.marks.${this.options.date}`) as WorktimeDayMark[] || []
+    const marksToDelete = marksString ? marksString.split(',') : []
+    let finalDateMarks: WorktimeDayMark[] = []
+
+    if (marksToDelete.length > 0) {
+      if (this.options.debug) {
+        ux.log(`Removendo ${ux.colorize('blue', `${marksToDelete.length}`)} batida(s) em ${ux.colorize('blue', this.options.date)}`)
+      }
+
+      for (const mark of marksToDelete) {
+        ux.info(`${ux.colorize('bgRed', ' BATIDA REMOVIDA ')} ${ux.colorize('blue', mark)} de ${ux.colorize('blue', this.options.date)}`)
+      }
+
+      finalDateMarks = registeredMarks.filter(mark => !marksToDelete.includes(mark.clock))
+    }
+
+    localConfigManager.settings.set(`custom.marks.${this.options.date}`, finalDateMarks)
+
+    const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(finalDateMarks)
     return worktimeDayResume
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]> {
-    const settings = await LocalConfigManager.retrieveSettings()
-    const registeredMarks = settings.custom?.marks?.[this.options.date] as WorktimeDayMark[] || []
+    const registeredMarks = localConfigManager.settings.get(`custom.marks.${this.options.date}`) as WorktimeDayMark[] || []
     return registeredMarks
   }
 
-  private validateNewMarksByClockStrings(registeredMarks: WorktimeDayMark[], newMarks: string[]): string[] {
+  async resetMarks(): Promise<WorktimeDayResume> {
+    const worktimeDayResume = await this.deleteMarks()
+    return worktimeDayResume;
+  }
+
+  private filterNewValidMarks(registeredMarks: WorktimeDayMark[], newMarks: string[]): string[] {
     const validNewMarks = newMarks.filter(newMark => {
       const isRegistered = registeredMarks.find(mark => mark.clock === newMark)
       let validClock = true
