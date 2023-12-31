@@ -20,10 +20,10 @@ export default class Ahgora extends WorktimeProvider {
       let data: AhgoraMonthResume
 
       const requestBody = {
-        ano: this.options.momentDate.year(),
+        ano: this.options.momentDate!.year(),
         company: this.options.companyId,
         matricula: this.options.userId,
-        mes: this.options.momentDate.month() + 1, // Not a zero based service
+        mes: this.options.momentDate!.month() + 1, // Not a zero based service
         senha: this.options.password,
       }
 
@@ -47,8 +47,8 @@ export default class Ahgora extends WorktimeProvider {
         this.handleGetDateMarksError(data.error, requestBody)
       } else {
         const { dias } = data
-        const dateResume: AhgoraDay = dias[this.options.momentDate.format('YYYY-MM-DD')]
-        this.options.debug && console.log(`\nDATE ${this.options.momentDate.format('L')}`, dateResume)
+        const dateResume: AhgoraDay = dias[this.options.momentDate!.format('YYYY-MM-DD')]
+        this.options.debug && console.log(`\nDATE ${this.options.momentDate!.format('L')}`, dateResume)
 
         const ahgoraMarks = dateResume.batidas.filter((mark) => mark.tipo !== AhgoraDayMarkType.PUNCH)
         marks = ahgoraMarks.map(mark => ({
