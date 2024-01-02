@@ -63,15 +63,7 @@
       "@oclif/plugin-help",
       "@oclif/plugin-plugins"
     ],
-    "topicSeparator": ":",
-    "topics": {
-      "check": {
-        "description": "Check your worktime based on system server"
-      },
-      "hit": {
-        "description": "Adds a hit to your worktime"
-      }
-    }
+    "topicSeparator": ":"
   },
   "repository": "carloshpds/my-worktime",
   "scripts": {
