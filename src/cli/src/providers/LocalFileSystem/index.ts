@@ -1,7 +1,7 @@
 import { ux } from "@oclif/core";
-import moment from "moment";
 
 import localConfigManager from "../../tools/LocalConfigManager/index.ts";
+import filterValidMarks from "../../utils/filterValidMarksStrings.ts";
 import WorktimeProvider from "../WorktimeProvider.ts";
 import { WorktimeDayMark, WorktimeDayResume } from "../types.ts";
 
@@ -9,7 +9,7 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
   async addMarksByClocksString(marksString: string): Promise<WorktimeDayResume> {
     const registeredMarks = await this.getDateMarks()
     const newMarksToValidate = marksString.split(',')
-    const validNewMarks = this.filterNewValidMarks(registeredMarks, newMarksToValidate)
+    const validNewMarks = filterValidMarks({ date: this.options.date, marksStrings: newMarksToValidate, registeredMarks })
 
     const newMarks = validNewMarks.map(clock => {
 
@@ -59,26 +59,5 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
   async resetMarks(): Promise<WorktimeDayResume> {
     const worktimeDayResume = await this.deleteMarks()
     return worktimeDayResume;
-  }
-
-  private filterNewValidMarks(registeredMarks: WorktimeDayMark[], newMarks: string[]): string[] {
-    const validNewMarks = newMarks.filter(newMark => {
-      const isRegistered = registeredMarks.find(mark => mark.clock === newMark)
-      let validClock = true
-      if (isRegistered) {
-        ux.log(`${ux.colorize('bgYellow', ' BATIDA IGNORADA ')} ${ux.colorize('blue', newMark)} já está registrada em ${ux.colorize('blue', this.options.date)} (duplicada)`)
-        validClock = false
-      } else if (!/^\d{2}:\d{2}$/.test(newMark)) {
-        ux.log(`${ux.colorize('bgYellow', ' BATIDA IGNORADA ')} ${ux.colorize('blue', newMark)} não está no formato correto (HH:mm)`)
-        validClock = false
-      } else if (moment().isBefore(moment(`${this.options.date} ${newMark}`, 'YYYY-MM-DD HH:mm'))) {
-        ux.log(`${ux.colorize('bgYellow', ' BATIDA IGNORADA ')} ${ux.colorize('blue', newMark)} está no futuro`)
-        validClock = false
-      }
-
-      return validClock
-    })
-
-    return validNewMarks
   }
 }
