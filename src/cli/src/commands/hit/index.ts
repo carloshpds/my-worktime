@@ -5,6 +5,7 @@ import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
 import commonFlags from '../../utils/commonFlags.ts'
+import { showTheShouldLeaveClockTime } from '../../utils/ui/worktimeDayResumeToConsole.ts'
 import { validateRunningDate } from '../../utils/validateDateOption.ts'
 
 export default class HitCommand extends Command {
@@ -42,7 +43,7 @@ export default class HitCommand extends Command {
     const worktimeDayResume: WorktimeDayResume = await provider.addMarksByClocksString(clocksString)
     const displayer = new CheckDisplayer(provider)
 
-    ux.info(`\nSeu horário de saída ideal é ${ux.colorize('bgGreen', ' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
+    showTheShouldLeaveClockTime(worktimeDayResume)
     displayer.displayResult(worktimeDayResume, options)
   }
 
