@@ -2,6 +2,7 @@ import { ux } from '@oclif/core'
 import moment from 'moment'
 
 import ClockHelper from '../utils/ClockHelper/index.ts'
+import { isMissingPairMark } from '../utils/isMissingPairMark.ts'
 import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.ts'
 
 export default abstract class WorktimeProvider {
@@ -158,7 +159,7 @@ export default abstract class WorktimeProvider {
   }
 
   isMissingMark(marks = this.marks): boolean {
-    return marks.length > 0 && marks.length % 2 === 1
+    return isMissingPairMark(marks)
   }
 
   abstract getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]>
