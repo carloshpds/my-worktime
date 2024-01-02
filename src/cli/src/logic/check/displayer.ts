@@ -1,8 +1,10 @@
 import chalk from 'chalk'
 
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
-import { WorktimeDayMark, WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
+import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
 import ClockHelper from '../../utils/ClockHelper/index.ts'
+import { formatMarkToConsole } from '../../utils/ui/marksToConsole.ts'
+import { prepareWorktimeDayResumeToConsole } from '../../utils/ui/worktimeDayResumeToConsole.ts'
 
 export default class CheckDisplayer {
   provider: WorktimeProvider
@@ -12,16 +14,7 @@ export default class CheckDisplayer {
   }
 
   displayResult(worktimeDayResume: WorktimeDayResume, options: Partial<WorktimeProviderOptions>) {
-    const marksToConsole = worktimeDayResume.marks.map((mark, index) => {
-      const isLastMark = index === worktimeDayResume.marks.length - 1
-      let markOnConsole = this.formatMarkToConsole(mark)
-
-      if (isLastMark && worktimeDayResume.isMissingPairMark) {
-        markOnConsole = chalk.yellow(mark.clock) + chalk.gray(' Batida ímpar')
-      }
-
-      return `${markOnConsole}`
-    })
+    const marksToConsole = prepareWorktimeDayResumeToConsole(worktimeDayResume)
 
     let workedMinutesUntilNowOnConsole = ClockHelper.humanizeMinutesToClock(worktimeDayResume.workedMinutesUntilNow)
 
@@ -50,20 +43,10 @@ export default class CheckDisplayer {
       console.log('')
 
       for (const mark of marksWithCorrection) {
-        console.log(`  ${this.formatMarkToConsole(mark)}`)
+        console.log(`  ${formatMarkToConsole(mark)}`)
         mark.correction && mark.correction.reason && console.log(`  ${chalk.bgYellow.black(mark.correction.reason)}`)
         console.log(chalk.white('---------'))
       }
     }
-  }
-
-  private formatMarkToConsole(mark: WorktimeDayMark): string {
-    let markOnConsole = chalk.blueBright(mark.clock)
-
-    if (mark.correction) {
-      markOnConsole = mark.correction.approved ? `${chalk.green('✔')} ${markOnConsole}` : `${chalk.yellow('o')} ${markOnConsole}`;
-    }
-
-    return markOnConsole
   }
 }
