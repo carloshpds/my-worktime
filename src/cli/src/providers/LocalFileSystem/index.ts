@@ -1,6 +1,6 @@
 import { ux } from "@oclif/core";
 
-import localConfigManager from "../../tools/LocalConfigManager/index.ts";
+import LocalSettingsManager from "../../tools/LocalSettingsManager/index.ts";
 import filterValidMarks from "../../utils/filterValidMarksStrings.ts";
 import WorktimeProvider from "../WorktimeProvider.ts";
 import { WorktimeDayMark, WorktimeDayResume } from "../types.ts";
@@ -23,12 +23,12 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
     const marks = [...registeredMarks, ...newMarks]
     const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(marks)
 
-    localConfigManager.settings.set(`custom.marks.${this.options.date}`, marks)
+    LocalSettingsManager.settings.set(`custom.marks.${this.options.date}`, marks)
     return worktimeDayResume
   }
 
   async deleteMarks(marksString?: string): Promise<WorktimeDayResume> {
-    const registeredMarks = localConfigManager.settings.get(`custom.marks.${this.options.date}`) as WorktimeDayMark[] || []
+    const registeredMarks = LocalSettingsManager.settings.get(`custom.marks.${this.options.date}`) as WorktimeDayMark[] || []
     const marksToDelete = marksString ? marksString.split(',') : []
     let finalDateMarks: WorktimeDayMark[] = []
 
@@ -44,7 +44,7 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
       finalDateMarks = registeredMarks.filter(mark => !marksToDelete.includes(mark.clock))
     }
 
-    localConfigManager.settings.set(`custom.marks.${this.options.date}`, finalDateMarks)
+    LocalSettingsManager.settings.set(`custom.marks.${this.options.date}`, finalDateMarks)
 
     const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(finalDateMarks)
     return worktimeDayResume
@@ -52,7 +52,7 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]> {
-    const registeredMarks = localConfigManager.settings.get(`custom.marks.${this.options.date}`) as WorktimeDayMark[] || []
+    const registeredMarks = LocalSettingsManager.settings.get(`custom.marks.${this.options.date}`) as WorktimeDayMark[] || []
     return registeredMarks
   }
 

@@ -2,7 +2,7 @@ import ora from 'ora'
 
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
-import { showTheShouldLeaveClockTime } from '../../utils/ui/worktimeDayResumeToConsole.ts'
+import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.ts'
 import CheckDisplayer from './displayer.ts'
 
 

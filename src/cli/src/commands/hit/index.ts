@@ -5,7 +5,7 @@ import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
 import commonFlags from '../../utils/commonFlags.ts'
-import { showTheShouldLeaveClockTime } from '../../utils/ui/worktimeDayResumeToConsole.ts'
+import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.ts'
 import { validateRunningDate } from '../../utils/validateDateOption.ts'
 
 export default class HitCommand extends Command {

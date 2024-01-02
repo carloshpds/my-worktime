@@ -13,7 +13,7 @@ import LocalFileSystemProvider from '../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../providers/WorktimeProvider.ts'
 import { WorktimeProviderOptions } from '../providers/types.ts'
 // import Setup from '../standBy/setup.ts'
-import ClockHelper from '../utils/ClockHelper/index.ts'
+import ClockHelper from '../tools/ClockHelper/index.ts'
 import { validateRunningDate } from '../utils/validateDateOption.ts'
 
 /*

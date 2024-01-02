@@ -1,7 +1,7 @@
 import { ux } from '@oclif/core'
 import moment from 'moment'
 
-import ClockHelper from '../utils/ClockHelper/index.ts'
+import ClockHelper from '../tools/ClockHelper/index.ts'
 import { isMissingPairMark } from '../utils/isMissingPairMark.ts'
 import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.ts'
 

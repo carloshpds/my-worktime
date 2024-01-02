@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import moment from 'moment'
 import { WorktimeDayResume, WorktimeProviderOptions } from '../providers/types'
-import ClockHelper from '../utils/ClockHelper'
+import ClockHelper from '../tools/ClockHelper'
 import * as chalk from 'chalk'
 import { DATE_FORMAT, DATE_REGEXP } from '../utils/dateFormat'
 import { executeQuery } from '../logic/check/executeQuery'

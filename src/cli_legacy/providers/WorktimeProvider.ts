@@ -1,6 +1,6 @@
 import { WorktimeProviderOptions, WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime } from './types'
 import moment from 'moment'
-import ClockHelper from '../utils/ClockHelper'
+import ClockHelper from '../tools/ClockHelper'
 
 export default abstract class WorktimeProvider {
   marks: WorktimeDayMark[] = []

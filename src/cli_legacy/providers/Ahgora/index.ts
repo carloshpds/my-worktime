@@ -1,6 +1,6 @@
-import {WorktimeDayMark} from '../types'
+import { WorktimeDayMark } from '../types'
 import axios from 'axios'
-import ClockHelper from '../../utils/ClockHelper'
+import ClockHelper from '../../tools/ClockHelper'
 import WorktimeProvider from '../WorktimeProvider'
 import { AhgoraDay, AhgoraDayMark, AhgoraMonthResume } from './types'
 import { AhgoraDayMarkType } from './types/AhgoraDayMarkType'
@@ -26,7 +26,7 @@ export default class Ahgora extends WorktimeProvider {
       }
 
       this.options.debug && console.log('\nRequest body', requestBody)
-      if(this.options.useMocks){
+      if (this.options.useMocks) {
         data = require('./mocks/dayResume.mock.json')
       } else {
         const response = await axios.post(
@@ -41,7 +41,7 @@ export default class Ahgora extends WorktimeProvider {
 
       // eslint-disable-next-line no-negated-condition
       if (!data.error) {
-        const {dias} = data
+        const { dias } = data
         const dateResume: AhgoraDay = dias[this.options.momentDate.format('YYYY-MM-DD')]
         this.options.debug && console.log(`\nDATE ${this.options.momentDate.format('L')}`, dateResume)
 
@@ -52,7 +52,7 @@ export default class Ahgora extends WorktimeProvider {
           }
         })
 
-        if(dateResume.justificativa) {
+        if (dateResume.justificativa) {
           const justificationsMarks: WorktimeDayMark[] = dateResume.justificativa.map((justification) => {
             return {
               clock: ClockHelper.formatClockString(justification.addPunch.punch),
@@ -66,10 +66,10 @@ export default class Ahgora extends WorktimeProvider {
           })
 
           marks = marks
-          .concat(justificationsMarks)
-          .sort((currentMark, nextMark) => {
-            return ClockHelper.convertClockStringToMinutes(currentMark.clock) - ClockHelper.convertClockStringToMinutes(nextMark.clock)
-          })
+            .concat(justificationsMarks)
+            .sort((currentMark, nextMark) => {
+              return ClockHelper.convertClockStringToMinutes(currentMark.clock) - ClockHelper.convertClockStringToMinutes(nextMark.clock)
+            })
         }
 
 

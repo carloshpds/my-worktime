@@ -2,9 +2,9 @@ import chalk from 'chalk'
 
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
-import ClockHelper from '../../utils/ClockHelper/index.ts'
-import { formatMarkToConsole } from '../../utils/ui/marksToConsole.ts'
-import { prepareWorktimeDayResumeToConsole } from '../../utils/ui/worktimeDayResumeToConsole.ts'
+import ClockHelper from '../../tools/ClockHelper/index.ts'
+import { formatMarkToConsole } from '../../tools/ui/marksToConsole.ts'
+import { prepareWorktimeDayResumeToConsole } from '../../tools/ui/worktimeDayResumeToConsole.ts'
 
 export default class CheckDisplayer {
   provider: WorktimeProvider
