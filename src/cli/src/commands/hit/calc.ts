@@ -3,7 +3,7 @@ import { Args, Command, Flags, ux } from '@oclif/core'
 import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeProviderOptions } from '../../providers/types.ts'
-import { getI18n } from '../../tools/i18n/index.ts'
+import { getI18n, translate } from '../../tools/i18n/index.ts'
 import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.ts'
 import commonFlags from '../../utils/commonFlags.ts'
 import filterValidMarks from '../../utils/filterValidMarksStrings.ts'
@@ -20,7 +20,7 @@ export default class HitResetCommand extends Command {
     }),
   }
 
-  static description = i18n.get(['cli', 'hit', 'calc', 'description'])
+  static description = translate('cli.hit.calc.description')
 
   static examples = [
     `$ <%= config.bin %> <%= command.id %> 09:00,12:00,13:00 `,

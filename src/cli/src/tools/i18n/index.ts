@@ -20,3 +20,9 @@ export const setup = (locale: string) => {
 }
 
 export const getI18n = () => messageFormatInstance
+
+export const translate = (key: Array<string> | string, values: Record<string, any> = {}) => {
+  const finalSearch: Array<string> = typeof key === 'string' ? key.split('.') : key;
+  console.log('[translate] finalSearch', finalSearch)
+  return messageFormatInstance.get(finalSearch, values)
+}
