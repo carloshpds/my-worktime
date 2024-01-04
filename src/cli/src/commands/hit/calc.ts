@@ -12,7 +12,9 @@ export default class HitResetCommand extends Command {
   static aliases = ['punch']
 
   static args = {
-    marks: Args.string({ description: 'Person to say hello to', required: true }),
+    marks: Args.string({
+      description: 'Lista de batidas no formato HH:mm separadas por vírgula', required: true
+    }),
   }
 
   static description = 'Calcula o horário de saída baseado em uma ou mais batidas, jornada de trabalho e a data'

@@ -10,6 +10,7 @@
     "my-worktime": "./bin/run.js"
   },
   "dependencies": {
+    "@formatjs/intl": "^2.9.9",
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^4",
@@ -22,11 +23,13 @@
     "js-logger": "^1.6.1",
     "keytar": "^7.0.0",
     "moment": "^2.28.0",
-    "ora": "^5.1.0"
+    "ora": "^5.1.0",
+    "os-locale": "^6.0.2"
   },
   "description": "oclif example Hello World CLI (ESM)",
   "devDependencies": {
     "@babel/preset-typescript": "^7.23.3",
+    "@formatjs/ts-transformer": "^3.13.9",
     "@jest/globals": "^29.7.0",
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^3",
