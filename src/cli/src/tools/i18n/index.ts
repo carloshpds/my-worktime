@@ -1,27 +1,22 @@
-import { createIntl, createIntlCache } from '@formatjs/intl'
+import MessageFormat from '@messageformat/runtime/messages'
+// const MessageFormat = MessageFormatRuntime.default
 
-import { messagesEnUS } from './messages/en-US/index.ts';
-import { messagesPtBR } from './messages/pt-BR/index.ts';
+// @ts-expect-error no types
+import messagesSet from './messages/compiled-messages.js'
 
-let intl: ReturnType<typeof createIntl>;
+// let messageFormatInstance: ReturnType<typeof MessageFormat>
+let messageFormatInstance: any
 
-const messages: Record<string, any> = {
-  'en-US': messagesEnUS,
-  'pt-BR': messagesPtBR,
-}
 
-export const supportedLocales: string[] = Object.keys(messages)
+export const supportedLocales: string[] = Object.keys(messagesSet)
 
 export const setup = (locale: string) => {
-  const localizedMessages = messages[locale] || messages['pt-BR']
-  const cache = createIntlCache()
-  const intlSettings = {
-    defaultLocale: locale,
-    locale,
-    messages: localizedMessages,
-  }
+  console.log('[setup locale]', locale)
+  // @ts-expect-error no types
+  messageFormatInstance = new MessageFormat(messagesSet, locale)
+  messageFormatInstance.setFallback(locale, ['pt-BR'])
+  console.log('messageFormatInstance==>', messageFormatInstance.get(['cli', 'hit', 'calc', 'description']))
 
-  intl = createIntl(intlSettings, cache)
 }
 
-export const getI18n = (): ReturnType<typeof createIntl> => intl
+export const getI18n = () => messageFormatInstance

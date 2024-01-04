@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@formatjs/intl": "^2.9.9",
+    "@messageformat/core": "^3.3.0",
+    "@messageformat/runtime": "^3.0.1",
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^4",
@@ -31,6 +33,7 @@
     "@babel/preset-typescript": "^7.23.3",
     "@formatjs/ts-transformer": "^3.13.9",
     "@jest/globals": "^29.7.0",
+    "@messageformat/cli": "^4.0.1",
     "@oclif/prettier-config": "^0.2.1",
     "@oclif/test": "^3",
     "@types/inquirer": "^9.0.7",
@@ -77,7 +80,8 @@
     "prepack": "npm run build && oclif manifest && oclif readme",
     "prepare": "npm run build",
     "test": "jest --config=jest.config.cjs",
-    "version": "oclif readme && git add README.md"
+    "version": "oclif readme && git add README.md",
+    "build:messages": "messageformat src/tools/i18n/messages --locale=en-US,pt-BR --outfile=src/tools/i18n/messages/compiled-messages.js"
   },
   "version": "0.0.0",
   "bugs": "https://github.com/carloshpds/my-worktime/issues",
