@@ -2,6 +2,7 @@ import { ux } from '@oclif/core'
 import moment from 'moment'
 
 import ClockHelper from '../tools/ClockHelper/index.ts'
+import localSettingsManager from '../tools/LocalSettingsManager/index.ts'
 import { isMissingPairMark } from '../utils/isMissingPairMark.ts'
 import { validateRunningDate } from '../utils/validateDateOption.ts'
 import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.ts'
@@ -27,7 +28,7 @@ export default abstract class WorktimeProvider {
     const defaultOptions: WorktimeProviderOptions = {
       companyId: '',
       date: '',
-      debug: false,
+      debug: Boolean(process.env.DEBUG) || false,
       journeyTime: '',
       momentDate: moment(),
       password: '',
@@ -39,6 +40,7 @@ export default abstract class WorktimeProvider {
     Object.assign(defaultOptions, options)
     defaultOptions.momentDate = defaultOptions.date ? moment(defaultOptions.date) : undefined;
 
+    localSettingsManager.settings.set('options.isDebugEnabled', options.debug)
     return defaultOptions
   }
 

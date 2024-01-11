@@ -67,6 +67,8 @@ export default {
     cli: {
       common: {
         display: {
+          yesLabel: () => "Sim",
+          noLabel: () => "Não",
           idealClockOut: () => ""
         },
         flags: {

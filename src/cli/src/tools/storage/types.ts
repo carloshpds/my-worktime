@@ -1,6 +1,7 @@
 
 import { WorktimeDayMark } from "../../providers/types.ts";
 export interface MWOptions {
+  isDebugEnabled: boolean
 }
 
 export type MWOptionsKey = keyof MWOptions;
