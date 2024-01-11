@@ -19,7 +19,7 @@ export default (): Record<string, Flag<any>> => {
         dateFormat: translate('cli.common.flags.date.universalDateFormat')
       }),
     }),
-    debug: Flags.boolean({ char: 'b', default: true, description: translate('cli.common.flags.debug.description') }),
+    debug: Flags.boolean({ char: 'b', default: false, description: translate('cli.common.flags.debug.description') }),
     help: Flags.help({ char: 'h', description: translate('cli.common.flags.help.description') }),
     journeyTime: Flags.string({ char: 'j', default: '08:00', description: translate('cli.common.flags.journeyTime.description') }),
   }
