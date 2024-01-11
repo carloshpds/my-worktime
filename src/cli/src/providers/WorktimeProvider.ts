@@ -22,10 +22,10 @@ export default abstract class WorktimeProvider {
     this.options = options
   }
 
-  static buildOptions(options: Partial<WorktimeProviderOptions>): WorktimeProviderOptions {
-    validateRunningDate(options.date as string)
+  static buildOptions(runtimeOptions: Partial<WorktimeProviderOptions>): WorktimeProviderOptions {
+    validateRunningDate(runtimeOptions.date as string)
 
-    const defaultOptions: WorktimeProviderOptions = {
+    const options: WorktimeProviderOptions = {
       companyId: '',
       date: '',
       debug: Boolean(process.env.DEBUG) || false,
@@ -37,11 +37,12 @@ export default abstract class WorktimeProvider {
       userId: '',
     }
 
-    Object.assign(defaultOptions, options)
-    defaultOptions.momentDate = defaultOptions.date ? moment(defaultOptions.date) : undefined;
+    Object.assign(options, runtimeOptions)
+    options.momentDate = options.date ? moment(options.date) : undefined;
 
-    localSettingsManager.settings.set('options.isDebugEnabled', options.debug)
-    return defaultOptions
+    options.debug && console.table({ ...options, momentDate: undefined, password: '***' })
+    localSettingsManager.settings.set('options.isDebugEnabled', runtimeOptions.debug)
+    return options
   }
 
   calculateBreakMinutes(marks: WorktimeDayMark[] = this.marks) {
