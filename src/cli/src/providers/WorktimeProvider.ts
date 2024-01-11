@@ -3,6 +3,7 @@ import moment from 'moment'
 
 import ClockHelper from '../tools/ClockHelper/index.ts'
 import { isMissingPairMark } from '../utils/isMissingPairMark.ts'
+import { validateRunningDate } from '../utils/validateDateOption.ts'
 import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.ts'
 
 export default abstract class WorktimeProvider {
@@ -21,6 +22,8 @@ export default abstract class WorktimeProvider {
   }
 
   static buildOptions(options: Partial<WorktimeProviderOptions>): WorktimeProviderOptions {
+    validateRunningDate(options.date as string)
+
     const defaultOptions: WorktimeProviderOptions = {
       companyId: '',
       date: '',

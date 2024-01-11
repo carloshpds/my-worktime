@@ -5,7 +5,6 @@ import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeProviderOptions } from '../../providers/types.ts'
 import commonFlags from '../../utils/commonFlags.ts'
-import { validateRunningDate } from '../../utils/validateDateOption.ts'
 
 export default class HitResetCommand extends Command {
   static aliases = ['punch']
@@ -30,8 +29,6 @@ export default class HitResetCommand extends Command {
   async run() {
     ux.log('\n')
     const { args: { marks: clocksString }, flags: { date, debug, journeyTime, system } } = await this.parse(HitResetCommand);
-
-    validateRunningDate.call(this, date)
 
     const options: WorktimeProviderOptions = WorktimeProvider.buildOptions({
       date,

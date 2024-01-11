@@ -3,20 +3,17 @@ import { Args, Command, Flags, ux } from '@oclif/core'
 import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeProviderOptions } from '../../providers/types.ts'
-import { getI18n, translate } from '../../tools/i18n/index.ts'
+import { translate } from '../../tools/i18n/index.ts'
 import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.ts'
 import commonFlags from '../../utils/commonFlags.ts'
 import filterValidMarks from '../../utils/filterValidMarksStrings.ts'
-import { validateRunningDate } from '../../utils/validateDateOption.ts'
-
-const i18n = getI18n()
 
 export default class HitResetCommand extends Command {
   static aliases = ['punch']
 
   static args = {
     marks: Args.string({
-      description: 'Lista de batidas no formato HH:mm separadas por vírgula', required: true
+      description: translate('cli.hit.calc.args.marks.description'), required: true
     }),
   }
 
@@ -30,14 +27,12 @@ export default class HitResetCommand extends Command {
 
   static flags = {
     ...commonFlags(),
-    system: Flags.string({ char: 's', default: 'local', description: 'Nome do sistema de ponto', options: ['local'] }),
+    system: Flags.string({ char: 's', default: 'local', description: translate('cli.common.flags.system.description'), options: ['local'] }),
   }
 
   async run() {
     ux.log('\n')
     const { args: { marks: clocksString }, flags: { date, debug, journeyTime, system } } = await this.parse(HitResetCommand);
-
-    validateRunningDate.call(this, date)
 
     const options: WorktimeProviderOptions = WorktimeProvider.buildOptions({
       date,
@@ -63,7 +58,7 @@ export default class HitResetCommand extends Command {
       if (worktimeDayResume.isMissingPairMark) {
         showTheShouldLeaveClockTime(worktimeDayResume)
       } else {
-        ux.info('Não foi possível calcular o horário de saída por não ter horário de entrada.')
+        ux.info(translate('cli.common.errors.isMissingPairMarkToCalculateClockOut'))
       }
     } catch (error) {
       ux.error(`${error}`)

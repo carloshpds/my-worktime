@@ -12,9 +12,7 @@ import Faker from '../providers/Faker/index.ts'
 import LocalFileSystemProvider from '../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../providers/WorktimeProvider.ts'
 import { WorktimeProviderOptions } from '../providers/types.ts'
-// import Setup from '../standBy/setup.ts'
 import ClockHelper from '../tools/ClockHelper/index.ts'
-import { validateRunningDate } from '../utils/validateDateOption.ts'
 
 /*
  * Constants
@@ -107,9 +105,6 @@ export default class CheckCommand extends Command {
       useMocks: flags.useMocks,
       userId: flags.user
     })
-
-
-    validateRunningDate.call(this, options.date as string)
 
     if (options.debug) {
       console.group('WorktimeOptions')

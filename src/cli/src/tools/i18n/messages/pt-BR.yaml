@@ -2,36 +2,37 @@ cli:
   common:
     display:
       idealClockOut: ''
-    errors:
-      invalidDate:
-        message: 'Data inválida'
-      invalidJourneyTime:
-        message: 'Jornada de trabalho inválida'
-      invalidMark:
-        message: 'Batida inválida'
-      missingDate:
-        message: 'Data não informada'
-      missingJourneyTime:
-        message: 'Jornada de trabalho não informada'
-      missingMark:
-        message: 'Batida não informada'
-      missingSystem:
-        message: 'Sistema de ponto não informado'
-      systemNotFound:
-        message: 'Sistema de ponto não encontrado'
     flags:
       date:
-        description: 'Data'
+        universalDateFormat: 'AAAA-MM-DD'
+        description: 'Data relacionada as batidas (utilize o padrão {dateFormat})'
+        defaultHelp: 'Data atual {date} (utilize o padrão {dateFormat})'
       debug:
-        description: 'Mostra informações de debug'
+        description: 'Exibe informações a nível de debug'
       journeyTime:
-        description: 'Jornada de trabalho'
+        description: 'Jornada de trabalho: Quantidade de horas a serem trabalhadas por dia'
       system:
         description: 'Nome do sistema de ponto'
+      help:
+        description: 'Exibe ajuda para todos os comandos'
+    errors:
+      invalidDateFormat: 'Formato de data inválido (utilize o padrão *universalDateFormat)'
+      invalidDate: 'Data inválida'
+      invalidJourneyTime: 'Jornada de trabalho inválida'
+      invalidMark: 'Batida inválida'
+      missingDate: 'Data não informada'
+      missingJourneyTime: 'Jornada de trabalho não informada'
+      missingMark: 'Batida não informada'
+      missingSystem: 'Sistema de ponto não informado'
+      systemNotFound: 'Sistema de ponto não encontrado'
+      isMissingPairMarkToCalculateClockOut: 'Não foi possível calcular o horário de saída por não ter horário de entrada.'
   hit:
     add:
       description: 'Adiciona uma ou mais batidas ao histórico'
     calc:
+      args:
+        marks:
+          description: 'Lista de batidas no formato HH:mm separadas por vírgula'
       description: 'Calcula o horário de saída baseado em uma ou mais batidas, jornada de trabalho e a data'
     delete:
       description: 'Deleta uma ou mais batidas do histórico'
