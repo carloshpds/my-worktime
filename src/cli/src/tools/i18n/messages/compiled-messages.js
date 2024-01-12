@@ -1,4 +1,5 @@
-
+import { pt } from "@messageformat/runtime/lib/cardinals";
+import { plural } from "@messageformat/runtime";
 export default {
   "en-US": {
     cli: {
@@ -69,7 +70,8 @@ export default {
         display: {
           yesLabel: () => "Sim",
           noLabel: () => "Não",
-          idealClockOut: () => ""
+          oddMark: () => "Batida ímpar",
+          mark: (d) => plural(d.count, 0, pt, { "1": "Batida", other: "Batidas" })
         },
         flags: {
           date: {
@@ -113,13 +115,17 @@ export default {
               description: () => "Lista de batidas no formato HH:mm separadas por vírgula"
             }
           },
-          description: () => "Calcula o horário de saída baseado em uma ou mais batidas, jornada de trabalho e a data"
+          description: () => "Calcula o horário de saída baseado em uma ou mais batidas, jornada de trabalho e a data",
+          journeyTime: (d) => "Considerando Jornada de trabalho de " + d.clockTime,
+          shouldLeaveClockTime: (d) => "Seu horário ideal de saída é " + d.clockTime
         },
         "delete": {
           description: () => "Deleta uma ou mais batidas do histórico"
         },
         reset: {
-          description: () => "Reseta todo o histórico ou todas as batidas do histórico para uma data específica"
+          description: () => "Reseta todas as batidas de uma data específica",
+          resettingMarks: (d) => "Resetando batidas de " + d.date,
+          marksHasBeenReseted: (d) => "Batidas de " + d.date + " foram resetadas"
         }
       }
     }

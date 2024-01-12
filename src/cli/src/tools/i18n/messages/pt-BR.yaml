@@ -3,7 +3,8 @@ cli:
     display:
       yesLabel: 'Sim'
       noLabel: 'Não'
-      idealClockOut: ''
+      oddMark: 'Batida ímpar'
+      mark: '{count, plural, =1 {Batida} other {Batidas}}'
     flags:
       date:
         universalDateFormat: 'AAAA-MM-DD'
@@ -36,7 +37,11 @@ cli:
         marks:
           description: 'Lista de batidas no formato HH:mm separadas por vírgula'
       description: 'Calcula o horário de saída baseado em uma ou mais batidas, jornada de trabalho e a data'
+      journeyTime: 'Considerando Jornada de trabalho de {clockTime}'
+      shouldLeaveClockTime: 'Seu horário ideal de saída é {clockTime}'
     delete:
       description: 'Deleta uma ou mais batidas do histórico'
     reset:
-      description: 'Reseta todo o histórico ou todas as batidas do histórico para uma data específica'
+      description: 'Reseta todas as batidas de uma data específica'
+      resettingMarks: 'Resetando batidas de {date}'
+      marksHasBeenReseted: 'Batidas de {date} foram resetadas'
