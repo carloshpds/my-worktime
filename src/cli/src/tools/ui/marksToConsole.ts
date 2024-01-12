@@ -2,6 +2,7 @@ import chalk from 'chalk'
 
 import { WorktimeDayMark } from "../../providers/types.ts"
 import { isMissingPairMark } from '../../utils/isMissingPairMark.ts'
+import { translate } from '../i18n/index.ts'
 
 
 export const prepareMarksToConsole = (marks: WorktimeDayMark[]): string[] => {
@@ -10,7 +11,7 @@ export const prepareMarksToConsole = (marks: WorktimeDayMark[]): string[] => {
     let markOnConsole = formatMarkToConsole(mark)
 
     if (isLastMark && isMissingPairMark(marks)) {
-      markOnConsole = chalk.yellow(mark.clock) + chalk.gray(' Batida ímpar')
+      markOnConsole = chalk.yellow(mark.clock) + chalk.gray(` ${translate('cli.common.display.oddHit')}`)
     }
 
     return `${markOnConsole}`
@@ -37,11 +38,11 @@ export const showMarks = (marks: WorktimeDayMark[]): void => {
     let markOnConsole = formatMarkToConsole(mark)
 
     if (isLastMark && isMissingPairMark(marks)) {
-      markOnConsole = chalk.yellow(mark.clock) + chalk.gray(' Batida ímpar')
+      markOnConsole = chalk.yellow(mark.clock) + chalk.gray(` ${translate('cli.common.display.oddMark')}`)
     }
 
     return `${markOnConsole}`
   })
 
-  console.log(`🔢 Batidas: ${marksToConsole.join('   ')}`)
+  console.log(`🔢 ${translate('cli.common.display.mark', { count: marksToConsole.length })}: ${marksToConsole.join('   ')}`)
 }

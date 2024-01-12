@@ -141,17 +141,19 @@ export default abstract class WorktimeProvider {
   }
 
   calculateWorktimeDayResume(marks: WorktimeDayMark[] = this.marks, date: string = this.options.date): WorktimeDayResume {
-    let worktimeDayResume: WorktimeDayResume = {
+    const worktimeDayResume: WorktimeDayResume = {
       breakMinutes: 0,
       isMissingPairMark: false,
+      journeyTime: this.options.journeyTime as string,
       marks,
       missingMinutesToCompleteJourney: 0,
       registeredWorkedMinutes: 0,
-      workedMinutesUntilNow: 0
+      workedMinutesUntilNow: 0,
     }
 
     if (marks.length > 0) {
-      worktimeDayResume = this.calculateWorkedTimeMinutes(marks, date)
+      const workedDayResume = this.calculateWorkedTimeMinutes(marks, date)
+      Object.assign(worktimeDayResume, workedDayResume)
     }
 
     return worktimeDayResume

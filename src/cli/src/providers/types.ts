@@ -15,6 +15,7 @@ export interface WorktimeDayWorkedTime {
 export interface WorktimeDayResume {
   breakMinutes: number;
   isMissingPairMark: boolean;
+  journeyTime: string;
   marks: WorktimeDayMark[];
   missingMinutesToCompleteJourney: number;
   registeredWorkedMinutes: number;
