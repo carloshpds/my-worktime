@@ -83,7 +83,7 @@
     "prepare": "npm run build",
     "test": "jest --config=jest.config.cjs",
     "version": "oclif readme && git add README.md",
-    "build:messages": "messageformat src/tools/i18n/messages --locale=en-US,pt-BR --outfile=src/tools/i18n/messages/compiled-messages.js"
+    "build:messages": "messageformat src/tools/i18n/messages --locale=en-US,pt-BR --options.customFormatters=./src/tools/i18n/messages/customFormatters.cjs --outfile=src/tools/i18n/messages/compiled-messages.js"
   },
   "version": "0.0.0",
   "bugs": "https://github.com/carloshpds/my-worktime/issues",
