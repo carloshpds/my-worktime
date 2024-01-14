@@ -71,7 +71,11 @@ export default {
           yesLabel: () => "Sim",
           noLabel: () => "Não",
           oddMark: () => "Batida ímpar",
-          mark: (d) => plural(d.count, 0, pt, { "1": "Batida", other: "Batidas" })
+          mark: (d) => plural(d.count, 0, pt, { "1": "Batida", other: "Batidas" }),
+          removedMark: () => "Batida removida",
+          addedMark: () => "Batida adicionada",
+          ignoredMark: () => "Batida ignorada",
+          actionMarkFromDate: (d) => d.action + " " + d.mark + " em " + d.date
         },
         flags: {
           date: {
@@ -94,6 +98,9 @@ export default {
         },
         errors: {
           invalidDateFormat: () => "Formato de data inválido (utilize o padrão *universalDateFormat)",
+          invalidMarkTime: (d) => d.mark + " formato inválido (utilize o padrão HH:mm)",
+          markInTheFuture: (d) => d.mark + " é uma batida futura (verifique a data ou utilize comando hit:calc para simular/calcular com batidas futuras)",
+          duplicatedMark: (d) => d.mark + " já está registrada em " + d.date + " (duplicada)",
           invalidDate: () => "Data inválida",
           invalidJourneyTime: () => "Jornada de trabalho inválida",
           invalidMark: () => "Batida inválida",
@@ -120,7 +127,13 @@ export default {
           shouldLeaveClockTime: (d) => "Seu horário ideal de saída é " + d.clockTime
         },
         "delete": {
-          description: () => "Deleta uma ou mais batidas do histórico"
+          args: {
+            marks: {
+              description: () => "Lista de batidas no formato HH:mm separadas por vírgula"
+            }
+          },
+          description: () => "Deleta uma ou mais batidas do histórico",
+          removingMarks: () => ""
         },
         reset: {
           description: () => "Reseta todas as batidas de uma data específica",
