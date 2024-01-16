@@ -2,6 +2,7 @@ import { ux } from "@oclif/core"
 import moment from "moment"
 
 import { WorktimeDayMark } from "../providers/types.ts"
+import { translate } from "../tools/i18n/index.ts"
 
 export interface FilterValidMarksParams {
   date?: string,
@@ -16,15 +17,28 @@ export default ({ date, ignoreDateCases, marksStrings, registeredMarks }: Filter
     const isRegistered = registeredMarks.find(mark => mark.clock === newMark)
     let validClock = true
 
+    const actionMessage = ux.colorize('bgYellow', ` ${translate('cli.common.display.ignoredMark').toUpperCase()} `)
+
+    const errorsMessages = {
+      duplicatedMark: translate('cli.common.errors.duplicatedMark', {
+        date,
+        mark: newMark
+      }),
+      invalidMarkTime: translate('cli.common.errors.invalidMarkTime'),
+      markInTheFuture: translate('cli.common.errors.markInTheFuture', {
+        mark: newMark,
+      })
+    }
+
     if (!/^\d{2}:\d{2}$/.test(newMark)) {
-      ux.log(`${ux.colorize('bgYellow', ' BATIDA IGNORADA ')} ${ux.colorize('blue', newMark)} não está no formato correto (HH:mm)`)
+      ux.log(`${actionMessage} ${errorsMessages.invalidMarkTime}`)
       validClock = false
     } else if (date && !ignoreDateCases) {
       if (date && moment().isBefore(moment(`${date} ${newMark}`, 'YYYY-MM-DD HH:mm'))) {
-        ux.log(`${ux.colorize('bgYellow', ' BATIDA IGNORADA ')} ${ux.colorize('blue', newMark)} está no futuro`)
+        ux.log(`${actionMessage} ${errorsMessages.markInTheFuture}`)
         validClock = false
       } else if (isRegistered && date) {
-        ux.log(`${ux.colorize('bgYellow', ' BATIDA IGNORADA ')} ${ux.colorize('blue', newMark)} já está registrada em ${ux.colorize('blue', moment(date).format('L'))} (duplicada)`)
+        ux.log(`${actionMessage} ${errorsMessages.duplicatedMark}`)
         validClock = false
       }
     }
