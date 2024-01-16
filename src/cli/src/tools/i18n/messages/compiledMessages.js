@@ -1,65 +1,160 @@
-import { pt } from "@messageformat/runtime/lib/cardinals";
+import { en, es, pt } from "@messageformat/runtime/lib/cardinals";
 import { plural } from "@messageformat/runtime";
 export default {
   "en-US": {
     cli: {
       common: {
         display: {
-          idealClockOut: () => ""
-        },
-        errors: {
-          invalidDate: {
-            message: () => "Invalid date"
-          },
-          invalidJourneyTime: {
-            message: () => "Invalid work journey"
-          },
-          invalidMark: {
-            message: () => "Invalid mark"
-          },
-          missingDate: {
-            message: () => "Missing date"
-          },
-          missingJourneyTime: {
-            message: () => "Missing work journey"
-          },
-          missingMark: {
-            message: () => "Missing mark"
-          },
-          missingSystem: {
-            message: () => "Missing time system"
-          },
-          systemNotFound: {
-            message: () => "Time system not found"
-          }
+          yesLabel: () => "Yes",
+          noLabel: () => "No",
+          oddMark: () => "Odd Clock In",
+          mark: (d) => plural(d.count, 0, en, { "1": "Clock In", other: "Clock Ins" }),
+          removedMark: () => "Clock In Removed",
+          addedMark: () => "Clock In Added",
+          ignoredMark: () => "Clock In Ignored",
+          actionMarkFromDate: (d) => d.action + " " + d.mark + " on " + d.date
         },
         flags: {
           date: {
-            description: () => "Date"
+            universalDateFormat: () => "YYYY-MM-DD",
+            description: (d) => "Date related to clock ins (use the " + d.dateFormat + " pattern)",
+            defaultHelp: (d) => "Current date " + d.date + " (use the " + d.dateFormat + " pattern)"
           },
           debug: {
-            description: () => "Show debug information"
+            description: () => "Display debug information"
           },
           journeyTime: {
-            description: () => "Work journey"
+            description: () => "Workday: Number of hours to be worked per day"
           },
           system: {
-            description: () => "Time system name"
+            description: () => "Time tracking system name"
+          },
+          help: {
+            description: () => "Display help for all commands"
           }
+        },
+        errors: {
+          invalidDateFormat: () => "Invalid date format (use the YYYY-MM-DD pattern)",
+          invalidMarkTime: (d) => "Invalid " + d.mark + " format (use the HH:mm pattern)",
+          markInTheFuture: (d) => d.mark + " is a future clock in (check the date or use the hit:calc command to simulate/calculate with future clock ins)",
+          duplicatedMark: (d) => d.mark + " is already registered on " + d.date + " (duplicated)",
+          invalidDate: () => "Invalid date",
+          invalidJourneyTime: () => "Invalid workday",
+          invalidMark: () => "Invalid clock in",
+          missingDate: () => "Date not provided",
+          missingJourneyTime: () => "Workday not provided",
+          missingMark: () => "Clock in not provided",
+          missingSystem: () => "Time tracking system not provided",
+          systemNotFound: () => "Time tracking system not found",
+          isMissingPairMarkToCalculateClockOut: () => "Could not calculate the clock out time because there is no clock in time."
         }
       },
       hit: {
         add: {
-          description: () => "Add one or more marks to the history"
+          description: () => "Add one or more clock ins to the history"
         },
         calc: {
-          description: () => "Calculate the clock out time based on one or more marks, work journey, and date"
+          args: {
+            marks: {
+              description: () => "List of clock ins in the HH:mm format separated by commas"
+            }
+          },
+          description: () => "Calculate the clock out time based on one or more clock ins, workday, and date",
+          journeyTime: (d) => "Considering a workday of " + d.clockTime,
+          shouldLeaveClockTime: (d) => "Your ideal clock out time is " + d.clockTime
         },
         "delete": {
-          description: () => "Delete one or more marks from the history"
+          args: {
+            marks: {
+              description: () => "List of clock ins in the HH:mm format separated by commas"
+            }
+          },
+          description: () => "Delete one or more clock ins from the history",
+          removingMarks: () => ""
         },
         reset: {
-          description: () => "Reset the entire history or all marks from the history for a specific date"
+          description: () => "Reset all clock ins for a specific date",
+          resettingMarks: (d) => "Resetting clock ins for " + d.date,
+          marksHasBeenReseted: (d) => "Clock ins for " + d.date + " have been reset"
+        }
+      }
+    }
+  },
+  es: {
+    cli: {
+      common: {
+        display: {
+          yesLabel: () => "Sí",
+          noLabel: () => "No",
+          oddMark: () => "Marca impar",
+          mark: (d) => plural(d.count, 0, es, { "1": "Marca", other: "Marcas" }),
+          removedMark: () => "Marca eliminada",
+          addedMark: () => "Marca añadida",
+          ignoredMark: () => "Marca ignorada",
+          actionMarkFromDate: (d) => d.action + " " + d.mark + " en " + d.date
+        },
+        flags: {
+          date: {
+            universalDateFormat: () => "AAAA-MM-DD",
+            description: (d) => "Fecha relacionada a las marcas (utilice el formato " + d.dateFormat + ")",
+            defaultHelp: (d) => "Fecha actual " + d.date + " (utilice el formato " + d.dateFormat + ")"
+          },
+          debug: {
+            description: () => "Muestra información de depuración"
+          },
+          journeyTime: {
+            description: () => "Jornada laboral: Cantidad de horas a trabajar por día"
+          },
+          system: {
+            description: () => "Nombre del sistema de registro de tiempo"
+          },
+          help: {
+            description: () => "Muestra ayuda para todos los comandos"
+          }
+        },
+        errors: {
+          invalidDateFormat: () => "Formato de fecha inválido (utilice el formato *universalDateFormat)",
+          invalidMarkTime: (d) => "Formato de marca " + d.mark + " inválido (utilice el formato HH:mm)",
+          markInTheFuture: (d) => d.mark + " es una marca futura (verifique la fecha o utilice el comando hit:calc para simular/calcular con marcas futuras)",
+          duplicatedMark: (d) => d.mark + " ya está registrado en " + d.date + " (duplicado)",
+          invalidDate: () => "Fecha inválida",
+          invalidJourneyTime: () => "Jornada laboral inválida",
+          invalidMark: () => "Marca inválida",
+          missingDate: () => "Fecha no especificada",
+          missingJourneyTime: () => "Jornada laboral no especificada",
+          missingMark: () => "Marca no especificada",
+          missingSystem: () => "Sistema de registro de tiempo no especificado",
+          systemNotFound: () => "Sistema de registro de tiempo no encontrado",
+          isMissingPairMarkToCalculateClockOut: () => "No se puede calcular la hora de salida porque no hay hora de entrada."
+        }
+      },
+      hit: {
+        add: {
+          description: () => "Añade una o más marcas al historial"
+        },
+        calc: {
+          args: {
+            marks: {
+              description: () => "Lista de marcas en formato HH:mm separadas por comas"
+            }
+          },
+          description: () => "Calcula la hora de salida basándose en una o más marcas, jornada laboral y fecha",
+          journeyTime: (d) => "Considerando una jornada laboral de " + d.clockTime,
+          shouldLeaveClockTime: (d) => "Tu hora ideal de salida es " + d.clockTime
+        },
+        "delete": {
+          args: {
+            marks: {
+              description: () => "Lista de marcas en formato HH:mm separadas por comas"
+            }
+          },
+          description: () => "Elimina una o más marcas del historial",
+          removingMarks: () => ""
+        },
+        reset: {
+          description: () => "Restablece todas las marcas de una fecha específica",
+          resettingMarks: (d) => "Restableciendo marcas de " + d.date,
+          marksHasBeenReseted: (d) => "Las marcas de " + d.date + " se han restablecido"
         }
       }
     }

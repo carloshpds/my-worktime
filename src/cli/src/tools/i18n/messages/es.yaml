@@ -1,0 +1,58 @@
+cli:
+  common:
+    display:
+      yesLabel: 'Sí'
+      noLabel: 'No'
+      oddMark: 'Marca impar'
+      mark: '{count, plural, =1 {Marca} other {Marcas}}'
+      removedMark: 'Marca eliminada'
+      addedMark: 'Marca añadida'
+      ignoredMark: 'Marca ignorada'
+      actionMarkFromDate: '{action} {mark} en {date}'
+    flags:
+      date:
+        universalDateFormat: 'AAAA-MM-DD'
+        description: 'Fecha relacionada a las marcas (utilice el formato {dateFormat})'
+        defaultHelp: 'Fecha actual {date} (utilice el formato {dateFormat})'
+      debug:
+        description: 'Muestra información de depuración'
+      journeyTime:
+        description: 'Jornada laboral: Cantidad de horas a trabajar por día'
+      system:
+        description: 'Nombre del sistema de registro de tiempo'
+      help:
+        description: 'Muestra ayuda para todos los comandos'
+    errors:
+      invalidDateFormat: 'Formato de fecha inválido (utilice el formato *universalDateFormat)'
+      invalidMarkTime: 'Formato de marca {mark} inválido (utilice el formato HH:mm)'
+      markInTheFuture: '{mark} es una marca futura (verifique la fecha o utilice el comando hit:calc para simular/calcular con marcas futuras)'
+      duplicatedMark: '{mark} ya está registrado en {date} (duplicado)'
+      invalidDate: 'Fecha inválida'
+      invalidJourneyTime: 'Jornada laboral inválida'
+      invalidMark: 'Marca inválida'
+      missingDate: 'Fecha no especificada'
+      missingJourneyTime: 'Jornada laboral no especificada'
+      missingMark: 'Marca no especificada'
+      missingSystem: 'Sistema de registro de tiempo no especificado'
+      systemNotFound: 'Sistema de registro de tiempo no encontrado'
+      isMissingPairMarkToCalculateClockOut: 'No se puede calcular la hora de salida porque no hay hora de entrada.'
+  hit:
+    add:
+      description: 'Añade una o más marcas al historial'
+    calc:
+      args:
+        marks:
+          description: 'Lista de marcas en formato HH:mm separadas por comas'
+      description: 'Calcula la hora de salida basándose en una o más marcas, jornada laboral y fecha'
+      journeyTime: 'Considerando una jornada laboral de {clockTime}'
+      shouldLeaveClockTime: 'Tu hora ideal de salida es {clockTime}'
+    delete:
+      args:
+        marks:
+          description: 'Lista de marcas en formato HH:mm separadas por comas'
+      description: 'Elimina una o más marcas del historial'
+      removingMarks: ''
+    reset:
+      description: 'Restablece todas las marcas de una fecha específica'
+      resettingMarks: 'Restableciendo marcas de {date}'
+      marksHasBeenReseted: 'Las marcas de {date} se han restablecido'

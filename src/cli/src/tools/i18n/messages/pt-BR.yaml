@@ -5,6 +5,10 @@ cli:
       noLabel: 'Não'
       oddMark: 'Batida ímpar'
       mark: '{count, plural, =1 {Batida} other {Batidas}}'
+      removedMark: 'Batida removida'
+      addedMark: 'Batida adicionada'
+      ignoredMark: 'Batida ignorada'
+      actionMarkFromDate: '{action} {mark} em {date}'
     flags:
       date:
         universalDateFormat: 'AAAA-MM-DD'
@@ -20,6 +24,9 @@ cli:
         description: 'Exibe ajuda para todos os comandos'
     errors:
       invalidDateFormat: 'Formato de data inválido (utilize o padrão *universalDateFormat)'
+      invalidMarkTime: '{mark} formato inválido (utilize o padrão HH:mm)'
+      markInTheFuture: '{mark} é uma batida futura (verifique a data ou utilize comando hit:calc para simular/calcular com batidas futuras)'
+      duplicatedMark: '{mark} já está registrada em {date} (duplicada)'
       invalidDate: 'Data inválida'
       invalidJourneyTime: 'Jornada de trabalho inválida'
       invalidMark: 'Batida inválida'
@@ -40,7 +47,11 @@ cli:
       journeyTime: 'Considerando Jornada de trabalho de {clockTime}'
       shouldLeaveClockTime: 'Seu horário ideal de saída é {clockTime}'
     delete:
+      args:
+        marks:
+          description: 'Lista de batidas no formato HH:mm separadas por vírgula'
       description: 'Deleta uma ou mais batidas do histórico'
+      removingMarks: ''
     reset:
       description: 'Reseta todas as batidas de uma data específica'
       resettingMarks: 'Resetando batidas de {date}'
