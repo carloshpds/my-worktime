@@ -4,16 +4,17 @@ import CheckDisplayer from '../../logic/check/displayer.ts'
 import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeProviderOptions } from '../../providers/types.ts'
+import { translate } from '../../tools/i18n/index.ts'
 import commonFlags from '../../utils/commonFlags.ts'
 
-export default class HitResetCommand extends Command {
+export default class HitDeleteCommand extends Command {
   static aliases = ['punch']
 
   static args = {
-    marks: Args.string({ description: 'Person to say hello to', required: true }),
+    marks: Args.string({ description: translate('cli.hit.delete.args.marks.description'), required: true }),
   }
 
-  static description = 'Resets all hits of the history or only from a given date'
+  static description = translate('cli.hit.delete.description')
 
   static examples = [
     `$ <%= config.bin %> <%= command.id %> 13:00`,
@@ -23,12 +24,12 @@ export default class HitResetCommand extends Command {
 
   static flags = {
     ...commonFlags(),
-    system: Flags.string({ char: 's', default: 'local', description: 'Nome do sistema de ponto', options: ['local'] }),
+    system: Flags.string({ char: 's', default: 'local', description: translate('cli.common.flags.system.description'), options: ['local'] }),
   }
 
   async run() {
     ux.log('\n')
-    const { args: { marks: clocksString }, flags: { date, debug, journeyTime, system } } = await this.parse(HitResetCommand);
+    const { args: { marks: clocksString }, flags: { date, debug, journeyTime, system } } = await this.parse(HitDeleteCommand);
 
     const options: WorktimeProviderOptions = WorktimeProvider.buildOptions({
       date,
