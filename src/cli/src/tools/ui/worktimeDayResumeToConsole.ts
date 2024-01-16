@@ -10,7 +10,6 @@ export const prepareWorktimeDayResumeToConsole = (worktimeDayResume: WorktimeDay
 }
 
 export const showTheShouldLeaveClockTime = (worktimeDayResume: WorktimeDayResume): void => {
-  // ux.info(`\nSeu horário de saída ideal é ${ux.colorize('bgGreen', ' ' + worktimeDayResume.shouldLeaveClockTime + ' ')}`)
   if (worktimeDayResume.shouldLeaveClockTime) {
     const journeyTimeMessage = translate('cli.hit.calc.journeyTime', {
       clockTime: ux.colorize('bgCyan', ' ' + worktimeDayResume.journeyTime + ' ')
@@ -21,7 +20,7 @@ export const showTheShouldLeaveClockTime = (worktimeDayResume: WorktimeDayResume
     })
 
 
-    ux.info(`\n⏳ ${journeyTimeMessage}`)
+    ux.info(`⏳ ${journeyTimeMessage}`)
     ux.info(`✨ ${shouldLeaveClockTimeMessage}`)
   }
 }
