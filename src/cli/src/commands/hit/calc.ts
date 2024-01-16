@@ -4,12 +4,11 @@ import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeProviderOptions } from '../../providers/types.ts'
 import { translate } from '../../tools/i18n/index.ts'
-import { logAppName } from '../../tools/ui/logAppName.ts'
 import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.ts'
 import commonFlags from '../../utils/commonFlags.ts'
 import filterValidMarks from '../../utils/filterValidMarksStrings.ts'
 
-export default class HitResetCommand extends Command {
+export default class HitCalcCommand extends Command {
   static aliases = ['punch']
 
   static args = {
@@ -32,9 +31,8 @@ export default class HitResetCommand extends Command {
   }
 
   async run() {
-    logAppName()
     ux.log('\n')
-    const { args: { marks: clocksString }, flags: { date, debug, journeyTime, system } } = await this.parse(HitResetCommand);
+    const { args: { marks: clocksString }, flags: { date, debug, journeyTime, system } } = await this.parse(HitCalcCommand);
 
     const options: WorktimeProviderOptions = WorktimeProvider.buildOptions({
       date,
