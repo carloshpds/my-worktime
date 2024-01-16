@@ -11,7 +11,7 @@ export const prepareMarksToConsole = (marks: WorktimeDayMark[]): string[] => {
     let markOnConsole = formatMarkToConsole(mark)
 
     if (isLastMark && isMissingPairMark(marks)) {
-      markOnConsole = chalk.yellow(mark.clock) + chalk.gray(` ${translate('cli.common.display.oddHit')}`)
+      markOnConsole = chalk.yellow(mark.clock) + chalk.gray(` ${translate('cli.common.display.oddMark')}`)
     }
 
     return `${markOnConsole}`
