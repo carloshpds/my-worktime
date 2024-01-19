@@ -1,5 +1,5 @@
 {
-  "author": "Carlos Henrique @carloshpds",
+  "author": "Carlos Henrique <carloshpds@gmail.com> https://github.com/carloshpds",
   "contributors": [
     "Matheus Soares <matheusb95@gmail.com> https://github.com/Matheusss",
     "Beatriz Gidzinski Cardoso <beatriz.gidzinski@mercadolivre.com> https://github.com/bgidzinski",
@@ -10,12 +10,13 @@
     "my-worktime": "./bin/run.js"
   },
   "dependencies": {
-    "@formatjs/intl": "^2.9.9",
     "@messageformat/core": "^3.3.0",
     "@messageformat/runtime": "^3.0.1",
     "@oclif/core": "^3",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^4",
+    "@oclif/plugin-update": "4.1.8",
+    "@oclif/plugin-warn-if-update-available": "3.0.9",
     "@types/axios": "^0.14.0",
     "@types/jest": "^29.5.11",
     "axios": "1.6.2",
@@ -29,7 +30,7 @@
     "ora": "^5.1.0",
     "os-locale": "^6.0.2"
   },
-  "description": "oclif example Hello World CLI (ESM)",
+  "description": "CLI to manage your worktime. It calculates your perfect clock out.",
   "devDependencies": {
     "@babel/preset-typescript": "^7.23.3",
     "@formatjs/ts-transformer": "^3.13.9",
@@ -69,9 +70,21 @@
     "commands": "./dist/commands",
     "plugins": [
       "@oclif/plugin-help",
-      "@oclif/plugin-plugins"
+      "@oclif/plugin-plugins",
+      "@oclif/plugin-update",
+      "@oclif/plugin-warn-if-update-available"
     ],
-    "topicSeparator": ":"
+    "warn-if-update-available": {
+      "timeoutInDays": 7,
+      "message": "<%= config.name %> com atualização disponível: de <%= chalk.greenBright(config.version) %> para <%= chalk.greenBright(latest) %>."
+    },
+    "topicSeparator": ":",
+    "topics": {
+      "hit:calc": {},
+      "hit:reset": {},
+      "hit:clear": {},
+      "hit:delete": {}
+    }
   },
   "repository": "carloshpds/my-worktime",
   "scripts": {
@@ -83,9 +96,10 @@
     "prepare": "npm run build",
     "test": "jest --config=jest.config.cjs",
     "version": "oclif readme && git add README.md",
+    "readme": "oclif readme",
     "build:messages": "messageformat src/tools/i18n/messages --locale=en-US,pt-BR,es --options.customFormatters=./src/tools/i18n/messages/customFormatters.cjs --outfile=src/tools/i18n/messages/compiledMessages.js"
   },
-  "version": "0.0.0",
+  "version": "2.0.0",
   "bugs": "https://github.com/carloshpds/my-worktime/issues",
   "types": "dist/index.d.ts",
   "exports": "./lib/index.js",
