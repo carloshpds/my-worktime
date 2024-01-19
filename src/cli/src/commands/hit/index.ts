@@ -4,6 +4,7 @@ import CheckDisplayer from '../../logic/check/displayer.ts'
 import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
 import WorktimeProvider from '../../providers/WorktimeProvider.ts'
 import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
+import { translate } from '../../tools/i18n/index.ts'
 import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.ts'
 import commonFlags from '../../utils/commonFlags.ts'
 
@@ -11,13 +12,14 @@ export default class HitCommand extends Command {
   static aliases = ['punch']
 
   static args = {
-    marks: Args.string({ description: 'Person to say hello to', required: true }),
+    marks: Args.string({ description: translate('cli.hit.calc.args.marks.description'), required: true }),
   }
 
-  static description = 'adds a new hit'
+  static description = translate('cli.hit.add.description')
 
   static examples = [
     `$ <%= config.bin %> <%= command.id %> 01:00`,
+    `$ <%= config.bin %> <%= command.id %> 09:00,12:00,13:00 -s local`,
   ]
 
   static flags = {
