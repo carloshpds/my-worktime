@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-import ClockHelper from '../../tools/ClockHelper/index.ts'
-import WorktimeProvider from '../WorktimeProvider.ts'
-import { WorktimeDayMark } from '../types.ts'
-import { AhgoraDayMarkType } from './types/AhgoraDayMarkType.ts'
-import { AhgoraDay, AhgoraMonthResume } from './types/index.ts'
+import ClockHelper from '../../tools/ClockHelper/index.js'
+import WorktimeProvider from '../WorktimeProvider.js'
+import { WorktimeDayMark } from '../types.js'
+import { AhgoraDayMarkType } from './types/AhgoraDayMarkType.js'
+import { AhgoraDay, AhgoraMonthResume } from './types/index.js'
 
 export default class Ahgora extends WorktimeProvider {
   name = 'Ahgora'

@@ -2,8 +2,8 @@ import axios from 'axios';
 import moment from 'moment'
 import 'moment/locale/pt-br'
 
-import { WorktimeProviderOptions } from '../../types.ts';
-import Ahgora from '../index.ts';
+import { WorktimeProviderOptions } from '../../types.js';
+import Ahgora from '../index.js';
 
 jest.spyOn(axios, 'post').mockImplementation(() => {
   const mock = require('../mocks/dayResume.mock.json')

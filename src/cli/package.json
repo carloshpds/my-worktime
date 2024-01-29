@@ -12,7 +12,7 @@
   "dependencies": {
     "@messageformat/core": "^3.3.0",
     "@messageformat/runtime": "^3.0.1",
-    "@oclif/core": "^3",
+    "@oclif/core": "3.18.1",
     "@oclif/plugin-help": "^5",
     "@oclif/plugin-plugins": "^4",
     "@oclif/plugin-update": "4.1.8",
@@ -30,7 +30,7 @@
     "ora": "^5.1.0",
     "os-locale": "^6.0.2"
   },
-  "description": "CLI to manage your worktime. It calculates your perfect clock out.",
+  "description": "CLI to manage your worktime and a easy way to calculate your perfect clock out.",
   "devDependencies": {
     "@babel/preset-typescript": "^7.23.3",
     "@formatjs/ts-transformer": "^3.13.9",
@@ -80,15 +80,29 @@
     },
     "topicSeparator": ":",
     "topics": {
-      "hit:calc": {},
-      "hit:reset": {},
-      "hit:clear": {},
-      "hit:delete": {}
+      "plugins": {
+        "description": "Lista de plugins instalados"
+      },
+      "help": {
+        "description": "Exibe ajuda para <%= config.bin %> ou um comando específico"
+      },
+      "hit:calc": {
+        "description": "Calcula o horário de saída baseado em uma ou mais batidas, jornada de trabalho e a data"
+      },
+      "hit:reset": {
+        "description": "Reseta todas as batidas de uma data específica"
+      },
+      "hit:clear": {
+        "description": "Apelido para o comando hit:reset"
+      },
+      "hit:delete": {
+        "description": "Deleta uma ou mais batidas do histórico"
+      }
     }
   },
   "repository": "carloshpds/my-worktime",
   "scripts": {
-    "build": "shx rm -rf dist && npm run build:messages && tsc -b",
+    "build": "shx rm -rf dist && npm run build:i18n && tsc -b",
     "lint": "eslint . --ext .ts",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "npm run lint",
@@ -97,9 +111,12 @@
     "test": "jest --config=jest.config.cjs",
     "version": "oclif readme && git add README.md",
     "readme": "oclif readme",
-    "build:messages": "messageformat src/tools/i18n/messages --locale=en-US,pt-BR,es --options.customFormatters=./src/tools/i18n/messages/customFormatters.cjs --outfile=src/tools/i18n/messages/compiledMessages.js"
+    "manifest": "oclif manifest",
+    "build:i18n": "npm run build:messages-folder && npm run build:messages",
+    "build:messages-folder": "shx mkdir -p dist/tools/i18n/messages",
+    "build:messages": "messageformat src/tools/i18n/messages --locale=en-US,pt-BR,es --options.customFormatters=./src/tools/i18n/messages/customFormatters.cjs --outfile=dist/tools/i18n/messages/compiledMessages.js"
   },
-  "version": "2.0.0",
+  "version": "2.0.0-beta.2",
   "bugs": "https://github.com/carloshpds/my-worktime/issues",
   "types": "dist/index.d.ts",
   "exports": "./lib/index.js",

@@ -1,7 +1,7 @@
 // import { createIntl, createIntlCache } from '@formatjs/intl'
 
-// import { messagesEnUS } from './messages/en-US/index.ts';
-// import { messagesPtBR } from './messages/pt-BR/index.ts';
+// import { messagesEnUS } from './messages/en-US/index.js';
+// import { messagesPtBR } from './messages/pt-BR/index.js';
 
 // let intl: ReturnType<typeof createIntl>;
 

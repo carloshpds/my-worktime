@@ -2,7 +2,7 @@
 import moment from 'moment'
 import 'moment/locale/pt-br'
 
-import ClockHelper from '../index.ts'
+import ClockHelper from '../index.js'
 
 describe('Clock Helper', () => {
   describe('Convert hour string (clock format) in minutes', () => {

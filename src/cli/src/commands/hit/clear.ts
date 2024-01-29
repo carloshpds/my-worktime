@@ -1,4 +1,4 @@
-import HitResetCommand from "./reset.ts";
+import HitResetCommand from "./reset.js";
 
 export default class HitClearCommand extends HitResetCommand {
 

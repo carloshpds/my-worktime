@@ -2,7 +2,7 @@ import { Flags } from "@oclif/core"
 import { Flag } from "@oclif/core/lib/interfaces/index.js"
 import moment from "moment"
 
-import { translate } from "../tools/i18n/index.ts"
+import { translate } from "../tools/i18n/index.js"
 
 
 export default (): Record<string, Flag<any>> => {

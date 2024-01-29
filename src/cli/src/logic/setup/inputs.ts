@@ -3,9 +3,9 @@ const CLIError = require('@oclif/core/handle');
 import { QuestionCollection } from "inquirer";
 import moment from 'moment'
 
-import { MeliBUs } from "../../enums/MeliBusinessUnits.ts";
-import { WorktimeProviderName } from "../../enums/WorktimeProviderName.ts";
-import { WorktimeProviderOptions } from "../../providers/types.ts";
+import { MeliBUs } from "../../enums/MeliBusinessUnits.js";
+import { WorktimeProviderName } from "../../enums/WorktimeProviderName.js";
+import { WorktimeProviderOptions } from "../../providers/types.js";
 
 export const OTHER = "Outro";
 export const AHGORA = "Ahgora";

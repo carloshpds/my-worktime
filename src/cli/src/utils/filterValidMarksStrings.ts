@@ -1,8 +1,8 @@
 import { ux } from "@oclif/core"
 import moment from "moment"
 
-import { WorktimeDayMark } from "../providers/types.ts"
-import { translate } from "../tools/i18n/index.ts"
+import { WorktimeDayMark } from "../providers/types.js"
+import { translate } from "../tools/i18n/index.js"
 
 export interface FilterValidMarksParams {
   date?: string,

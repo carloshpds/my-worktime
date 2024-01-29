@@ -1,8 +1,8 @@
 import { ux } from "@oclif/core"
 
-import { WorktimeDayResume } from "../../providers/types.ts"
-import { translate } from "../i18n/index.ts"
-import { prepareMarksToConsole } from "./marksToConsole.ts"
+import { WorktimeDayResume } from "../../providers/types.js"
+import { translate } from "../i18n/index.js"
+import { prepareMarksToConsole } from "./marksToConsole.js"
 
 export const prepareWorktimeDayResumeToConsole = (worktimeDayResume: WorktimeDayResume): string[] => {
   const marksToConsole = prepareMarksToConsole(worktimeDayResume.marks)

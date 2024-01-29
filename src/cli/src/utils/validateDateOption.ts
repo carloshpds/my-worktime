@@ -2,8 +2,8 @@ import { ux } from '@oclif/core'
 import chalk from 'chalk'
 import moment from 'moment'
 
-import { translate } from '../tools/i18n/index.ts'
-import { DATE_REGEXP } from "./dateFormat.ts"
+import { translate } from '../tools/i18n/index.js'
+import { DATE_REGEXP } from "./dateFormat.js"
 
 export default validateRunningDateFormat
 

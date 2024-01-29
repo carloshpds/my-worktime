@@ -4,8 +4,8 @@ import * as os from 'node:os'
 import * as path from 'node:path'
 import { osLocaleSync } from 'os-locale'
 
-import { setup, supportedLocales } from '../i18n/index.ts'
-import { MWStorageSettings } from '../storage/types.ts'
+import { setup, supportedLocales } from '../i18n/index.js'
+import { MWStorageSettings } from '../storage/types.js'
 
 const debugSettings = debug('my-worktime:settings')
 class LocalSettingsManager {

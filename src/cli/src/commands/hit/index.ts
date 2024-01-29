@@ -1,12 +1,12 @@
 import { Args, Command, Flags, ux } from '@oclif/core'
 
-import CheckDisplayer from '../../logic/check/displayer.ts'
-import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
-import WorktimeProvider from '../../providers/WorktimeProvider.ts'
-import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
-import { translate } from '../../tools/i18n/index.ts'
-import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.ts'
-import commonFlags from '../../utils/commonFlags.ts'
+import CheckDisplayer from '../../logic/check/displayer.js'
+import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.js'
+import WorktimeProvider from '../../providers/WorktimeProvider.js'
+import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.js'
+import { translate } from '../../tools/i18n/index.js'
+import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.js'
+import commonFlags from '../../utils/commonFlags.js'
 
 export default class HitCommand extends Command {
   static aliases = ['punch']

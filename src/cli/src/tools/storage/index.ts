@@ -1,8 +1,8 @@
 import logger from "js-logger";
 const Logger = logger.default;
 
-import deepAssign from "../../utils/deepAssign.ts";
-import { MWInMemorySettings, MWStorageSettings } from "./types.ts";
+import deepAssign from "../../utils/deepAssign.js";
+import { MWInMemorySettings, MWStorageSettings } from "./types.js";
 
 class AppStorage {
 
@@ -67,7 +67,7 @@ class AppStorage {
   async getLocalFileSettings(): Promise<Partial<MWStorageSettings>> {
     let settings = {}
 
-    const configManager = await import('../LocalSettingsManager/index.ts')
+    const configManager = await import('../LocalSettingsManager/index.js')
     settings = configManager.default.settings
 
     return settings

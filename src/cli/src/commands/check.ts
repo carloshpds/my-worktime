@@ -3,16 +3,16 @@ import { Command, Flags, ux } from '@oclif/core'
 // import * as keytar from 'keytar'
 import moment from 'moment'
 
-import { executeQuery } from '../logic/check/executeQuery.ts'
+import { executeQuery } from '../logic/check/executeQuery.js'
 /*
  * Providers
  */
-import Ahgora from '../providers/Ahgora/index.ts'
-import Faker from '../providers/Faker/index.ts'
-import LocalFileSystemProvider from '../providers/LocalFileSystem/index.ts'
-import WorktimeProvider from '../providers/WorktimeProvider.ts'
-import { WorktimeProviderOptions } from '../providers/types.ts'
-import ClockHelper from '../tools/ClockHelper/index.ts'
+import Ahgora from '../providers/Ahgora/index.js'
+import Faker from '../providers/Faker/index.js'
+import LocalFileSystemProvider from '../providers/LocalFileSystem/index.js'
+import WorktimeProvider from '../providers/WorktimeProvider.js'
+import { WorktimeProviderOptions } from '../providers/types.js'
+import ClockHelper from '../tools/ClockHelper/index.js'
 
 /*
  * Constants

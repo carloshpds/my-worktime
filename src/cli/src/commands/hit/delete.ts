@@ -1,11 +1,11 @@
 import { Args, Command, Flags, ux } from '@oclif/core'
 
-import CheckDisplayer from '../../logic/check/displayer.ts'
-import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.ts'
-import WorktimeProvider from '../../providers/WorktimeProvider.ts'
-import { WorktimeProviderOptions } from '../../providers/types.ts'
-import { translate } from '../../tools/i18n/index.ts'
-import commonFlags from '../../utils/commonFlags.ts'
+import CheckDisplayer from '../../logic/check/displayer.js'
+import LocalFileSystemProvider from '../../providers/LocalFileSystem/index.js'
+import WorktimeProvider from '../../providers/WorktimeProvider.js'
+import { WorktimeProviderOptions } from '../../providers/types.js'
+import { translate } from '../../tools/i18n/index.js'
+import commonFlags from '../../utils/commonFlags.js'
 
 export default class HitDeleteCommand extends Command {
   static aliases = ['punch']

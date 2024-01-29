@@ -1,8 +1,8 @@
 import chalk from 'chalk'
 
-import { WorktimeDayMark } from "../../providers/types.ts"
-import { isMissingPairMark } from '../../utils/isMissingPairMark.ts'
-import { translate } from '../i18n/index.ts'
+import { WorktimeDayMark } from "../../providers/types.js"
+import { isMissingPairMark } from '../../utils/isMissingPairMark.js'
+import { translate } from '../i18n/index.js'
 
 
 export const prepareMarksToConsole = (marks: WorktimeDayMark[]): string[] => {

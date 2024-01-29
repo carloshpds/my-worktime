@@ -3,10 +3,10 @@ import Conf from 'conf'
 import inquirer from 'inquirer'
 import * as keytar from 'keytar'
 
-import { executeQuery } from '../logic/check/executeQuery.ts'
-import { meliFluxGenerateOptions, meliFluxGetPassword, meliFluxSecondStep, meliFluxThirdStep, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions, otherCompaniesGetPassword } from '../logic/setup/inputs.ts'
-import Ahgora from '../providers/Ahgora/index.ts'
-import { WorktimeProviderOptions } from '../providers/types.ts'
+import { executeQuery } from '../logic/check/executeQuery.js'
+import { meliFluxGenerateOptions, meliFluxGetPassword, meliFluxSecondStep, meliFluxThirdStep, otherCompaniesFluxSecondStep, otherCompaniesFluxThirdStep, otherCompaniesGenerateOptions, otherCompaniesGetPassword } from '../logic/setup/inputs.js'
+import Ahgora from '../providers/Ahgora/index.js'
+import { WorktimeProviderOptions } from '../providers/types.js'
 
 export default class Setup extends Command {
   static description = 'Sets up the CLI for checking the worktime without entering the credentials every time.'

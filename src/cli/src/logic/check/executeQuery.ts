@@ -1,9 +1,9 @@
 import ora from 'ora'
 
-import WorktimeProvider from '../../providers/WorktimeProvider.ts'
-import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.ts'
-import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.ts'
-import CheckDisplayer from './displayer.ts'
+import WorktimeProvider from '../../providers/WorktimeProvider.js'
+import { WorktimeDayResume, WorktimeProviderOptions } from '../../providers/types.js'
+import { showTheShouldLeaveClockTime } from '../../tools/ui/worktimeDayResumeToConsole.js'
+import CheckDisplayer from './displayer.js'
 
 
 export async function executeQuery(CurrentProviderClass: any, options: Partial<WorktimeProviderOptions>) {

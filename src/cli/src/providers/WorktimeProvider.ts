@@ -1,11 +1,11 @@
 import { ux } from '@oclif/core'
 import moment from 'moment'
 
-import ClockHelper from '../tools/ClockHelper/index.ts'
-import localSettingsManager from '../tools/LocalSettingsManager/index.ts'
-import { isMissingPairMark } from '../utils/isMissingPairMark.ts'
-import { validateRunningDate } from '../utils/validateDateOption.ts'
-import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.ts'
+import ClockHelper from '../tools/ClockHelper/index.js'
+import localSettingsManager from '../tools/LocalSettingsManager/index.js'
+import { isMissingPairMark } from '../utils/isMissingPairMark.js'
+import { validateRunningDate } from '../utils/validateDateOption.js'
+import { WorktimeDayMark, WorktimeDayResume, WorktimeDayWorkedTime, WorktimeProviderOptions } from './types.js'
 
 export default abstract class WorktimeProvider {
   [prop: string]: any

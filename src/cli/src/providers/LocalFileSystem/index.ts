@@ -1,10 +1,10 @@
 import { ux } from "@oclif/core";
 
-import LocalSettingsManager from "../../tools/LocalSettingsManager/index.ts";
-import { translate } from "../../tools/i18n/index.ts";
-import filterValidMarks from "../../utils/filterValidMarksStrings.ts";
-import WorktimeProvider from "../WorktimeProvider.ts";
-import { WorktimeDayMark, WorktimeDayResume } from "../types.ts";
+import LocalSettingsManager from "../../tools/LocalSettingsManager/index.js";
+import { translate } from "../../tools/i18n/index.js";
+import filterValidMarks from "../../utils/filterValidMarksStrings.js";
+import WorktimeProvider from "../WorktimeProvider.js";
+import { WorktimeDayMark, WorktimeDayResume } from "../types.js";
 
 export default class LocalFileSystemProvider extends WorktimeProvider {
   async addMarksByClocksString(marksString: string): Promise<WorktimeDayResume> {

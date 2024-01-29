@@ -2,8 +2,8 @@
 import moment from 'moment'
 import 'moment/locale/pt-br'
 
-import { WorktimeDayMark, WorktimeDayWorkedTime, WorktimeProviderOptions } from '../../providers/types.ts'
-import WorktimeProvider from '../WorktimeProvider.ts'
+import { WorktimeDayMark, WorktimeDayWorkedTime, WorktimeProviderOptions } from '../../providers/types.js'
+import WorktimeProvider from '../WorktimeProvider.js'
 
 const momentDate = moment()
 const defaultOptions: WorktimeProviderOptions = {

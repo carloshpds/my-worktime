@@ -9,8 +9,8 @@
     "target": "es2022",
     "moduleResolution": "node16",
     "esModuleInterop": true,
-    "allowImportingTsExtensions": true,
-    "noEmit": true,
+    "allowImportingTsExtensions": false,
+    "noEmit": false,
   },
   "include": [
     "./src/**/*"

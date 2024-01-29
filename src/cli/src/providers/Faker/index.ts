@@ -1,5 +1,5 @@
-import WorktimeProvider from "../WorktimeProvider.ts";
-import { WorktimeDayMark } from "../types.ts";
+import WorktimeProvider from "../WorktimeProvider.js";
+import { WorktimeDayMark } from "../types.js";
 
 export default class Faker extends WorktimeProvider {
   async getDateMarks(requestOptions?: any): Promise<WorktimeDayMark[]> {

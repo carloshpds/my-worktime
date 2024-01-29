@@ -1,4 +1,4 @@
-import { WorktimeDayMark } from '../../providers/types.ts'
+import { WorktimeDayMark } from '../../providers/types.js'
 
 class ClockHelper {
   debug: boolean | undefined = false
