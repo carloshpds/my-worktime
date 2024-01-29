@@ -1,19 +1,19 @@
 {
 	"folders": [
 		{
-			"path": "../.."
-		},
-		{
-			"name": "extension",
-			"path": "../extension"
-		},
-		{
-			"name": "cli",
 			"path": "."
 		},
 		{
+			"name": "extension",
+			"path": "src/extension"
+		},
+		{
+			"name": "cli",
+			"path": "src/cli"
+		},
+		{
 			"name": "cli_legacy",
-			"path": "../cli_legacy"
+			"path": "src/cli_legacy"
 		}
 	],
 	"settings": {
