@@ -1,0 +1,58 @@
+cli:
+  common:
+    display:
+      yesLabel: 'Yes'
+      noLabel: 'No'
+      oddMark: 'Odd Clock In'
+      mark: '{count, plural, =1 {Clock In} other {Clock Ins}}'
+      removedMark: 'Clock In Removed'
+      addedMark: 'Clock In Added'
+      ignoredMark: 'Clock In Ignored'
+      actionMarkFromDate: '{action} {mark} on {date}'
+    flags:
+      date:
+        universalDateFormat: 'YYYY-MM-DD'
+        description: 'Date related to clock ins (use the {dateFormat} pattern)'
+        defaultHelp: 'Current date {date} (use the {dateFormat} pattern)'
+      debug:
+        description: 'Display debug information'
+      journeyTime:
+        description: 'Workday: Number of hours to be worked per day'
+      system:
+        description: 'Time tracking system name'
+      help:
+        description: 'Display help for all commands'
+    errors:
+      invalidDateFormat: 'Invalid date format (use the YYYY-MM-DD pattern)'
+      invalidMarkTime: 'Invalid {mark} format (use the HH:mm pattern)'
+      markInTheFuture: '{mark} is a future clock in (check the date or use the hit:calc command to simulate/calculate with future clock ins)'
+      duplicatedMark: '{mark} is already registered on {date} (duplicated)'
+      invalidDate: 'Invalid date'
+      invalidJourneyTime: 'Invalid workday'
+      invalidMark: 'Invalid clock in'
+      missingDate: 'Date not provided'
+      missingJourneyTime: 'Workday not provided'
+      missingMark: 'Clock in not provided'
+      missingSystem: 'Time tracking system not provided'
+      systemNotFound: 'Time tracking system not found'
+      isMissingPairMarkToCalculateClockOut: 'Could not calculate the clock out time because there is no clock in time.'
+  hit:
+    add:
+      description: 'Add one or more clock ins to the history'
+    calc:
+      args:
+        marks:
+          description: 'List of clock ins in the HH:mm format separated by commas'
+      description: 'Calculate the clock out time based on one or more clock ins, workday, and date'
+      journeyTime: 'Considering a workday of {clockTime}'
+      shouldLeaveClockTime: 'Your ideal clock out time is {clockTime}'
+    delete:
+      args:
+        marks:
+          description: 'List of clock ins in the HH:mm format separated by commas'
+      description: 'Delete one or more clock ins from the history'
+      removingMarks: ''
+    reset:
+      description: 'Reset all clock ins for a specific date'
+      resettingMarks: 'Resetting clock ins for {date}'
+      marksHasBeenReseted: 'Clock ins for {date} have been reset'

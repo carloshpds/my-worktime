@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "oclif",
+    "oclif-typescript",
+    "prettier"
+  ],
+  "rules": {
+    "unicorn/filename-case": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "max-nested-callbacks": [
+      2,
+      5
+    ],
+    "unicorn/no-object-as-default-parameter": "off",
+    "unicorn/prefer-spread": "off",
+    "unicorn/prefer-at": "off"
+  }
+}

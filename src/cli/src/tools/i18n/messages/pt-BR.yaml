@@ -1,0 +1,58 @@
+cli:
+  common:
+    display:
+      yesLabel: 'Sim'
+      noLabel: 'Não'
+      oddMark: 'Batida ímpar'
+      mark: '{count, plural, =1 {Batida} other {Batidas}}'
+      removedMark: 'Batida removida'
+      addedMark: 'Batida adicionada'
+      ignoredMark: 'Batida ignorada'
+      actionMarkFromDate: '{action} {mark} em {date}'
+    flags:
+      date:
+        universalDateFormat: 'AAAA-MM-DD'
+        description: 'Data relacionada as batidas (utilize o padrão {dateFormat})'
+        defaultHelp: 'Data atual {date} (utilize o padrão {dateFormat})'
+      debug:
+        description: 'Exibe informações a nível de debug'
+      journeyTime:
+        description: 'Jornada de trabalho: Quantidade de horas a serem trabalhadas por dia'
+      system:
+        description: 'Nome do sistema de ponto'
+      help:
+        description: 'Exibe ajuda para todos os comandos'
+    errors:
+      invalidDateFormat: 'Formato de data inválido (utilize o padrão *universalDateFormat)'
+      invalidMarkTime: '{mark} formato inválido (utilize o padrão HH:mm)'
+      markInTheFuture: '{mark} é uma batida futura (verifique a data ou utilize comando hit:calc para simular/calcular com batidas futuras)'
+      duplicatedMark: '{mark} já está registrada em {date} (duplicada)'
+      invalidDate: 'Data inválida'
+      invalidJourneyTime: 'Jornada de trabalho inválida'
+      invalidMark: 'Batida inválida'
+      missingDate: 'Data não informada'
+      missingJourneyTime: 'Jornada de trabalho não informada'
+      missingMark: 'Batida não informada'
+      missingSystem: 'Sistema de ponto não informado'
+      systemNotFound: 'Sistema de ponto não encontrado'
+      isMissingPairMarkToCalculateClockOut: 'Não foi possível calcular o horário de saída por não ter horário de entrada.'
+  hit:
+    add:
+      description: 'Adiciona uma ou mais batidas ao histórico'
+    calc:
+      args:
+        marks:
+          description: 'Lista de batidas no formato HH:mm separadas por vírgula'
+      description: 'Calcula o horário de saída baseado em uma ou mais batidas, jornada de trabalho e a data'
+      journeyTime: 'Considerando Jornada de trabalho de {clockTime}'
+      shouldLeaveClockTime: 'Seu horário ideal de saída é {clockTime}'
+    delete:
+      args:
+        marks:
+          description: 'Lista de batidas no formato HH:mm separadas por vírgula'
+      description: 'Deleta uma ou mais batidas do histórico'
+      removingMarks: ''
+    reset:
+      description: 'Reseta todas as batidas de uma data específica'
+      resettingMarks: 'Resetando batidas de {date}'
+      marksHasBeenReseted: 'Batidas de {date} foram resetadas'

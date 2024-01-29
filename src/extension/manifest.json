@@ -1,0 +1,66 @@
+{
+  "manifest_version": 3,
+  "minimum_chrome_version": "90",
+  "name": "My Worktime",
+  "version": "1.0.1",
+  "description": "__MSG_appDescription__",
+  "author": "Carlos Henrique (C8) <carloshpds@gmail.com>",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "default_locale": "pt_BR",
+  "icons": {
+    "16": "assets/logo_16.png",
+    "48": "assets/logo_48.png",
+    "128": "assets/logo_128.png"
+  },
+
+  "action": {
+    "default_title": "My Worktime",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.ahgora.com.br/externo/mirror*"
+      ],
+      "js": ["js/chunk-vendors.js", "js/mirrorContentScripts.js"],
+      "css": ["css/chunk-vendors.css", "css/mirrorContentScripts.css"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "web_accessible_resources" :[
+    {
+      "resources": [
+        "assets/*",
+        "fonts/*",
+        "content-scripts/*"
+      ],
+      "matches": [
+        "*://www.ahgora.com.br/*"
+      ],
+      "extensions": [
+        "__MSG_@@extension_id__"
+      ]
+    }
+  ],
+
+  "permissions": [
+    "storage",
+    "storage",
+    "tabs",
+    "nativeMessaging"
+  ],
+
+  "host_permissions": [
+    "*://www.ahgora.com.br/*"
+  ]
+
+}

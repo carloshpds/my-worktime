@@ -1,0 +1,3 @@
+/dist
+/tmp
+src/tools/i18n/messages/**/*.js
