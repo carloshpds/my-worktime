@@ -1,4 +1,9 @@
 ![](https://github.com/carloshpds/my-worktime/blob/feature/chrome-extension/src/cli/assets/LOGO_MWT.png?raw=true)
+[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
+![npm](https://img.shields.io/npm/v/my-worktime)
+![node-current](https://img.shields.io/node/v/my-worktime)
+[![Downloads/week](https://img.shields.io/npm/dw/my-worktime.svg)](https://npmjs.org/package/my-worktime)
+![NPM](https://img.shields.io/npm/l/my-worktime)
 
 CLI para controlar seu horário de trabalho, trazendo um jeito simples e fácil de registrar suas batidas de ponto e calcular seu horário de saída.
 
@@ -151,7 +156,7 @@ ALIASES
   $ my-worktime punch
 
 EXAMPLES
-  $ my-worktime hit:calc 09:00,12:00,13:00 
+  $ my-worktime hit:calc 09:00,12:00,13:00
 
   $ my-worktime hit:calc 09:00,12:00,13:00,14:00,15:00 --date=2020-01-01
 
