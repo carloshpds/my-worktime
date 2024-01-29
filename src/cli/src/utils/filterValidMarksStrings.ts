@@ -46,5 +46,7 @@ export default ({ date, ignoreDateCases, marksStrings, registeredMarks }: Filter
     return validClock
   })
 
+  marksToValidate.length !== validNewMarks.length && ux.log('\n')
+
   return validNewMarks
 }

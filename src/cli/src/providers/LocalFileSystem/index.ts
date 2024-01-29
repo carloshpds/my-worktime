@@ -29,6 +29,8 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
       return { clock: clock.trim() }
     })
 
+    newMarks.length > 0 && ux.log('\n')
+
     const marks = [...registeredMarks, ...newMarks]
     const worktimeDayResume: WorktimeDayResume = this.calculateWorktimeDayResume(marks)
 
@@ -59,6 +61,8 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
         })
         ux.info(actionMarkFromDate)
       }
+
+      marksToDelete.length > 0 && ux.log('\n')
 
       finalDateMarks = registeredMarks.filter(mark => !marksToDelete.includes(mark.clock))
     }

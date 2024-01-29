@@ -1,4 +1,5 @@
 import { ux } from "@oclif/core"
+import chalk from "chalk"
 
 import { WorktimeDayResume } from "../../providers/types.js"
 import { translate } from "../i18n/index.js"
@@ -12,15 +13,14 @@ export const prepareWorktimeDayResumeToConsole = (worktimeDayResume: WorktimeDay
 export const showTheShouldLeaveClockTime = (worktimeDayResume: WorktimeDayResume): void => {
   if (worktimeDayResume.shouldLeaveClockTime) {
     const journeyTimeMessage = translate('cli.hit.calc.journeyTime', {
-      clockTime: ux.colorize('bgCyan', ' ' + worktimeDayResume.journeyTime + ' ')
+      clockTime: chalk.black.bgCyan(' ' + worktimeDayResume.journeyTime + ' ')
     })
 
     const shouldLeaveClockTimeMessage = translate('cli.hit.calc.shouldLeaveClockTime', {
-      clockTime: ux.colorize('bgGreen', ' ' + worktimeDayResume.shouldLeaveClockTime + ' ')
+      clockTime: chalk.black.bgGreen(' ' + worktimeDayResume.shouldLeaveClockTime + ' ')
     })
 
-
     ux.info(`⏳ ${journeyTimeMessage}`)
-    ux.info(`✨ ${shouldLeaveClockTimeMessage}`)
+    ux.info(`✨ ${shouldLeaveClockTimeMessage}\n`)
   }
 }

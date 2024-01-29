@@ -34,11 +34,11 @@ export default class CheckCommand extends Command {
   static flags = {
     company: Flags.string({ char: 'c', description: 'ID da empresa no sistema de ponto', env: 'MW_COMPANY' }),
     date: Flags.string({ char: 'd', default: moment().format('YYYY-MM-DD'), description: 'Data relacionada a consulta de horas no padrão YYYY-MM-DD' }),
-    debug: Flags.boolean({ char: 'b', default: true, description: 'Debug - Exibe mais informações na execução' }),
+    debug: Flags.boolean({ char: 'b', default: false, description: 'Debug - Exibe mais informações na execução' }),
     help: Flags.help({ char: 'h' }),
     journeyTime: Flags.string({ char: 'j', default: '08:00', description: 'Quantidade de horas a serem trabalhadas por dia' }),
     password: Flags.string({ char: 'p', description: 'Senha do usuário no sistema', env: 'MW_PASS' }),
-    system: Flags.string({ char: 's', default: 'ahgora', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM' }),
+    system: Flags.string({ char: 's', default: 'local', description: 'Nome do sistema de ponto', env: 'MW_SYSTEM' }),
     useMocks: Flags.boolean({ char: 'm', default: false, description: 'Simula os requests para o sistema de ponto' }),
     user: Flags.string({ char: 'u', description: 'ID do usuário no sistema de ponto', env: 'MW_USER' }),
   }

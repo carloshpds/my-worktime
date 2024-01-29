@@ -18,7 +18,7 @@ export async function executeQuery(CurrentProviderClass: any, options: Partial<W
 
       if (worktimeDayResume.marks.length > 0) {
         console.log('')
-        loader.succeed(`Dados encontrados`)
+        loader.succeed(`Dados encontrados\n`)
         showTheShouldLeaveClockTime(worktimeDayResume)
         displayer.displayResult(worktimeDayResume, options)
       } else {
