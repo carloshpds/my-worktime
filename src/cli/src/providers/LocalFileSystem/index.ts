@@ -1,10 +1,11 @@
-import { ux } from "@oclif/core";
+import { ux } from "@oclif/core"
+import chalk from "chalk"
 
-import LocalSettingsManager from "../../tools/LocalSettingsManager/index.js";
-import { translate } from "../../tools/i18n/index.js";
-import filterValidMarks from "../../utils/filterValidMarksStrings.js";
-import WorktimeProvider from "../WorktimeProvider.js";
-import { WorktimeDayMark, WorktimeDayResume } from "../types.js";
+import LocalSettingsManager from "../../tools/LocalSettingsManager/index.js"
+import { translate } from "../../tools/i18n/index.js"
+import filterValidMarks from "../../utils/filterValidMarksStrings.js"
+import WorktimeProvider from "../WorktimeProvider.js"
+import { WorktimeDayMark, WorktimeDayResume } from "../types.js"
 
 export default class LocalFileSystemProvider extends WorktimeProvider {
   async addMarksByClocksString(marksString: string): Promise<WorktimeDayResume> {
@@ -19,7 +20,7 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
       }
 
       const actionMarkFromDate = translate('cli.common.display.actionMarkFromDate', {
-        action: ux.colorize('bgGreen', ` ${messages.addedMark.toUpperCase()} `),
+        action: chalk.black.bgGreen(` ${messages.addedMark.toUpperCase()} `),
         date: ux.colorize('blue', this.options.momentDate!.format('L')),
         mark: ux.colorize('blue', clock)
       })
@@ -53,9 +54,8 @@ export default class LocalFileSystemProvider extends WorktimeProvider {
       }
 
       for (const mark of marksToDelete) {
-        // ux.info(`${ux.colorize('bgRed', ' BATIDA REMOVIDA ')} ${ux.colorize('blue', mark)} de ${ux.colorize('blue', this.options.date)}`)
         const actionMarkFromDate = translate('cli.common.display.actionMarkFromDate', {
-          action: ux.colorize('bgRed', ` ${messages.removedMark.toUpperCase()} `),
+          action: chalk.black.bgRed(` ${messages.removedMark.toUpperCase()} `),
           date: ux.colorize('blue', this.options.momentDate!.format('L')),
           mark: ux.colorize('blue', mark)
         })

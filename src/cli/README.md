@@ -22,15 +22,13 @@ $ npm install -g my-worktime
 $ my-worktime COMMAND
 running command...
 $ my-worktime (--version)
-my-worktime/2.0.0-beta.7 darwin-arm64 node-v18.19.0
+my-worktime/2.0.1-beta.2 darwin-arm64 node-v18.19.0
 $ my-worktime --help [COMMAND]
 USAGE
   $ my-worktime COMMAND
 ...
 ```
 <!-- usagestop -->
-
-
 
 
 # Commandos
@@ -75,7 +73,7 @@ EXAMPLES
   $ my-worktime check -u 321 -p 123 -s ahgora -c a22 -j 08:48 -d 2020-09-23
 ```
 
-_See code: [src/commands/check.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.0-beta.7/src/commands/check.ts)_
+_See code: [src/commands/check.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.1-beta.2/src/commands/check.ts)_
 
 ## `my-worktime help [COMMANDS]`
 
@@ -128,7 +126,7 @@ EXAMPLES
   $ my-worktime hit 09:00,12:00,13:00 -s local
 ```
 
-_See code: [src/commands/hit/index.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.0-beta.7/src/commands/hit/index.ts)_
+_See code: [src/commands/hit/index.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.1-beta.2/src/commands/hit/index.ts)_
 
 ## `my-worktime hit:calc MARKS`
 
@@ -156,14 +154,14 @@ ALIASES
   $ my-worktime punch
 
 EXAMPLES
-  $ my-worktime hit:calc 09:00,12:00,13:00
+  $ my-worktime hit:calc 09:00,12:00,13:00 
 
   $ my-worktime hit:calc 09:00,12:00,13:00,14:00,15:00 --date=2020-01-01
 
   $ my-worktime hit:calc 09:00 -d=2020-01-01
 ```
 
-_See code: [src/commands/hit/calc.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.0-beta.7/src/commands/hit/calc.ts)_
+_See code: [src/commands/hit/calc.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.1-beta.2/src/commands/hit/calc.ts)_
 
 ## `my-worktime hit:clear`
 
@@ -195,7 +193,7 @@ EXAMPLES
   $ my-worktime hit:clear -d=2020-01-01
 ```
 
-_See code: [src/commands/hit/clear.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.0-beta.7/src/commands/hit/clear.ts)_
+_See code: [src/commands/hit/clear.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.1-beta.2/src/commands/hit/clear.ts)_
 
 ## `my-worktime hit:delete MARKS`
 
@@ -230,7 +228,7 @@ EXAMPLES
   $ my-worktime hit:delete 13:00,18:00 -d=2020-01-01
 ```
 
-_See code: [src/commands/hit/delete.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.0-beta.7/src/commands/hit/delete.ts)_
+_See code: [src/commands/hit/delete.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.1-beta.2/src/commands/hit/delete.ts)_
 
 ## `my-worktime hit:reset`
 
@@ -262,7 +260,7 @@ EXAMPLES
   $ my-worktime hit:reset -d=2020-01-01
 ```
 
-_See code: [src/commands/hit/reset.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.0-beta.7/src/commands/hit/reset.ts)_
+_See code: [src/commands/hit/reset.ts](https://github.com/carloshpds/my-worktime/blob/v2.0.1-beta.2/src/commands/hit/reset.ts)_
 
 ## `my-worktime punch MARKS`
 
