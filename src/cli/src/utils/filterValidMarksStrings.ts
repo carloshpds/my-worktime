@@ -1,4 +1,5 @@
 import { ux } from "@oclif/core"
+import chalk from "chalk"
 import moment from "moment"
 
 import { WorktimeDayMark } from "../providers/types.js"
@@ -17,7 +18,7 @@ export default ({ date, ignoreDateCases, marksStrings, registeredMarks }: Filter
     const isRegistered = registeredMarks.find(mark => mark.clock === newMark)
     let validClock = true
 
-    const actionMessage = ux.colorize('bgYellow', ` ${translate('cli.common.display.ignoredMark').toUpperCase()} `)
+    const actionMessage = chalk.black.bgYellow(` ${translate('cli.common.display.ignoredMark').toUpperCase()} `)
 
     const errorsMessages = {
       duplicatedMark: translate('cli.common.errors.duplicatedMark', {

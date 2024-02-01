@@ -113,7 +113,7 @@
     "build:messages-folder": "shx mkdir -p dist/tools/i18n/messages",
     "build:messages": "messageformat src/tools/i18n/messages --locale=en-US,pt-BR,es --options.customFormatters=./src/tools/i18n/messages/customFormatters.cjs --outfile=dist/tools/i18n/messages/compiledMessages.js"
   },
-  "version": "2.0.0-beta.7",
+  "version": "2.0.1-beta.2",
   "bugs": "https://github.com/carloshpds/my-worktime/issues",
   "types": "dist/index.d.ts",
   "exports": "./lib/index.js",

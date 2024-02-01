@@ -1,4 +1,5 @@
 import { ux } from '@oclif/core'
+import chalk from 'chalk'
 import moment from 'moment'
 
 import ClockHelper from '../tools/ClockHelper/index.js'
@@ -86,7 +87,7 @@ export default abstract class WorktimeProvider {
     const lastMark = marks[marks.length - 1];
     if (lastPeriodIsOpen && todayIsTheCurrentDate && marks.length > 0 && lastMark) {
       const lastStartingPeriodMarkMinutes = ClockHelper.convertClockStringToMinutes(lastMark.clock)
-      this.options.debug && ux.log(`\nHorário atual ${ux.colorize('bgCyan', nowClock)}`)
+      this.options.debug && ux.log(`\nHorário atual ${chalk.black.bgCyan(nowClock)}`)
 
       let partialWorkedMinutesUntilNow = ClockHelper.convertClockStringToMinutes(nowClock)
       partialWorkedMinutesUntilNow -= lastStartingPeriodMarkMinutes
