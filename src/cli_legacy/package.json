@@ -16,7 +16,7 @@
     "@oclif/command": "^1.8.0",
     "@oclif/config": "^1.17.0",
     "@oclif/plugin-help": "^3.2.0",
-    "axios": "^0.21.1",
+    "axios": "^0.28.0",
     "chalk": "^4.1.0",
     "conf": "^7.1.2",
     "keytar": "^7.0.0",
